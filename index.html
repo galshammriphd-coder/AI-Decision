@@ -1,0 +1,1478 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<title>اتخاذ القرار في عصر الذكاء الاصطناعي: بين الحكمة والجرأة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Tajawal:wght@500;700;800&family=Readex+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+  --bg:#FFFFFF; --surface:#F4F6FB; --surface2:#EEF1F8; --ink:#141A33; --ink2:#2E3657; --muted:#5B6385; --line:#E1E5EF;
+  --wisdom:#23307A; --courage:#C2410C;
+  --s1:#5B3FD9; --s1t:#F1EEFD;
+  --s2:#D12A45; --s2t:#FDEEF1;
+  --s3:#0A8FA8; --s3t:#E8F7FA;
+  --s4:#C98505; --s4t:#FDF5E4;
+  --s5:#138A5B; --s5t:#E8F6EF;
+  --ok:#138A5B; --bad:#C62839;
+  --display:"Readex Pro","IBM Plex Sans Arabic",Tahoma,"Segoe UI",sans-serif;
+  --body:"IBM Plex Sans Arabic","Readex Pro",Tahoma,"Segoe UI",sans-serif;
+  --r-lg:18px; --r-md:12px; --r-sm:8px;
+  --acc:var(--wisdom); --acct:#EEF0FA;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 120px);-webkit-text-size-adjust:100%}
+body{overflow-x:clip;margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.85}
+img,svg{max-width:100%}
+h1,h2,h3,h4{font-family:var(--display);line-height:1.35;margin:0;color:var(--ink);font-weight:600}
+p{margin:0 0 .8em}
+button{font-family:inherit;font-size:inherit;cursor:pointer}
+:focus-visible{outline:3px solid #6B7CFF;outline-offset:2px;border-radius:6px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+
+/* ---------- header ---------- */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:rgba(255,255,255,.94);backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:18px;height:64px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);flex-shrink:0}
+.brand .mark{width:38px;height:38px;border-radius:10px;background:var(--wisdom);display:grid;place-items:center}
+.brand b{font-family:var(--display);font-size:15px;font-weight:600;display:block;line-height:1.3}
+.brand small{display:block;font-size:12px;color:var(--muted);line-height:1.3}
+.prog{margin-inline-start:auto;display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted)}
+.prog .bar{width:120px;height:6px;border-radius:9px;background:var(--surface2);overflow:hidden}
+.prog .bar i{display:block;height:100%;background:var(--s5);width:0;transition:width .4s}
+nav.tabs{border-top:1px solid var(--line)}
+nav.tabs .wrap{display:flex;gap:4px;overflow-x:auto;height:50px;align-items:center;scrollbar-width:none}
+nav.tabs .wrap::-webkit-scrollbar{display:none}
+.tab{border:0;background:none;padding:7px 10px;border-radius:9px;color:var(--ink2);font-size:14px;font-weight:500;white-space:nowrap;display:flex;align-items:center;gap:7px;text-decoration:none}
+.tab:hover{background:var(--surface)}
+.tab .d{width:9px;height:9px;border-radius:50%}
+.tab[aria-current="page"]{background:var(--ink);color:#fff}
+.tab .chk{font-size:11px;color:var(--ok)}
+.tab[aria-current="page"] .chk{color:#8BE3B9}
+.sep{width:1px;height:22px;background:var(--line);margin:0 6px;flex-shrink:0}
+
+/* ---------- generic ---------- */
+main{min-height:70vh}
+.view{display:none;padding:34px 0 80px}
+.view.on{display:block}
+.eyebrow{font-size:13.5px;font-weight:600;color:var(--acc);margin-bottom:6px;display:block}
+.lead{font-size:19px;color:var(--ink2);max-width:68ch}
+.muted{color:var(--muted)}
+.sec{margin-top:56px}
+.sec>h2{font-size:26px;margin-bottom:8px}
+.sec>.sub{color:var(--muted);margin-bottom:22px;max-width:70ch}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:900px){.g3,.g4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:620px){.g2,.g3,.g4{grid-template-columns:1fr}body{font-size:16px}}
+.box{border:1px solid var(--line);border-radius:var(--r-md);padding:20px 22px;background:#fff}
+.box h3{font-size:18px;margin-bottom:6px}
+.tint{background:var(--acct);border-color:transparent}
+.rule{border-radius:var(--r-md);padding:18px 22px;background:var(--ink);color:#fff;font-family:var(--display);font-size:19px;font-weight:500;display:flex;gap:14px;align-items:flex-start;line-height:1.7}
+.rule .ic{flex-shrink:0;width:30px;height:30px;border-radius:8px;background:rgba(255,255,255,.14);display:grid;place-items:center;font-size:15px;margin-top:3px}
+.rule small{display:block;font-family:var(--body);font-size:13px;opacity:.75;font-weight:400}
+.pill{display:inline-block;font-size:13px;padding:3px 11px;border-radius:99px;background:var(--surface);color:var(--ink2);font-weight:500;margin:3px 0 3px 6px}
+.btn{text-decoration:none;border:1px solid var(--ink);background:var(--ink);color:#fff;padding:10px 20px;border-radius:10px;font-weight:600;font-size:15px;display:inline-flex;gap:8px;align-items:center}
+.btn:hover{filter:brightness(1.15)}
+.btn.ghost{background:#fff;color:var(--ink);border-color:var(--line)}
+.btn.ghost:hover{background:var(--surface);filter:none}
+.btn.sm{padding:6px 13px;font-size:14px;border-radius:8px}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.en{font-family:"Readex Pro",sans-serif;direction:ltr;unicode-bidi:isolate;font-size:.82em;color:var(--muted);font-weight:500}
+.num{font-family:var(--display);font-feature-settings:"tnum";}
+textarea,input[type=text],select{font-family:inherit;font-size:15.5px;width:100%;border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:#fff;color:var(--ink);resize:vertical}
+textarea:focus,input:focus,select:focus{outline:2px solid var(--acc);border-color:transparent}
+.hide{display:none!important}
+
+/* ---------- home ---------- */
+.hero{padding:26px 0 10px;display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:center}
+.hero>*{min-width:0}
+@media (max-width:980px){.hero{grid-template-columns:1fr;gap:30px}}
+.hero h1{font-size:clamp(34px,5.2vw,58px);font-weight:700;line-height:1.2;letter-spacing:-.5px}
+.hero h1 .l2{display:block;font-weight:400;color:var(--ink2);font-size:.62em;margin-top:10px}
+.hero .meta{display:flex;flex-wrap:wrap;gap:22px;margin-top:26px;font-size:14.5px;color:var(--muted)}
+.hero .meta b{display:block;color:var(--ink);font-size:15.5px;font-weight:600}
+.slogan{margin-top:26px;border-inline-start:3px solid var(--wisdom);padding:4px 16px 4px 0;font-family:var(--display);font-size:18px;color:var(--ink2)}
+.slogan small{display:block;font-size:14px;color:var(--muted);margin-top:4px;font-family:var(--body)}
+/* equation */
+.eq{position:relative;border:1px solid var(--line);border-radius:22px;padding:22px;background:linear-gradient(180deg,#fff, #F7F8FC)}
+.eq h2{font-size:17px;text-align:center;margin-bottom:2px}
+.eq .cap{text-align:center;font-size:13.5px;color:var(--muted);margin-bottom:16px}
+.eq-row{display:flex;align-items:center;justify-content:center;gap:4px}
+@media (max-width:520px){.pillar{font-size:11px;padding:10px 1px;overflow-wrap:anywhere}.pillar .ico{font-size:18px}.op{font-size:14px}}
+.pillar{border:1.5px solid var(--line);background:#fff;border-radius:14px;padding:12px 4px;flex:1 1 0;min-width:0;line-height:1.45;text-align:center;font-family:var(--display);font-size:14px;font-weight:600;color:var(--ink);transition:transform .2s,border-color .2s,box-shadow .2s}
+.pillar .ico{font-size:22px;display:block;line-height:1.3}
+.pillar:hover,.pillar[aria-pressed="true"]{transform:translateY(-3px);border-color:var(--pc);box-shadow:0 8px 20px -10px var(--pc)}
+.op{color:var(--muted);font-weight:600;font-size:18px}
+.eq-result{margin:14px auto 0;display:flex;align-items:center;justify-content:center;gap:10px}
+.eq-result .res{background:var(--s5);color:#fff;border-radius:14px;padding:12px 22px;font-family:var(--display);font-weight:600;font-size:18px}
+.eq-note{margin-top:16px;min-height:78px;border-radius:12px;background:var(--surface);padding:12px 16px;font-size:15px;color:var(--ink2)}
+.eq-note b{font-family:var(--display)}
+/* journey */
+.journey{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;counter-reset:st}
+@media (max-width:980px){.journey{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.journey{grid-template-columns:1fr}}
+.stc{position:relative;text-align:start;border:1px solid var(--line);border-radius:16px;padding:20px 18px 18px;background:#fff;color:var(--ink);transition:border-color .2s, transform .2s;display:flex;flex-direction:column;gap:8px}
+.stc:hover{border-color:var(--c);transform:translateY(-2px)}
+.stc .n{display:flex;align-items:center;justify-content:space-between}
+.stc .n span:first-child{width:34px;height:34px;border-radius:10px;background:var(--c);color:#fff;display:grid;place-items:center;font-family:var(--display);font-weight:700}
+.stc .code{font-family:"Readex Pro";font-weight:700;letter-spacing:1.5px;font-size:12.5px;color:var(--c)}
+.stc h3{font-size:17px}
+.stc .q{font-size:14px;color:var(--muted);line-height:1.7}
+.stc .done{position:absolute;top:12px;left:12px;font-size:12px;color:var(--ok);font-weight:600}
+.obj{display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-bottom:1px solid var(--line)}
+.obj .k{font-family:var(--display);font-weight:600;color:var(--wisdom);min-width:28px;font-size:15px;padding-top:2px}
+.sched{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+@media (max-width:800px){.sched{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.sched .box{padding:16px}
+.sched .t{font-family:var(--display);font-weight:600;font-size:16px}
+.methods{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+@media (max-width:900px){.methods{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.mth{border:1px solid var(--line);border-radius:14px;padding:16px;background:#fff;text-align:start;color:var(--ink)}
+.mth:hover{background:var(--surface)}
+.mth .i{font-size:22px}
+.mth b{display:block;font-family:var(--display);font-weight:600;margin-top:4px}
+.mth span{font-size:13.5px;color:var(--muted);line-height:1.6;display:block}
+
+/* ---------- station ---------- */
+.shead{border-radius:24px;padding:34px 34px 30px;background:var(--acct);position:relative;overflow:hidden}
+.shead .code{font-family:"Readex Pro";font-weight:700;letter-spacing:2px;color:var(--acc);font-size:14px}
+.shead h1{font-size:clamp(28px,4vw,42px);font-weight:700;margin:6px 0 14px;max-width:24ch}
+.shead .gq{display:inline-flex;gap:12px;align-items:flex-start;background:#fff;border-radius:14px;padding:14px 18px;max-width:720px}
+.shead .gq span{font-size:12.5px;font-weight:600;color:#fff;background:var(--acc);border-radius:7px;padding:2px 9px;white-space:nowrap;margin-top:4px}
+.shead .gq p{margin:0;font-family:var(--display);font-size:18px;font-weight:500}
+.shead .bignum{position:absolute;left:28px;bottom:-40px;font-family:var(--display);font-weight:700;font-size:200px;line-height:1;color:var(--acc);opacity:.08;pointer-events:none}
+.toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.toc a{font-size:14px;text-decoration:none;color:var(--ink2);border:1px solid var(--line);background:#fff;padding:5px 13px;border-radius:99px}
+.toc a:hover{border-color:var(--acc);color:var(--acc)}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media (max-width:700px){.stats{grid-template-columns:1fr}}
+.stat{border:1px solid var(--line);border-radius:16px;padding:20px}
+.stat .v{font-family:var(--display);font-weight:700;font-size:40px;color:var(--acc);line-height:1.1}
+.stat .v small{font-size:18px;font-weight:600}
+.stat p{margin:8px 0 0;font-size:15px;color:var(--ink2)}
+/* concept cards */
+.cc{border:1px solid var(--line);border-radius:16px;background:#fff;overflow:hidden}
+.cc>button{all:unset;box-sizing:border-box;display:flex;width:100%;gap:14px;align-items:flex-start;padding:18px 20px;cursor:pointer}
+.cc>button:focus-visible{outline:3px solid #6B7CFF;outline-offset:-3px}
+.cc .ic{width:40px;height:40px;border-radius:11px;background:var(--acct);display:grid;place-items:center;font-size:19px;flex-shrink:0}
+.cc h3{font-size:17.5px}
+.cc .d{font-size:15px;color:var(--ink2);margin-top:3px;line-height:1.75}
+.cc .ar{margin-inline-start:auto;transition:transform .25s;color:var(--muted);flex-shrink:0;margin-top:8px}
+.cc[data-open="1"] .ar{transform:rotate(180deg)}
+.cc .more{display:none;padding:0 20px 20px;border-top:1px dashed var(--line)}
+.cc[data-open="1"] .more{display:block}
+.cc .row{display:grid;grid-template-columns:140px 1fr;gap:12px;padding-top:12px;font-size:15px}
+@media (max-width:560px){.cc .row{grid-template-columns:1fr;gap:2px}}
+.cc .row b{font-family:var(--display);font-weight:600;font-size:14px;color:var(--acc)}
+.cc .row.bad b{color:var(--bad)}
+.cc .row.good b{color:var(--ok)}
+/* compare */
+.vs{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:stretch}
+@media (max-width:700px){.vs{grid-template-columns:1fr}.vs .mid{display:none}}
+.vs .mid{display:grid;place-items:center;font-family:var(--display);font-weight:700;color:var(--muted)}
+.steps{display:grid;gap:10px;counter-reset:s}
+.step{display:flex;gap:14px;align-items:flex-start;border:1px solid var(--line);border-radius:14px;padding:14px 18px;background:#fff}
+.step::before{counter-increment:s;content:counter(s);width:30px;height:30px;border-radius:9px;background:var(--acc);color:#fff;display:grid;place-items:center;font-family:var(--display);font-weight:700;flex-shrink:0;font-size:15px}
+.step b{font-family:var(--display);font-weight:600;display:block}
+.step span{color:var(--muted);font-size:15px}
+.chain{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.chain button{border:1px solid var(--line);background:#fff;border-radius:10px;padding:8px 14px;font-weight:500;color:var(--ink)}
+.chain button[aria-pressed="true"]{background:var(--acc);color:#fff;border-color:var(--acc)}
+.chain i{color:var(--muted);font-style:normal}
+table.t{width:100%;border-collapse:separate;border-spacing:0;font-size:15px}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:14px}
+table.t th{background:var(--surface);text-align:start;font-family:var(--display);font-weight:600;padding:12px 14px;font-size:14.5px;white-space:nowrap}
+table.t td{padding:12px 14px;border-top:1px solid var(--line);vertical-align:top}
+/* discussion */
+.disc{border-radius:18px;padding:24px;background:#fff;border:1.5px dashed var(--acc);display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center}
+@media (max-width:700px){.disc{grid-template-columns:1fr}}
+.disc .ic{width:52px;height:52px;border-radius:14px;background:var(--acct);display:grid;place-items:center;font-size:24px}
+.disc .lbl{font-size:13px;font-weight:600;color:var(--acc)}
+.disc p{font-family:var(--display);font-size:19px;font-weight:500;margin:2px 0 0}
+.timer{display:flex;align-items:center;gap:10px}
+.timer .tm{font-family:var(--display);font-weight:700;font-size:22px;min-width:64px;text-align:center;font-feature-settings:"tnum"}
+.disc .ins{grid-column:1/-1;display:none;background:var(--surface);border-radius:12px;padding:14px 18px;font-size:15.5px}
+.disc .ins.on{display:block}
+.complete{margin-top:60px;border-radius:20px;padding:26px;background:var(--surface);display:flex;gap:18px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.complete h3{font-size:19px}
+
+/* ---------- activities ---------- */
+.act{border-radius:20px;border:1px solid var(--line);background:#fff;overflow:hidden}
+.act .ah{padding:18px 22px;background:var(--surface);display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.act .ah .tag{font-size:12.5px;font-weight:600;color:#fff;background:var(--acc);padding:3px 10px;border-radius:7px}
+.act .ah h3{font-size:18px}
+.act .ab{padding:22px}
+.opts{display:grid;gap:10px}
+.opt{border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:12px 16px;text-align:start;color:var(--ink);font-size:15.5px;line-height:1.6}
+.opt:hover{border-color:var(--acc)}
+.opt[aria-pressed="true"]{border-color:var(--acc);background:var(--acct)}
+.opt.ok{border-color:var(--ok);background:#E9F7F0}
+.opt.no{border-color:var(--bad);background:#FDEEF0}
+.fb{margin-top:14px;border-radius:12px;padding:14px 18px;font-size:15.5px;display:none}
+.fb.on{display:block}
+.fb.good{background:#E9F7F0;color:#0D5E3D}
+.fb.warn{background:#FFF4E0;color:#7A4B00}
+.fb.info{background:var(--surface);color:var(--ink2)}
+/* sorter */
+.sorter .item{display:grid;grid-template-columns:1fr;gap:10px;padding:14px 0;border-bottom:1px solid var(--line)}
+.sorter .item:last-child{border-bottom:0}
+.sorter .item q{font-family:var(--display);font-weight:600;quotes:"«" "»"}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid var(--line);background:#fff;border-radius:99px;padding:5px 13px;font-size:14px;color:var(--ink2)}
+.chip:hover{border-color:var(--acc)}
+.chip[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.chip.ok{background:var(--ok);border-color:var(--ok);color:#fff}
+.chip.no{background:var(--bad);border-color:var(--bad);color:#fff}
+/* dots grid */
+.dots{display:grid;grid-template-columns:repeat(20,1fr);gap:4px;max-width:420px;direction:ltr}
+.dots i{aspect-ratio:1;border-radius:3px;background:#E3E6EF}
+.dots i.tp{background:var(--s5)}
+.dots i.fp{background:#F4B6BF}
+.slider{display:grid;grid-template-columns:130px 1fr 60px;gap:12px;align-items:center;margin-bottom:10px}
+.slider input{width:100%;accent-color:var(--acc)}
+.slider output{font-family:var(--display);font-weight:600;text-align:center}
+.legend{display:flex;gap:16px;font-size:13.5px;color:var(--muted);flex-wrap:wrap;margin-top:10px}
+.legend i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-inline-end:5px;vertical-align:middle}
+/* matrix */
+.mx{display:grid;grid-template-columns:44px 1fr 1fr;grid-template-rows:1fr 1fr 34px;gap:8px;max-width:640px}
+.mx .cell{border-radius:14px;padding:14px;min-height:118px;font-size:14px;border:1px solid var(--line);background:#fff}
+.mx .cell b{font-family:var(--display);font-weight:600;display:block;font-size:15px;margin-bottom:4px}
+.mx .cell.hot{background:#FDEEF0;border-color:#F3C1C9}
+.mx .cell.warm{background:#FFF6E6;border-color:#F2DCAF}
+.mx .cell.cool{background:#EAF7F0;border-color:#BFE5D1}
+.mx .ax{font-size:12.5px;color:var(--muted);display:grid;place-items:center;text-align:center}
+.mx .ay{writing-mode:vertical-rl;transform:rotate(180deg)}
+.mx .cell.hit{outline:3px solid var(--ink);outline-offset:2px}
+/* flashcards */
+.fc-stage{perspective:1600px;max-width:720px;margin:0 auto}
+.fc{position:relative;height:340px;cursor:pointer;transform-style:preserve-3d;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.fc.flip{transform:rotateY(180deg)}
+.fc .face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:24px;padding:34px;display:flex;flex-direction:column;justify-content:center;border:1px solid var(--line)}
+.fc .front{background:#fff}
+.fc .back{background:var(--ink);color:#fff;transform:rotateY(180deg)}
+.fc .front .st{font-size:13px;font-weight:600}
+.fc .front h3{font-size:clamp(26px,4vw,36px);font-weight:700;margin:10px 0 6px}
+.fc .back p{font-size:17.5px;line-height:1.9;margin:0}
+.fc .hint{position:absolute;bottom:16px;inset-inline:0;text-align:center;font-size:13px;color:var(--muted)}
+.fc .back .hint{color:rgba(255,255,255,.55)}
+.fc-ctl{display:flex;justify-content:center;align-items:center;gap:10px;margin-top:20px;flex-wrap:wrap}
+.fc-count{font-family:var(--display);font-weight:600;min-width:80px;text-align:center}
+.filters{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:20px}
+/* quiz */
+.qz{max-width:780px;margin:0 auto}
+.qz .qhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;font-size:14px;color:var(--muted)}
+.qz .qbar{height:6px;border-radius:9px;background:var(--surface2);overflow:hidden;margin-bottom:24px}
+.qz .qbar i{display:block;height:100%;background:var(--wisdom);transition:width .3s}
+.qz h3{font-size:21px;margin-bottom:18px;line-height:1.6}
+.score{text-align:center;padding:30px 10px}
+.score .big{font-family:var(--display);font-size:64px;font-weight:700;color:var(--wisdom)}
+/* glossary */
+.gl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:760px){.gl{grid-template-columns:1fr}}
+.gl .box{padding:16px 18px}
+.gl .box h3{font-size:16.5px;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.gl .box p{font-size:15px;margin:4px 0 0;color:var(--ink2)}
+/* wisdom checklist */
+.wis{display:grid;gap:10px}
+.wr{display:grid;grid-template-columns:56px 150px 1fr auto;gap:14px;align-items:center;border:1px solid var(--line);border-radius:14px;padding:12px 16px;background:#fff}
+@media (max-width:700px){.wr{grid-template-columns:48px 1fr}.wr .q{grid-column:1/-1}.wr label{grid-column:1/-1}}
+.wr .L{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;color:#fff;font-family:"Readex Pro";font-weight:700;font-size:22px}
+.wr .nm b{display:block;font-family:var(--display);font-weight:600}
+.wr .nm span{font-family:"Readex Pro";font-size:11.5px;letter-spacing:1px;font-weight:600}
+.wr .q{font-size:15.5px}
+.wr label{display:flex;gap:6px;align-items:center;font-size:14px;color:var(--muted);white-space:nowrap}
+.wr input{width:20px;height:20px;accent-color:var(--s5)}
+/* crisis */
+.wave{border:1px solid var(--line);border-radius:16px;padding:18px 20px;background:#fff;margin-bottom:12px}
+.wave .wt{display:flex;gap:10px;align-items:center;font-size:13.5px;color:var(--muted);margin-bottom:6px}
+.wave .wt b{font-family:var(--display);color:var(--ink);font-size:16px}
+.log{width:100%;border-collapse:collapse;font-size:14.5px}
+.log td,.log th{border-bottom:1px solid var(--line);padding:9px 10px;text-align:start}
+.log th{font-family:var(--display);font-weight:600;font-size:13.5px;color:var(--muted)}
+.roles{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+@media (max-width:800px){.roles{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.roles .box{padding:14px;text-align:center}
+.roles .box .i{font-size:24px}
+.roles .box b{display:block;font-family:var(--display);font-weight:600}
+.roles .box span{font-size:13.5px;color:var(--muted);line-height:1.6;display:block}
+.out{white-space:pre-wrap;font-size:15px;background:var(--surface);border-radius:12px;padding:16px;border:1px solid var(--line);min-height:120px;line-height:1.9}
+.fld{display:grid;grid-template-columns:150px 1fr;gap:12px;align-items:start;margin-bottom:10px}
+@media (max-width:620px){.fld{grid-template-columns:1fr;gap:4px}}
+.fld label{font-family:var(--display);font-weight:600;font-size:14.5px;padding-top:10px}
+.fld label small{display:block;font-family:var(--body);font-weight:400;color:var(--muted);font-size:12.5px;line-height:1.5}
+.lab-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media (max-width:900px){.lab-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.lab-grid{grid-template-columns:1fr}}
+.lab-card{border:1px solid var(--line);border-radius:16px;padding:18px;background:#fff;text-align:start;color:var(--ink);display:flex;flex-direction:column;gap:6px}
+.lab-card:hover{border-color:var(--c,var(--ink))}
+.lab-card .k{font-size:12.5px;font-weight:600;color:var(--c)}
+.lab-card b{font-family:var(--display);font-weight:600;font-size:17px}
+.lab-card span{font-size:14px;color:var(--muted);line-height:1.65}
+.back-link{display:inline-flex;gap:6px;align-items:center;font-size:14.5px;color:var(--muted);text-decoration:none;margin-bottom:18px}
+.back-link:hover{color:var(--ink)}
+footer{border-top:1px solid var(--line);padding:26px 0 40px;color:var(--muted);font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.toast{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%) translateY(120px);background:var(--ink);color:#fff;padding:10px 20px;border-radius:12px;font-size:14.5px;transition:transform .3s,opacity .3s;z-index:99;opacity:0;pointer-events:none}
+.toast.on{transform:translateX(-50%) translateY(0);opacity:1}
+/* ---------- failure dossiers ---------- */
+.fl-top{display:flex;flex-direction:column;gap:14px;margin-bottom:20px}
+.fl-legend{display:flex;flex-wrap:wrap;gap:8px}
+.fl-lg{border:1px solid var(--line);background:#fff;border-radius:99px;padding:6px 14px;font-size:14px;color:var(--ink2);display:inline-flex;align-items:center;gap:8px}
+.fl-lg i{width:10px;height:10px;border-radius:3px;background:var(--k);transform:rotate(45deg)}
+.fl-lg[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.fl-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+@media (max-width:1080px){.fl-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.fl-grid{grid-template-columns:1fr}}
+.fl-card{perspective:1400px;transition:opacity .35s,filter .35s,transform .35s}
+.fl-card.dim{opacity:.28;filter:grayscale(1);transform:scale(.97)}
+.fl-in{position:relative;height:392px;transform-style:preserve-3d;transition:transform .75s cubic-bezier(.3,1.25,.4,1);cursor:pointer;border-radius:18px}
+.fl-in.flip{transform:rotateY(180deg)}
+.fl-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:18px;overflow:hidden;display:flex;flex-direction:column}
+.fl-front{background:#fff;border:1px solid var(--line);box-shadow:0 1px 0 var(--line),0 18px 30px -24px color-mix(in srgb,var(--k) 70%,transparent)}
+.fl-front::before,.fl-front::after{content:"";position:absolute;top:218px;width:22px;height:22px;border-radius:50%;background:var(--bg);border:1px solid var(--line);z-index:2}
+.fl-front::before{right:-12px}.fl-front::after{left:-12px}
+.fl-head{display:flex;justify-content:space-between;align-items:center;padding:14px 16px 0;position:relative;z-index:1}
+.fl-code{font-family:var(--display);font-size:12px;color:var(--muted);display:flex;align-items:baseline;gap:6px}
+.fl-code b{font-size:26px;font-weight:700;color:var(--k);line-height:1;letter-spacing:.5px}
+.fl-cat{font-size:12px;font-weight:600;color:var(--k);border:1.5px solid color-mix(in srgb,var(--k) 45%,transparent);padding:2px 10px;border-radius:99px;background:color-mix(in srgb,var(--k) 7%,#fff)}
+.fl-art{margin:10px 14px 0;height:170px;border-radius:12px;display:grid;place-items:center;color:var(--k);position:relative;
+ background:radial-gradient(color-mix(in srgb,var(--k) 22%,transparent) 1px,transparent 1.4px) 0 0/12px 12px,linear-gradient(160deg,color-mix(in srgb,var(--k) 9%,#fff),color-mix(in srgb,var(--k) 3%,#fff))}
+.fl-art svg{width:86%;height:auto;overflow:visible}
+.fl-front h4{font-family:var(--display);font-size:20px;font-weight:700;margin:26px 18px 4px;color:var(--ink);position:relative}
+.fl-front h4::before{content:"";position:absolute;top:-16px;inset-inline:0;border-top:2px dashed var(--line)}
+.fl-sym{margin:0 18px;font-size:14.5px;color:var(--muted);line-height:1.7}
+.fl-flip{position:absolute;bottom:14px;inset-inline-start:18px;font-size:13px;font-weight:600;color:var(--k)}
+.fl-seen{position:absolute;bottom:14px;inset-inline-end:18px;font-size:12px;font-weight:600;color:var(--ok)}
+.fl-back{transform:rotateY(180deg);background:
+ radial-gradient(120% 80% at 100% 0%,color-mix(in srgb,var(--k) 38%,transparent),transparent 60%),#141A33;color:#fff}
+.fl-back .fl-code{color:rgba(255,255,255,.6)}.fl-back .fl-code b{color:#fff}
+.fl-back .fl-cat{color:#fff;background:transparent;border-color:rgba(255,255,255,.35)}
+.fl-back dl{margin:14px 18px 0;flex:1;display:flex;flex-direction:column;gap:2px}
+.fl-back dt{font-family:var(--display);font-size:12px;font-weight:600;color:color-mix(in srgb,var(--k) 55%,#fff);margin-top:10px}
+.fl-back dd{margin:0;font-size:14px;line-height:1.75;color:rgba(255,255,255,.9)}
+.fl-back dd.fl-q{font-family:var(--display);font-size:15px;color:#fff;border-inline-start:3px solid var(--k);padding-inline-start:10px}
+.fl-mark{margin:10px 16px 14px;display:flex;gap:8px;align-items:center;font-size:13.5px;background:rgba(255,255,255,.08);border-radius:10px;padding:8px 12px;cursor:pointer}
+.fl-mark input{width:18px;height:18px;accent-color:var(--k)}
+.fl-meter{margin-top:22px;border:1px solid var(--line);border-radius:16px;padding:16px 20px;display:grid;grid-template-columns:auto 1fr;gap:6px 20px;align-items:center}
+.fl-meter b[data-n]{font-family:var(--display);font-size:26px;display:block;line-height:1.2}
+.fl-meter span{font-size:13px;color:var(--muted)}
+.fl-bars{display:grid;grid-template-columns:repeat(8,1fr);gap:6px}
+.fl-bars i{height:12px;border-radius:4px;background:var(--surface2);transition:background .3s}
+.fl-bars i.on{background:var(--k)}
+.fl-meter p{grid-column:1/-1;margin:4px 0 0;font-size:14.5px;color:var(--ink2)}
+/* micro-motion: plays only while the dossier is hovered/focused */
+.fl-rain rect{animation:flRain 2.4s ease-in-out infinite paused}
+@keyframes flRain{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+.fl-spin{animation:flSpin 3s linear infinite paused}
+@keyframes flSpin{to{transform:rotate(360deg)}}
+.fl-dart{animation:flDart 1.8s ease-in-out infinite paused}
+@keyframes flDart{0%,100%{transform:translate(0,0)}50%{transform:translate(-3px,-4px)}}
+.fl-beam{transform-origin:74px 64px;animation:flBeam 2.6s ease-in-out infinite paused}
+@keyframes flBeam{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(6deg)}}
+.fl-dash{animation:flDash 1.2s linear infinite paused}
+@keyframes flDash{to{stroke-dashoffset:-24}}
+.fl-crack{stroke-dasharray:90;animation:flCrack 2s ease-in-out infinite paused}
+@keyframes flCrack{0%{stroke-dashoffset:90}60%,100%{stroke-dashoffset:0}}
+.fl-needle{animation:flNeedle 2.2s ease-in-out infinite paused}
+@keyframes flNeedle{0%,100%{transform:rotate(0)}50%{transform:rotate(-14deg)}}
+.fl-hit{transform-box:fill-box;transform-origin:center;animation:flHit 1.6s ease-in-out infinite paused}
+@keyframes flHit{0%,100%{transform:scale(1)}50%{transform:scale(1.5)}}
+.fl-in:hover :is(.fl-rain rect,.fl-spin,.fl-dart,.fl-beam,.fl-dash,.fl-crack,.fl-needle,.fl-hit),
+.fl-in:focus-visible :is(.fl-rain rect,.fl-spin,.fl-dart,.fl-beam,.fl-dash,.fl-crack,.fl-needle,.fl-hit){animation-play-state:running}
+.fl-in:hover:not(.flip){transform:translateY(-4px) rotateX(3deg)}
+
+@media (max-width:620px){.prog .bar{display:none}.brand small{display:none}.prog{font-size:12px}.shead{padding:26px 20px}.shead .bignum{font-size:130px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+/* =================== DECK-MATCHED DESIGN LAYER =================== */
+:root{--display:"Tajawal","Readex Pro","IBM Plex Sans Arabic",Tahoma,sans-serif;--ink:#1B2150;--ink2:#343C6B;--muted:#6A7196;--line:#E4E7F2;--surface:#F6F7FC;
+ --grad:linear-gradient(90deg,#3B82F6,#7C3AED);--glow:0 18px 40px -22px}
+h1,h2,h3,h4{font-weight:800;letter-spacing:0}
+.hl{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.badge{display:inline-flex;align-items:center;gap:8px;padding:7px 18px;border-radius:99px;background:#fff;font-family:var(--display);font-weight:700;font-size:14.5px;color:var(--acc,#5B3FD9);
+ border:1.5px solid color-mix(in srgb,var(--acc,#7C3AED) 40%,#fff);box-shadow:0 0 0 4px color-mix(in srgb,var(--acc,#7C3AED) 7%,transparent),0 6px 18px -10px var(--acc,#7C3AED)}
+.bar-u{display:block;width:70px;height:4px;border-radius:4px;background:linear-gradient(90deg,var(--acc),#F2994A);margin:12px auto 0}
+/* slide frame */
+.frame{position:relative;border:1px solid var(--line);border-radius:26px;background:#fff;overflow:hidden}
+.frame::before{content:"";position:absolute;top:-1px;left:44px;width:70px;height:48px;border-top:3px solid #7C6CF6;border-left:3px solid #7C6CF6;border-top-left-radius:18px;left:-1px}
+.frame::after{content:"";position:absolute;bottom:-1px;right:-1px;width:70px;height:48px;border-bottom:3px solid #22B8CF;border-right:3px solid #22B8CF;border-bottom-right-radius:18px}
+.confetti{position:absolute;inset:0;pointer-events:none;background:
+ radial-gradient(circle,#F59E0B 2px,transparent 2.5px) 8% 18%/1px 1px no-repeat,radial-gradient(circle,#8B5CF6 2px,transparent 2.5px) 92% 12%/1px 1px no-repeat;opacity:.9}
+.confetti i{position:absolute;width:5px;height:5px;border-radius:50%;opacity:.55}
+.slide-foot{display:flex;justify-content:space-between;align-items:center;padding:0 26px 18px;font-size:13px;color:var(--muted)}
+.dots3{display:flex;gap:5px}.dots3 i{width:7px;height:7px;border-radius:9px;background:#D5D9EA}.dots3 i.on{width:24px;background:var(--grad)}
+
+/* header */
+.brand .mark{background:linear-gradient(135deg,#3B82F6,#7C3AED);box-shadow:0 6px 16px -8px #7C3AED}
+.tab[aria-current="page"]{background:linear-gradient(135deg,#2E3A8C,#5B3FD9);box-shadow:0 6px 16px -10px #5B3FD9}
+.prog .bar i{background:linear-gradient(90deg,#22C55E,#0EA5E9)}
+
+/* hero */
+.hero-frame{padding:40px 38px 10px}
+.hero h1{font-weight:800}
+.hero h1 .l2{font-weight:800;font-size:.7em}
+.hero h1 .l2 span{background:linear-gradient(90deg,#5B3FD9,#E0314B 55%,#F59E0B);-webkit-background-clip:text;background-clip:text;color:transparent}
+.eq{border:0;background:#fff;box-shadow:0 0 0 1.5px #E4E1FB,0 24px 50px -30px #5B3FD9}
+.pillar{border-width:2px;border-color:color-mix(in srgb,var(--pc) 55%,#fff);position:relative;padding-top:18px}
+.pillar .num{position:absolute;top:-11px;left:50%;transform:translateX(-50%);width:22px;height:22px;border-radius:50%;background:var(--pc);color:#fff;font-size:11.5px;display:grid;place-items:center;font-weight:700}
+.eq-result .res{background:linear-gradient(135deg,#16A34A,#10B981);box-shadow:0 12px 26px -14px #16A34A}
+
+/* journey = roadmap slide */
+.journey{gap:18px;padding-top:34px}
+.stc{border:1.5px solid color-mix(in srgb,var(--c) 30%,#fff);border-top:5px solid var(--c);border-radius:18px;padding:46px 18px 20px;text-align:center;align-items:center;
+ box-shadow:0 22px 40px -28px var(--c),0 0 0 4px color-mix(in srgb,var(--c) 5%,transparent);overflow:visible}
+.stc .emo{position:absolute;top:-34px;left:50%;transform:translateX(-50%);width:62px;height:62px;border-radius:50%;display:grid;place-items:center;font-size:28px;
+ background:radial-gradient(circle at 30% 30%,color-mix(in srgb,var(--c) 55%,#fff),var(--c));box-shadow:0 0 0 5px #fff,0 0 0 7px color-mix(in srgb,var(--c) 22%,#fff),0 10px 24px -8px var(--c)}
+.stc .n{position:absolute;top:12px;right:12px}
+.stc .n span:first-child{width:26px;height:26px;border-radius:8px;font-size:13px}
+.stc .code{display:block;letter-spacing:2.5px;font-size:14px;font-weight:800;margin-top:4px}
+.stc h3{font-size:18px;font-weight:800}
+.stc .gqc{display:inline-block;font-size:12px;font-weight:700;color:var(--c);background:color-mix(in srgb,var(--c) 10%,#fff);border:1px solid color-mix(in srgb,var(--c) 25%,#fff);border-radius:99px;padding:2px 12px}
+.stc .q{font-size:14.5px}
+.stc .done{top:auto;bottom:10px;left:50%;transform:translateX(-50%)}
+
+/* section titles */
+.sec{text-align:initial}
+.sec>h2{font-size:28px;font-weight:800;display:inline-block;position:relative;padding-bottom:12px}
+.sec>h2::after{content:"";position:absolute;bottom:0;right:0;width:64px;height:4px;border-radius:4px;background:linear-gradient(90deg,#F2994A,var(--acc))}
+.sec>.sub{margin-top:10px}
+
+/* labelled cards (deck concept-sheet style) */
+.lc{position:relative;border:1.6px solid color-mix(in srgb,var(--k) 55%,#fff);border-radius:16px;padding:30px 20px 18px;
+ background:linear-gradient(180deg,color-mix(in srgb,var(--k) 7%,#fff),#fff 70%);box-shadow:0 16px 30px -24px var(--k);font-size:15.5px;line-height:1.85}
+.lc-tag{position:absolute;top:-14px;right:18px;max-width:calc(100% - 36px);background:var(--k);color:#fff;font-family:var(--display);font-weight:700;font-size:14px;line-height:1.5;
+ padding:4px 14px;border-radius:99px;box-shadow:0 0 0 3px #fff,0 6px 14px -6px var(--k)}
+.lc .lc-ic{display:block;text-align:center;font-size:22px;margin-bottom:6px}
+.grid:has(> .lc){row-gap:30px;padding-top:14px}
+.lcg{display:grid;gap:30px 16px;padding-top:14px}
+
+/* concept cards */
+.cc{border:1.6px solid color-mix(in srgb,var(--acc) 30%,#fff);border-radius:18px;box-shadow:0 18px 34px -28px var(--acc)}
+.cc .ic{border-radius:50%;background:radial-gradient(circle at 30% 30%,#fff,var(--acct));box-shadow:0 0 0 2px color-mix(in srgb,var(--acc) 25%,#fff)}
+.cc h3{font-weight:800}
+.cc .en{display:inline-block;margin-inline-start:6px;border:1.5px solid color-mix(in srgb,var(--acc) 35%,#fff);border-radius:99px;padding:0 10px;font-size:12px;color:var(--acc);background:#fff;font-family:Georgia,"Times New Roman",serif;font-weight:700}
+.cc .more{border-top:0;padding-top:6px}
+.cc .more .lcg{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (max-width:620px){.cc .more .lcg{grid-template-columns:1fr}}
+.cc[data-open="1"]{box-shadow:0 26px 50px -30px var(--acc)}
+
+/* stats = glowing metric cards */
+.stat{border:2px solid color-mix(in srgb,var(--acc) 50%,#fff);border-radius:20px;text-align:center;padding:22px 16px;background:#fff;
+ box-shadow:0 0 0 5px color-mix(in srgb,var(--acc) 8%,transparent),0 22px 40px -26px var(--acc)}
+.stat .ring{width:104px;height:104px;margin:0 auto 6px;position:relative;display:grid;place-items:center}
+.stat .ring svg{position:absolute;inset:0;transform:rotate(-90deg)}
+.stat .ring .v{font-size:26px}
+.stat .v{font-family:var(--display);font-weight:800;color:var(--acc)}
+.stat:nth-child(2){--acc:#E39A12}.stat:nth-child(3){--acc:#7C3AED}
+.stat:nth-child(1){--acc:var(--sacc,#E0314B)}
+
+/* vs */
+.vs .lc{height:100%}
+.vs .mid{position:relative}
+.vs .mid b{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;color:#fff;font-family:"Readex Pro";font-weight:800;font-size:17px;
+ background:linear-gradient(135deg,#F43F5E,#F97316);box-shadow:0 0 0 5px #fff,0 0 0 7px #FDE2E4,0 10px 22px -8px #F43F5E}
+
+/* rules */
+.rule{background:linear-gradient(180deg,#ECFDF3,#F7FEFA);color:#14532D;border:1.6px solid #86D5A7;border-radius:18px;padding:30px 24px 22px;position:relative;
+ justify-content:center;text-align:center;box-shadow:0 18px 34px -26px #16A34A;margin-top:26px}
+.rule .ic{position:absolute;top:-14px;right:20px;width:auto;height:auto;background:#16A34A;color:#fff;border-radius:99px;padding:3px 14px;font-size:13.5px;font-family:var(--display);font-weight:700;box-shadow:0 0 0 3px #fff;margin:0}
+.rule span:last-child{font-weight:800;font-size:20px;color:#14532D}
+.rule small{color:#2F6B45;opacity:1;font-weight:500;margin-top:6px;font-size:14.5px}
+.rule.warn{background:linear-gradient(180deg,#FFF1F2,#FFF8F8);border-color:#F4A3AE;box-shadow:0 18px 34px -26px #E11D48}
+.rule.warn .ic{background:#E11D48}.rule.warn span:last-child{color:#881337}.rule.warn small{color:#9F3A4C}
+.rule.q{background:linear-gradient(135deg,#EEF2FF,#F5F3FF);border-color:#B8B1F7;box-shadow:0 18px 34px -26px #6D28D9}
+.rule.q .ic{background:linear-gradient(90deg,#4F46E5,#7C3AED)}.rule.q span:last-child{color:#312E81}.rule.q small{color:#4C4A8A}
+
+/* steps = numbered flow */
+.steps{display:flex;flex-wrap:wrap;gap:12px;align-items:stretch}
+.step{flex:1 1 170px;flex-direction:column;align-items:center;text-align:center;border:1.6px solid color-mix(in srgb,var(--acc) 40%,#fff);border-radius:16px;
+ background:linear-gradient(180deg,color-mix(in srgb,var(--acc) 6%,#fff),#fff);position:relative;padding:18px 14px 16px;box-shadow:0 14px 28px -24px var(--acc)}
+.step::before{border-radius:50%;background:radial-gradient(circle at 30% 30%,color-mix(in srgb,var(--acc) 60%,#fff),var(--acc));box-shadow:0 0 0 4px color-mix(in srgb,var(--acc) 14%,#fff)}
+.step:not(:last-child)::after{content:"←";position:absolute;left:-12px;top:50%;transform:translateY(-50%);color:var(--acc);font-weight:800;font-size:16px;background:#fff;border-radius:50%;width:20px;height:20px;line-height:20px;text-align:center;z-index:1}
+@media (max-width:620px){.step:not(:last-child)::after{display:none}}
+
+/* tables = deck header */
+.tw{border:1.6px solid color-mix(in srgb,var(--acc) 30%,#fff);border-radius:18px;box-shadow:0 18px 34px -28px var(--acc)}
+table.t th{background:linear-gradient(90deg,var(--acc),color-mix(in srgb,var(--acc) 60%,#1B2150));color:#fff}
+table.t tbody tr:nth-child(odd) td{background:color-mix(in srgb,var(--acc) 4%,#fff)}
+
+/* station head = title slide */
+.shead{background:#fff;border:1px solid var(--line);text-align:center;padding:30px 30px 0}
+.shead .bignum{display:none}
+.shead h1{margin:18px auto 20px;max-width:26ch;font-weight:800}
+.shead .gq{display:flex;max-width:none;width:100%;border-radius:18px;padding:18px 22px;align-items:center;gap:16px;text-align:start;
+ background:linear-gradient(95deg,var(--acc),color-mix(in srgb,var(--acc) 55%,#7C3AED));box-shadow:0 20px 40px -24px var(--acc)}
+.shead .gq span{background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.4);margin:0;padding:4px 12px;border-radius:99px}
+.shead .gq p{color:#fff;font-weight:800;font-size:20px}
+.shead .gq .qm{font-size:54px;font-family:var(--display);font-weight:800;color:rgba(255,255,255,.28);line-height:1;margin-inline-start:auto}
+.shead .toc{justify-content:center;margin:20px 0 18px}
+.shead .emo{width:74px;height:74px;border-radius:50%;margin:6px auto 0;display:grid;place-items:center;font-size:34px;background:radial-gradient(circle at 30% 30%,color-mix(in srgb,var(--acc) 50%,#fff),var(--acc));box-shadow:0 0 0 6px #fff,0 0 0 8px color-mix(in srgb,var(--acc) 20%,#fff),0 14px 30px -12px var(--acc)}
+
+/* discussion = "مناقشة" slide */
+.disc{border:0;background:linear-gradient(#fff,#fff) padding-box,linear-gradient(120deg,var(--acc),#F59E0B) border-box;border:2px solid transparent;border-radius:22px;box-shadow:0 24px 44px -30px var(--acc)}
+.disc .ic{border-radius:50%;width:62px;height:62px;font-size:30px;background:radial-gradient(circle at 30% 30%,#fff,var(--acct));box-shadow:0 0 0 3px color-mix(in srgb,var(--acc) 25%,#fff)}
+.disc .lbl{display:inline-block;background:linear-gradient(90deg,#F43F5E,#F97316);color:#fff;border-radius:99px;padding:2px 12px}
+.disc p{font-weight:800}
+.timer .tm{width:70px;height:70px;border-radius:50%;display:grid;place-items:center;font-size:18px;border:4px solid var(--acct);border-top-color:var(--acc);color:var(--acc)}
+
+/* activity panels */
+.act{border:1.6px solid color-mix(in srgb,var(--acc) 30%,#fff);border-radius:22px;box-shadow:0 24px 44px -34px var(--acc)}
+.act .ah{background:linear-gradient(180deg,color-mix(in srgb,var(--acc) 8%,#fff),#fff);border-bottom:1px dashed color-mix(in srgb,var(--acc) 30%,#fff)}
+.act .ah .tag{border-radius:99px;padding:3px 12px;background:linear-gradient(90deg,var(--acc),color-mix(in srgb,var(--acc) 60%,#7C3AED))}
+.act .ah h3{font-weight:800}
+.opt{border-radius:14px}
+.opt[aria-pressed="true"]{box-shadow:0 10px 22px -16px var(--acc)}
+.btn{border-radius:12px}
+.btn:not(.ghost){background:linear-gradient(135deg,#2E3A8C,#5B3FD9);border-color:transparent;box-shadow:0 10px 20px -12px #5B3FD9}
+
+/* ladder = staircase slide */
+.ladder{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;align-items:end;padding-top:30px}
+@media (max-width:900px){.ladder{grid-template-columns:1fr;align-items:stretch}.ladder .lv{min-height:0!important}}
+.lv{position:relative;border:1.6px solid color-mix(in srgb,var(--c) 30%,#fff);border-top:5px solid var(--c);border-radius:16px;background:#fff;text-align:center;padding:36px 12px 16px;box-shadow:0 20px 36px -26px var(--c)}
+.lv .nb{position:absolute;top:-24px;left:50%;transform:translateX(-50%);width:44px;height:44px;border-radius:50%;background:var(--c);color:#fff;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:18px;box-shadow:0 0 0 4px #fff,0 0 0 6px color-mix(in srgb,var(--c) 25%,#fff)}
+.lv .e{font-size:26px;display:block}
+.lv .en2{display:block;font-family:"Readex Pro";font-weight:800;letter-spacing:1px;font-size:11.5px;color:var(--c)}
+.lv b{display:block;font-family:var(--display);font-weight:800;font-size:17px;margin:2px 0 6px}
+.lv b::after{content:"";display:block;width:34px;height:3px;border-radius:3px;background:var(--c);margin:6px auto 0;opacity:.6}
+.lv p{font-size:14px;color:var(--muted);margin:0;line-height:1.7}
+
+footer .wrap span:last-child::before{content:"⚖️ "}
+/* flip cards: height follows content (no clipping) */
+.fl-in{display:grid;height:auto!important;min-height:392px}
+.fl-in>.fl-face{position:relative;inset:auto;grid-area:1/1}
+.fl-front{min-height:392px}
+.fl-back{padding-bottom:4px}
+.fl-front::before,.fl-front::after{top:218px}
+.fc{display:grid;height:auto!important;min-height:340px}
+.fc>.face{position:relative;inset:auto;grid-area:1/1;padding-bottom:48px}
+
+.grid:has(> .cc){align-items:start}
+.fl-card{display:flex}.fl-card>.fl-in{flex:1}
+.stat{display:flex;flex-direction:column;justify-content:center;align-items:center}
+.stat>.v{font-size:44px;line-height:1.2;min-height:104px;display:grid;place-items:center}
+@media (max-width:620px){.shead .gq{flex-direction:column;align-items:flex-start;gap:8px}.shead .gq .qm{display:none}.shead .gq p{font-size:18px}.shead .toc{display:none}.hero-frame{padding:28px 18px 6px}}
+@media print{.top,footer,.complete,.btn{display:none!important}.view{display:block!important;padding:0}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#home" aria-label="الصفحة الرئيسية">
+      <span class="mark" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M7 21h10M5 7h14M5 7l-3 6a3.2 3.2 0 0 0 6 0L5 7zM19 7l-3 6a3.2 3.2 0 0 0 6 0l-3-6z"/></svg></span>
+      <span><b>بين الحكمة والجرأة</b><small>اتخاذ القرار في عصر الذكاء الاصطناعي</small></span>
+    </a>
+    <div class="prog" title="نسبة إنجاز المحطات"><span id="progTxt">٠ من ٥ محطات</span><span class="bar"><i id="progBar"></i></span></div>
+  </div>
+  <nav class="tabs" aria-label="أقسام الدورة"><div class="wrap" id="tabs"></div></nav>
+</header>
+<main class="wrap" id="main"></main>
+<footer><div class="wrap"><span>د. غالب الشمري · أستاذ الذكاء الاصطناعي المشارك بجامعة الملك سعود</span><span>الذكاء الاصطناعي × صناعة القرار</span></div></footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+const STATIONS = [
+{ id:'s1', emo:'🧠', n:1, code:'THINK', color:'var(--s1)', tint:'var(--s1t)',
+  title:'تشريح القرار: من الحدس إلى ذكاء القرار',
+  short:'تشريح القرار',
+  gq:'هل المشكلة التي نحاول حلّها... هي المشكلة الصحيحة؟',
+  blocks:[
+   {t:'h',id:'s1-why',title:'عندما تصبح المعلومات أكثر... يصبح القرار أصعب',sub:'وفرة البيانات لا تعني بالضرورة جودة القرار؛ فالتحدي اليوم هو كثرة الخيارات وضعف الانضباط المنهجي في صناعة القرار.'},
+   {t:'stats',items:[['61<small>%</small>','من المديرين أفادوا بأن أكثر من نصف وقت اتخاذ القرار يُهدر'],['20<small>%</small>','فقط من المؤسسات وصفت نفسها بأنها متميزة في صناعة القرار'],['530<small> ألف</small>','يوم عمل إداري يُهدر سنويًا في إحدى شركات Fortune 500 بسبب أوجه القصور في صناعة القرار']]},
+   {t:'h',id:'s1-case',title:'الحالة الجارية: منصة البلاغات',sub:'جهة خدمية تستقبل بلاغات صيانة، وقررت الإدارة إدخال نموذج ذكاء اصطناعي لترتيب أولوية البلاغات تلقائيًا. هذه الحالة ترافقنا في المحطات الخمس.'},
+   {t:'stats',items:[['9,000','بلاغ صيانة شهريًا'],['6.4<small> أيام</small>','متوسط زمن الإغلاق'],['19<small>%</small>','نسبة إعادة فتح البلاغات']]},
+   {t:'act',id:'priority'},
+   {t:'rule',text:'إذا لم نعرّف القرار... فالذكاء الاصطناعي سيُحسّن قرارًا لم نحدده أصلًا.',ic:'⚠'},
+   {t:'h',id:'s1-anatomy',title:'لا تبدأ بالحل... شرّح القرار أولًا',sub:'قبل بناء أو شراء أي نظام ذكاء اصطناعي، اسأل ستة أسئلة. جرّب تطبيقها على قرار حقيقي من عملك؛ تُحفظ إجاباتك على جهازك.'},
+   {t:'act',id:'anatomy'},
+   {t:'act',id:'twoareas'},
+   {t:'h',id:'s1-concepts',title:'المفاهيم الأساسية',sub:'اضغط على أي مفهوم لعرض لماذا يهمّ صانع القرار، والخطأ الشائع، وكيف تستخدمه عمليًا.'},
+   {t:'cards',items:[
+     {ic:'🧠',t:'ذكاء القرار',en:'Decision Intelligence',d:'منهج يتعامل مع القرار باعتباره منظومة قابلة للتصميم والقياس والتحسين، تجمع بين علم القرار والبيانات والعلوم السلوكية والذكاء الاصطناعي والحوكمة.',why:'النموذج ليس القرار، والبيانات ليست القرار، والتوصية ليست القرار؛ القرار منظومة كاملة.',ex:'قبل شراء نموذج لترتيب البلاغات يجب أن نحدد أولًا: ما الذي يجعل البلاغ «عالي الأولوية»؟ ومن يملك حق تحديد ذلك؟',p:'لا تبدأ بالتقنية... ابدأ بالقرار الذي تريد تغييره.'},
+     {ic:'🎯',t:'جودة القرار',en:'Decision Quality',d:'تُبنى جودة القرار من ستة عناصر: تأطير المشكلة، والبدائل، والمعلومات، والقيم والمفاضلات، والاستدلال، والالتزام بالتنفيذ.',why:'هل كان قرارك جيدًا... حتى لو كانت النتيجة سيئة؟ الجودة تُقاس بالعملية لا بالحظ.',ex:'لدينا بدائل متعددة، لكن بيانات ثلاثة أحياء غير مكتملة. التحليل قد يكون صحيحًا... لكن جودة القرار ليست مكتملة.',p:'لا تبحث عن أقوى عنصر في القرار؛ ابحث عن أضعف عنصر.'},
+     {ic:'⚖',t:'قرار جيد ≠ نتيجة جيدة',en:'Decision vs Outcome',d:'الحظ لا يجعل القرار الجيد سيئًا... ولا القرار السيئ جيدًا. قرار (أ): دراسة جيدة ← تأجيل ← ارتفاع الأسعار لاحقًا. قرار (ب): قرار متسرع ← ظروف ساعدت ← أرباح.',m:'إذا حكمنا على القرار من النتيجة فقط، فسنتعلم الدرس الخطأ.',p:'السؤال الصحيح عند المراجعة: هل كان هذا القرار منطقيًا استنادًا إلى المعلومات المتاحة لحظة اتخاذه؟ قيّم جودة القرار أولًا... ثم قيّم النتيجة.'},
+     {ic:'📢',t:'الضجيج',en:'Noise',d:'اختلاف غير مبرر بين الأحكام المهنية عند التعامل مع الحالة نفسها.',why:'التحيز يمكن اكتشاف اتجاهه، بينما الضجيج قد يبدو مجرد «اختلاف في وجهات النظر».',ex:'البلاغ نفسه عُرض على مشرفين مختلفين، فكانت النتيجة ثلاثة أيام فرق في زمن الاستجابة.',m:'افتراض أن الأتمتة تحل المشكلة؛ فإذا أتمتنا حكمًا غير متسق لم نُزل الضجيج... بل ثبّتناه.',p:'قِس الاختلاف قبل أن تحاول أتمتته.'},
+     {ic:'📉',t:'قانون غودهارت',en:"Goodhart's Law",d:'عندما يصبح الرقم هدفًا... يبدأ الناس بتحسين الرقم لا الأداء. عندما يتحول المقياس إلى هدف، قد يتوقف عن كونه مقياسًا جيدًا.',ex:'انخفض زمن إغلاق البلاغات 40%... لكن إعادة الفتح ارتفعت إلى 19%. تحسّن المؤشر، ولم تتحسن الخدمة.',why:'النظام الذكي يستطيع تحسين المؤشر بكفاءة مذهلة... حتى لو كان المؤشر يقيس الشيء الخطأ.',p:'اختبار غودهارت: كيف يمكن تحسين هذا الرقم دون تحسين الخدمة؟ إذا وجدت الإجابة فقد وجدت ثغرة المؤشر. لكل مؤشر مهم... ضع مؤشرًا موازنًا يحمي الغاية.'},
+     {ic:'🚪',t:'القرار القابل وغير القابل للتراجع',en:'Two-way / One-way Door',d:'القرار القابل للتراجع يمكن عكسه أو تعديله بتكلفة محدودة (مثل تفويض ترتيب الأولويات لمشرف الوردية). غير القابل للتراجع يصعب عكسه أو تكون كلفة عكس آثاره مرتفعة (مثل عقد نظام ذكاء اصطناعي لخمس سنوات).',why:'ليس كل قرار يستحق أسبوعين من النقاش.',p:'اسأل قبل النقاش: إذا اكتشفنا غدًا أن القرار خاطئ... كم ستكلفنا العودة؟ سرعة القرار يجب أن تتناسب مع صعوبة التراجع عنه، لا مع حجمه المالي فقط.'}
+   ]},
+   {t:'act',id:'dmtest'},
+   {t:'h',id:'s1-maturity',title:'مستويات نضج صانع القرار',sub:'خمس مراحل... لكن أين تقف مؤسستك؟ ليست المسألة هل تستخدم البيانات أو الذكاء الاصطناعي، بل كيف تُتخذ القرارات فعلًا.'},
+   {t:'act',id:'ladder'},
+   {t:'act',id:'scenes'},
+   {t:'boxes',cols:2,items:[
+     {t:'اختبار الحقيقة: مؤسسة الحالة',b:'تدّعي المؤسسة أنها في المرحلة الرابعة (معزّزة بالذكاء الاصطناعي). لكن: لا يوجد سجل موحّد يوضح لماذا حصل كل بلاغ على أولويته، ويتغير الترتيب باختلاف المشرف المناوب، ولم يُستخدم الذكاء الاصطناعي منهجيًا لاختبار البدائل أو الافتراضات.'},
+     {t:'المفاجأة: التقنية ليست عنق الزجاجة',b:'المستوى الفعلي هو المرحلة الثانية (واعٍ بالبيانات): فجوة مرحلتين. البيانات تُستخدم فعلًا... لكن القرار نفسه غير مُصمَّم؛ لا معيار موثق للأولوية، ولا سجل لمنطق القرار، والأحكام تختلف باختلاف المشرف.',tint:1}
+   ]},
+   {t:'rule',text:'وجود الذكاء الاصطناعي لا يعني أن المؤسسة وصلت إلى ذكاء القرار.',small:'المشكلة ليست غياب الذكاء الاصطناعي... المشكلة أن القرار نفسه لم يُصمَّم بعد.',ic:'💡'},
+   {t:'act',id:'survey'},
+   {t:'h',id:'s1-fail',title:'لماذا تفشل المؤسسات رغم امتلاكها البيانات؟',sub:'لديك 40 مؤشرًا ولوحات معلومات وتقارير... فلماذا ما زلت تتخذ قرارًا سيئًا؟ المشكلة ليست دائمًا نقص المعلومات، بل سوء تصميم القرار.'},
+   {t:'act',id:'chain'},
+   {t:'act',id:'failures'},
+   {t:'boxes',cols:2,items:[
+     {t:'الحل في الحالة الجارية',b:'لم تكن المشكلة في سرعة الإغلاق، بل في تصميم المؤشر نفسه: مؤشر واحد يقيس السرعة فقط. الحل منظومة مؤشرات متوازنة: زمن الإغلاق + جودة المعالجة + نسبة إعادة الفتح.'},
+     {t:'الضابط المقترح',b:'لا يُحتسب البلاغ «مغلقًا بنجاح» إذا أُعيد فتحه خلال 14 يومًا.',tint:1}
+   ]},
+   {t:'disc',q:'تخيل أن هذه البيانات لم تجعل قرارنا أصعب فحسب... بل جعلتنا نُتقن حلّ المشكلة الخطأ. لماذا؟',ins:'أخطر خطأ في القرار ليس اختيار الحل الخطأ... بل حل المشكلة الخطأ. أعد صياغة السؤال: بدل «كيف نخفض زمن معالجة الطلب؟» اسأل «كيف نقلل الطلبات الناقصة وإعادة المعالجة؟». جودة السؤال تحدد جودة الحل.'},
+   {t:'disc',q:'إذا اشتريت النموذج ولم تكن قد شرّحت القرار... فكيف ستعرف أنه نجح؟',ins:'بلا تشريح، لا معيار للنجاح، ولن يبقى أمامك إلا الحكم على النموذج بنتائجه. من لم يُشرّح قراره، لن يشتري نموذجًا... بل سيشتري ضجيجًا أسرع.'},
+   {t:'rule',text:'أكبر خطأ يمكن أن ترتكبه المؤسسة هو أن تحاول جعل القرار أسرع قبل أن تتأكد أنها تصنع القرار الصحيح.',small:'الخلاصة: لا تبدأ بالذكاء الاصطناعي',ic:'★'}
+  ]},
+
+{ id:'s2', emo:'🔍', n:2, code:'CHALLENGE', color:'var(--s2)', tint:'var(--s2t)',
+  title:'حدود الآلة: هل نستطيع الوثوق بالذكاء الاصطناعي؟',
+  short:'حدود الآلة',
+  gq:'هل نستطيع الوثوق بما يقوله الذكاء الاصطناعي؟',
+  blocks:[
+   {t:'h',id:'s2-open',title:'هل تثق بالذكاء الاصطناعي... لأنه يبدو واثقًا؟',sub:'نظام توصية يعرض عليك: «احتمالية الحالة الخطرة مرتفعة». النص منظم، والتحليل يبدو منطقيًا، والنظام لا يتردد. هل تعتمد التوصية؟'},
+   {t:'vs',a:{t:'الثقة في طريقة الإجابة',b:'رقم مرتفع، نص منظم، لغة واثقة، تحليل يبدو منطقيًا.'},b:{t:'صحة الإجابة',b:'أحتاج إلى التحقق، وإلى معرفة كيف وصل النظام إلى النتيجة.'}},
+   {t:'rule',text:'أخطر مخرجات الذكاء الاصطناعي ليست الردود السيئة... بل الردود المقنعة والخاطئة.',small:'الإنسان غالبًا يشك في الإجابة الرديئة، لكنه قد يتوقف عن التحقق أمام الإجابة المتقنة.',ic:'!'},
+   {t:'h',id:'s2-real',title:'الواقع بالأرقام',sub:'تحقّق خارجي مستقل من نموذج للتنبؤ بالحالات الخطرة الناتجة عن الاستجابة الشديدة للعدوى، شمل 38,455 حالة تنويم، كشف فجوة كبيرة بين «النموذج المستخدم» و«النموذج الموثوق».'},
+   {t:'stats',items:[['≈ 0.63','AUC: قدرة تمييز محدودة'],['≈ 33<small>%</small>','الحساسية: ثلثا الحالات لم تُلتقط'],['≈ 12<small>%</small>','القيمة التنبؤية الموجبة: من كل 100 تنبيه']]},
+   {t:'boxes',cols:2,items:[
+     {t:'ماذا يعني ذلك؟',b:'إذا أصدر النظام تنبيهًا، فإن نحو 12% فقط من الحالات التي صنّفها إيجابية كانت صحيحة فعليًا؛ أي أن معظم التنبيهات تحتاج إلى مراجعة بشرية قبل اتخاذ الإجراء.'},
+     {t:'المفاجأة الحقيقية: توقيت الثقة',b:'كان النموذج قيد الاستخدام قبل أن يكتمل التحقق المستقل من أدائه خارج الجهة المطوّرة. هل يكفي أن يقول المورّد إن النموذج «تم التحقق منه»؟ أين؟ وعلى أي بيانات؟ ومتى؟',tint:1}
+   ]},
+   {t:'steps',title:'سلسلة الأسئلة الحاكمة',items:[['هل الذكاء الاصطناعي دقيق؟','دقيق... بالنسبة إلى ماذا؟'],['دقيق على أي بيانات؟','وفي أي سياق؟'],['ما تكلفة الخطأ؟','ومن يتضرر منه؟'],['ماذا لا يعرف النظام؟','حدود معرفته ونطاق بياناته'],['من يملك حق رفض توصيته؟','المسؤولية والصلاحية']]},
+   {t:'rule',text:'الذكاء الاصطناعي لا يحتاج إلى أن يكون صحيحًا دائمًا حتى يؤثر في القرار؛ يكفي أن يكون مقنعًا بما يكفي لكي نتوقف عن التحقق.',ic:'◆'},
+   {t:'h',id:'s2-traps',title:'ستة أسئلة... ستة فخاخ',sub:'قبل أن تعتمد توصية الذكاء الاصطناعي، مرّ على هذه الفخاخ الستة.'},
+   {t:'cards',items:[
+     {ic:'🤖',t:'تحيّز الأتمتة',en:'Automation Bias',d:'الميل إلى قبول مخرجات الأنظمة الآلية دون تحقق كافٍ، ويظهر في صورتين: أخطاء الإغفال (عدم ملاحظة ما أغفله النظام) وأخطاء الارتكاب (اتباع توصية آلية خاطئة).',why:'قد يدفعك إلى تفويض الحكم للنظام دون قصد، خاصة تحت ضغط الوقت أو عند ارتفاع الثقة بالنظام.',ex:'يقترح النظام أولوية لبلاغ معين، فيتبع المسؤول التوصية مباشرة دون تكوين حكم مستقل.',m:'الاعتقاد أن معرفة وجود تحيّز الأتمتة تكفي لتجنبه.',p:'سجّل تقييمك الأولي قبل الاطلاع على مخرجات النظام، ثم قارن الحكمين، ودوّن سبب أي تغيير في حكمك.',q:'هل تحققت من التوصية؟'},
+     {ic:'🌀',t:'الهلوسة',en:'Hallucination',d:'إنتاج محتوى يبدو متماسكًا ومقنعًا لكنه غير صحيح أو غير مستند إلى مصدر موثوق.',why:'المعلومة الخاطئة قد تبدو مهنية ودقيقة، مما يزيد احتمال اعتمادها دون تحقق.',ex:'مرجع نظامي برقم مادة دقيق... لكنه غير موجود.',m:'الاعتماد على الخبرة أو الانطباع الشخصي لاكتشاف الهلوسة.',p:'لا مرجع ولا إحصائية دون مصدر موثوق يمكن الرجوع إليه.',q:'هل تحققت من المصدر؟'},
+     {ic:'🌍',t:'انحراف البيانات والنموذج',en:'Data & Model Drift',d:'انحراف البيانات: تغيّر خصائص البيانات المستخدمة في النظام. انحراف النموذج: تغيّر العلاقة بين المدخلات والمخرجات بعد بدء التشغيل. النموذج لم يتغيّر... لكن العالم تغيّر.',why:'قد يتدهور أداء النموذج بمرور الوقت حتى دون إجراء أي تعديل عليه.',ex:'نموذج لترتيب أولويات الخدمات دُرّب قبل التوسّع العمراني، ثم ظهرت أحياء جديدة لم تكن ممثلة جيدًا في بيانات التدريب.',m:'اعتبار اختبار النموذج عند إطلاقه أو شرائه ضمانًا مستمرًا لأدائه.',p:'حدّد حدود أداء واضحة وراقب الأداء دوريًا.',q:'هل ما زال النموذج مناسبًا للواقع الحالي؟'},
+     {ic:'🔗',t:'الارتباط ≠ السببية',en:'Correlation vs Causation',d:'الارتباط يوضّح وجود علاقة بين متغيرين، لكنه لا يثبت أن أحدهما سبب للآخر.',why:'بناء القرار على علاقة ارتباطية فقط قد يؤدي إلى تدخلات غير فعّالة أو مكلفة.',ex:'ارتفاع البلاغات مرتبط بزيادة زيارات فرق الصيانة؛ لكن الزيارات لا تسبب البلاغات، فقد تكون نتيجة لاكتشاف مزيد من الأعطال.',m:'تحويل علاقة ارتباطية إلى توصية سببية.',p:'اسأل: هل الدليل ارتباطي أم سببي؟ وإذا كانت التوصية سببية، ما الدليل أو التجربة التي تثبت أن التدخل سيُحدث الأثر المتوقع؟',q:'هل العلاقة تثبت السببية؟'},
+     {ic:'📊',t:'مغالطة المعدل الأساسي',en:'Base Rate Fallacy',d:'تجاهل معدل حدوث الحدث الأساسي عند تفسير نتائج النموذج.',why:'انخفاض معدل حدوث الحدث قد يؤدي إلى انخفاض القيمة التنبؤية الموجبة حتى مع ارتفاع الحساسية والنوعية.',ex:'معدل حدوث 3%، حساسية 80%، نوعية 90%: نحو 20 فقط من كل 100 إنذار ستكون صحيحة (قرابة الخُمس).',m:'الاعتماد على رقم الدقة الوارد في عرض النظام دون التحقق من معدل حدوث الحدث في بيئة التشغيل الفعلية.',p:'اسأل: كم يحدث الحدث فعليًا لدينا؟ كم إنذارًا سيولّد النظام؟ وكم منها سيكون صحيحًا؟',q:'كم يحدث الحدث فعليًا؟'},
+     {ic:'🎭',t:'المتغيّر البديل',en:'Proxy Variable',d:'استخدام متغير قابل للقياس بوصفه مؤشرًا بديلًا عن متغير آخر يصعب قياسه مباشرة.',why:'قد يؤدي إلى تحيّز غير مقصود عندما يعكس خصائص لا علاقة لها بالهدف الحقيقي للقرار.',ex:'إذا قيست الأولوية بحدّة لغة البلاغ، تصبح الأولوية للبلاغات الأكثر انفعالًا بدلًا من البلاغات الأكثر حاجة.',m:'افتراض أن المتغير القابل للقياس يمثّل الهدف الحقيقي.',p:'اطلب تحديد جميع المتغيرات البديلة المستخدمة، ومبررات استخدامها، ومخاطرها المحتملة. غياب هذه المعلومات مؤشر يستدعي مزيدًا من التحقق.',q:'هل المتغير يقيس ما أعتقد أنه يقيسه؟'}
+   ]},
+   {t:'act',id:'baserate'},
+   {t:'h',id:'s2-think',title:'كيف «يفكر» الذكاء الاصطناعي؟',sub:'قد يعطيك الذكاء الاصطناعي إجابة ممتازة... دون أن «يفهم» ما قاله. ليس كل ذكاء اصطناعي يعمل بالطريقة نفسها: أربعة أنظمة، أربعة أنواع من المخاطر.'},
+   {t:'table',head:['النظام','ماذا يفعل؟','السؤال الذي يهمّك'],rows:[
+     ['<b>التعلم الآلي الإشرافي</b>','يتعلّم من بيانات تاريخية ونتائج معروفة','هل تعلّم النمط الصحيح... أم تعلّم تحيزات الماضي؟'],
+     ['<b>النماذج اللغوية</b>','تتنبأ بالتتابع الأكثر احتمالًا من الرموز؛ تختار الأعلى احتمالًا لا الأصح بالضرورة','هل المخرج صحيح، أم مقنع فقط؟'],
+     ['<b>أنظمة التوصية</b>','تحسّن مؤشرًا أو هدفًا محددًا (النقرات، التفاعل، مدة الاستخدام)','ما الذي صُمم النظام لتحسينه فعلًا؟'],
+     ['<b>وكلاء الذكاء الاصطناعي</b>','تنفذ خطوات وإجراءات باستخدام الأدوات؛ كل خطوة تُوسّع سطح الأثر في الواقع','ماذا يستطيع النظام أن يفعل؟ وما حدود صلاحياته؟']]},
+   {t:'boxes',cols:2,items:[
+     {t:'حلقة التحيّز في التعلم الإشرافي',b:'قرارات تاريخية تحمل تحيزًا ← النموذج يتعلم النمط ويعيد إنتاجه ← قرارات جديدة غير عادلة ← تُغذّي البيانات التاريخية... وتدور الحلقة.'},
+     {t:'النمط ليس سببًا',b:'قد يكتشف الذكاء الاصطناعي ارتباطًا قويًا. لكن من النمط إلى التنبؤ خطوة، ومن التنبؤ إلى التفسير خطوة أخرى. السؤال الحاسم: هل ما اكتشفه النموذج مجرد نمط... أم دليل على سبب؟',tint:1}
+   ]},
+   {t:'act',id:'capmap'},
+   {t:'boxes',cols:2,items:[
+     {t:'تجربة حيّة: هل يعطي الذكاء الاصطناعي الإجابة نفسها دائمًا؟',b:'اطرح السؤال ذاته على نظامين (أو على النظام نفسه مرتين)، ثم قارن: أيهما كان أكثر إقناعًا؟ هل الأكثر إقناعًا هو الأكثر صحة؟ ما مستوى الثقة الذي أعطاه كل نموذج؟ ما الذي اختلف وما الذي اتفق؟'},
+     {t:'الرسالة الأساسية',b:'قد تتأثر المخرجات بصياغة السؤال والمعلومات المتاحة. اختلاف المخرجات ليس مشكلة يجب إخفاؤها؛ بل فرصة لفهم حدود النموذج وضرورة التحقق من مخرجاته.',tint:1}
+   ]},
+   {t:'h',id:'s2-trap',title:'تجربة «فخ الذكاء الاصطناعي»',sub:'هل تثق بقرارك... أم تثق بما يقوله الذكاء الاصطناعي؟ ثلاث جولات وقرار واحد. لا توجد إجابة صحيحة أو خاطئة؛ المطلوب أن تلاحظ ما يحدث لقرارك عندما تظهر توصية آلية.'},
+   {t:'act',id:'trap'},
+   {t:'boxes',cols:2,items:[
+     {t:'يزداد أثر تحيّز الأتمتة عندما...',b:'يكون الوقت محدودًا لاتخاذ القرار، وتنخفض القدرة على التحقق المستقل. الخطر الحقيقي ليس في وجود الذكاء الاصطناعي... بل في تفويض الحكم له دون قصد.'},
+     {t:'قاعدة عملية: الإنسان أولًا... ثم الآلة',b:'لا تجعل الآلة تقرر أولًا ثم تجعل الإنسان يوافق. التوصية الآلية مُدخَل للقرار، وليست القرار.',tint:1}
+   ]},
+   {t:'act',id:'verify7'},
+   {t:'disc',q:'أيّ الأخطاء الثلاثة المتكررة (الخلط بين جودة القرار وجودة النتيجة، الضجيج، تحيّز الأتمتة) يكون الأكبر خطورة عندما يصبح الذكاء الاصطناعي جزءًا من عملية اتخاذ القرار؟',ins:'الأخطر هو تحيّز الأتمتة، لأنه الخطأ الذي يُعطّل مناعة المؤسسة ضد بقية الأخطاء. أولًا عامل السرعة والنطاق: خطأ النظام يتكرر على آلاف الحالات بالنمط نفسه خلال ثوانٍ فيتحول الخطأ الفردي إلى خطأ مؤسسي ممنهج. ثانيًا تعطيل خط الدفاع الأخير: حين يفقد المراجع البشري دافع الاعتراض لا يبقى من يكتشف الخطأين الآخرين. ولاحظ أن الذكاء الاصطناعي يخفف الضجيج لأنه متسق مع نفسه، لكن هذا الاتساق خادع؛ فالنظام المتسق قد يكون متسقًا في الخطأ.'},
+   {t:'rule',text:'الثقة لا تُمنح للآلة... بل تُبنى بالتحقق.',small:'قوة الذكاء الاصطناعي في قدرته على توسيع التفكير؛ وقوة صانع القرار في قدرته على مساءلة ما تنتجه الآلة.',ic:'✓'}
+  ]},
+
+{ id:'s3', emo:'🤝', n:3, code:'AUGMENT', color:'var(--s3)', tint:'var(--s3t)',
+  title:'من المحادثة إلى مساعد القرار',
+  short:'مساعد القرار',
+  gq:'كيف نحوّل الذكاء الاصطناعي من مستشار إلى شريك في القرار؟',
+  blocks:[
+   {t:'h',id:'s3-open',title:'ماذا لو كان أفضل استخدام للذكاء الاصطناعي... ألّا تسأله عن القرار؟',sub:'غالبًا نبدأ بسؤال «ما أفضل قرار؟»، لكن الاستخدام الأكثر قيمة يبدأ بأسئلة مختلفة. الهدف ليس أن يقرر عنك، بل أن يجعلك تفكر بصورة أفضل.'},
+   {t:'boxes',cols:4,items:[{t:'«ما البدائل التي لم أفكّر فيها؟»',b:''},{t:'«ما الافتراض الذي قد يكون خاطئًا؟»',b:''},{t:'«كيف يمكن أن يفشل هذا القرار؟»',b:''},{t:'«ما الحجة الأقوى ضد قراري؟»',b:''}]},
+   {t:'act',id:'reframe'},
+   {t:'h',id:'s3-roles',title:'لا تطلب منه الإجابة... اطلب منه أن يعارضك',sub:'يمكن استخدام الذكاء الاصطناعي في ستة أدوار محددة تُوسّع مساحة التفكير قبل القرار.'},
+   {t:'boxes',cols:3,items:[
+     {t:'توليد البدائل',b:'اكتشاف خيارات لم تكن مطروحة.'},{t:'اختبار الافتراضات',b:'كشف الافتراضات التي بُني عليها القرار.'},{t:'وجهة النظر المعارضة',b:'بناء أقوى حجة ضد الخيار المطروح.'},
+     {t:'محاكاة السيناريوهات',b:'استكشاف ما قد يحدث إذا تغيّرت الظروف.'},{t:'تحليل ما قبل الوفاة',b:'افترض أن القرار فشل... لماذا فشل؟'},{t:'الفريق الأحمر',b:'اجعله يتصرف كفريق معارض يبحث عن نقاط الضعف.'}]},
+   {t:'vs',a:{t:'الاستخدام التقليدي',b:'«أي نموذج ذكاء اصطناعي تنصحنا به لترتيب البلاغات؟» إجابة تقنية ممتازة... لكن هل طرحتَ السؤال الصحيح؟'},b:{t:'استخدامه مساعدًا للقرار',b:'اقترح 5 معايير مختلفة لتحديد أولوية البلاغ. حدّد الافتراضات الخفية وراء كل معيار. ابحث عن الحالات التي قد يفشل فيها كل معيار. قدّم أقوى حجة ضد استخدام النموذج. «افترض أن المشروع فشل بعد سنة؛ ما الأسباب المحتملة؟»'}},
+   {t:'rule',text:'الذكاء الاصطناعي لا يجب أن يُغلق مساحة التفكير... بل أن يوسّعها.',small:'توسيع البدائل ← اختبار الافتراضات ← استكشاف المخاطر ← محاكاة السيناريوهات ← سماع الرأي المعارض ← ثم اتخاذ القرار',ic:'↔'},
+   {t:'h',id:'s3-concepts',title:'المفاهيم الأساسية',sub:'خمسة مفاهيم تحوّل أداة الذكاء الاصطناعي إلى منظومة قرار.'},
+   {t:'cards',items:[
+     {ic:'🧭',t:'مساعد القرار',en:'Decision Copilot',d:'منظومة تفكير منظمة تُستخدم لدعم قرار محدد، وتقوم على أربعة أركان: مدخلات واضحة، ونطاق استخدام محدد، ووظائف ومعايير قبول، ومخرجات موحّدة قابلة للمراجعة.',why:'تحويل الاستخدام من محادثة مفتوحة إلى منظومة منظمة يجعل المخرجات أكثر اتساقًا وقابلية للمراجعة والتطوير.',ex:'مساعد لترتيب أولويات البلاغات التشغيلية ضمن نطاق محدد، يقدّم توصية وفق معايير معلنة، مع درجة الثقة ومواطن عدم اليقين.',m:'إنشاء مساعد عام دون نطاق واضح، فيُستخدم في قرارات لم يُصمّم لدعمها.',p:'ابدأ بنوع واحد من القرارات المتكررة، وحدّد النطاق والمدخلات والوظائف والمخرجات وضوابط الاستخدام قبل تشغيله.'},
+     {ic:'⚰',t:'تحليل ما قبل الوفاة',en:'Pre-mortem',d:'أسلوب تحليلي يفترض أن القرار قد فشل بالفعل، ثم يبحث الفريق بأثر رجعي عن أسباب الفشل المحتملة، قبل تنفيذ القرار.',why:'يكشف المخاطر ونقاط الضعف مبكرًا، ويجعل طرح المخاطر جزءًا من منهجية العمل بدل أن يُنظر إليه كاعتراض شخصي.',ex:'أحد المخاطر: تحوّل القاعدة التشغيلية إلى إجراء شكلي، فتُصنّف جميع الحالات «عاجلة» لتجنب التأخير.',m:'إجراؤه بعد اعتماد القرار، فيتحول من أداة استباقية إلى محاولة لتبرير القرار.',p:'«إذا فشل هذا القرار بعد ستة أشهر، فما السبب الأكثر احتمالًا؟» حدّد: أسبابًا محتملة للفشل، ومؤشرات إنذار مبكر، وإجراءات وقائية.'},
+     {ic:'🟥',t:'الفريق الأحمر',en:'Red Teaming',d:'تكليف مستقل ومنهجي لفريق بمهاجمة القرار أو النظام لاكتشاف نقاط الضعف والثغرات ومصادر الفشل المحتملة قبل التنفيذ. مهمتك ليست الدفاع عن القرار... بل محاولة إسقاطه.',why:'مراجعة القرار من منظور مؤيد له قد لا تكشف نقاط ضعفه، بينما يوفر الفريق الأحمر منظورًا نقديًا مستقلًا يختبر متانته.',ex:'أُسند إلى فريق مستقل دور «المعارض» فقدّم 5 حجج مضادة؛ أدّت اثنتان منها إلى تعديل القرار قبل تنفيذه.',m:'تحويله إلى جلسة انتقاد عامة تنتج قائمة طويلة من المخاوف دون إجراءات واضحة.',p:'كل اعتراض ينتهي بنتيجة قابلة للتنفيذ، أو بتوثيق سبب رفضه.'},
+     {ic:'🧾',t:'توثيق المصدر',en:'Provenance',d:'توثيق مصدر كل عنصر في عملية القرار: ما أنتجه الذكاء الاصطناعي، وما أضافه أو عدّله الإنسان، ومتى تمّ ذلك، بما يتيح تتبّع مسار القرار من المصدر إلى المخرج النهائي.',m:'دمج مخرجات الذكاء الاصطناعي مباشرة في الوثيقة النهائية دون توثيق مصدرها، فيصعب تتبّع أصل المعلومات لاحقًا.',p:'إذا لم تستطع تتبّع مصدر القرار، فسيصبح من الصعب مساءلته أو التعلّم منه.'},
+     {ic:'🎭',t:'تقنيع البيانات',en:'Data Masking',d:'استبدال البيانات الحساسة أو القابلة للتعرّف بقيم بديلة تحافظ على البنية التحليلية وتحدّ من إمكانية تحديد هوية الأفراد أو الجهات. مثال: «حي الشفا» ← «حي (أ)»، ورقم الهوية ← معرّف عشوائي، مع الاحتفاظ بالبيانات الإحصائية اللازمة.',why:'يتيح الاستفادة من أدوات الذكاء الاصطناعي مع تقليل مخاطر كشف البيانات، ودعم الالتزام بمتطلبات حماية البيانات الشخصية.',m:'حذف الاسم فقط مع الإبقاء على تفاصيل يمكن دمجها مع مصادر أخرى وإعادة تحديد الهوية. إخفاء الاسم لا يعني بالضرورة إخفاء الهوية.',p:'اجعل التقنيع خطوة إلزامية قبل إدخال أي بيانات حساسة، وضمّنها في إجراءات العمل وقوالب الصياغة المعتمدة.'}
+   ]},
+   {t:'act',id:'copilot9'},
+   {t:'h',id:'s3-functions',title:'ست وظائف قرارية للذكاء الاصطناعي',sub:'إذا لم تطلب من الذكاء الاصطناعي «قرارًا»... فماذا تطلب منه؟ لكل وظيفة صياغة ومعيار قبول؛ والمخرج الذي لا يجتاز معيار القبول لا يُعتمد.'},
+   {t:'table',head:['الوظيفة','ماذا تطلب؟','معيار القبول'],rows:[
+     ['<b>1. تأطير المشكلة</b>','توليد أسئلة تساعد على إعادة تأطير المشكلة','هل كشف النظام سؤالًا واحدًا على الأقل لم يخطر لنا؟ إذا لم يغيّر طريقة رؤيتنا للمشكلة... لم ينجح.'],
+     ['<b>2. توليد البدائل</b>','«ولّد بدائل متمايزة فعليًا، وليس صياغات مختلفة للبديل نفسه»','بديل واحد قابل للتنفيذ لم يكن مطروحًا أصلًا. التمايز في الجوهر... لا في الصياغة.'],
+     ['<b>3. تحليل السيناريوهات</b>','«ماذا يحدث للقرار إذا تغيّرت الظروف؟» لا «ماذا سيحدث؟» فقط','أن يحدّد النظام الافتراض الذي إذا سقط... انهار القرار.'],
+     ['<b>4. كشف المخاطر</b>','ترتيب المخاطر حسب الاحتمال والأثر ومؤشر الإنذار','كل خطر يرتبط بمؤشر يمكن رصده فعلًا في بياناتنا.'],
+     ['<b>5. اختبار الافتراضات</b>','«افصل المثبَت عن المفترَض في نص القرار»','قائمة افتراضات صريحة. ما لا نراه كافتراض قد يصبح نقطة انهيار.'],
+     ['<b>6. الحجج المضادة</b>','«قدّم أقوى حجة ضد القرار المفضّل»','أن تكون الحجة قوية لدرجة تستحق ردًا مكتوبًا... لا تجاهلًا.']]},
+   {t:'boxes',cols:1,items:[{t:'أشياء لا تُطلب من النظام إطلاقًا',b:'الترجيح النهائي بين البدائل، وتقدير كلفة داخلية لا يعرفها، وأي حكم يتطلب معرفة بسياسات الجهة غير المتاحة له.',tint:1}]},
+   {t:'h',id:'s3-prompt',title:'هندسة الحوار من أجل القرار',sub:'هل المشكلة في الذكاء الاصطناعي؟ أم في طريقة الحديث معه؟ الصياغة الضعيفة «حلّل هذا القرار وأعطني رأيك» بلا دور ولا سياق ولا معيار ولا شكل للمخرج.'},
+   {t:'act',id:'prompt'},
+   {t:'boxes',cols:2,items:[
+     {t:'لا تترك النظام «حرًّا»: قيود حماية إلزامية',b:'حدّد ما لا يعرفه النظام، واطلب منه الفصل بين ما هو مثبت وما هو مفترض، وألّا يقدّم أرقامًا أو مراجع دون مصدر. المخرج الجيد لا يخبرك فقط بما يعرفه النظام؛ بل يكشف أيضًا حدود معرفته.'},
+     {t:'مكتبة الصياغات المعتمدة',b:'احفظ الصياغة التي نجحت في مكتبة الإدارة: تلك التي أعطت أوضح مخرج وأفضل تفكير. الصياغة الجيدة لا تبقى في رأس الموظف... بل تتحول إلى أصل مؤسسي قابل لإعادة الاستخدام.',tint:1}
+   ]},
+   {t:'disc',q:'ما هو السؤال الأفضل لتغيير دور الذكاء الاصطناعي: «أعطني أفضل قرار»، أم «لخّص لي المعلومات»، أم «أي خيار أختار؟»',ins:'لا شيء منها. الأسئلة الثلاثة تُبقي الذكاء الاصطناعي في دور «المجيب». الأفضل: «اختبر قراري»، «اكشف افتراضاتي»، «ما مخاطر كل خيار؟»، «قدّم لي حجة معارضة». ويمكن تطبيق ذلك بخمسة وكلاء يعارض بعضهم بعضًا وينتقد كل منهم الآخر.'},
+   {t:'rule',text:'لا تجعل الذكاء الاصطناعي يتخذ القرار بدلًا منك... بل اجعله يوسّع خياراتك، ويتحدّى افتراضاتك، ويبحث عن نقاط ضعفك، ويحاكي الفشل، ويوثّق مسار القرار، ويحمي بياناتك. ثم أنت تقرر.',ic:'◎'}
+  ]},
+
+{ id:'s4', emo:'⚖️', n:4, code:'JUDGE', color:'var(--s4)', tint:'var(--s4t)',
+  title:'الحكم: متى نثق بالآلة ومتى نعترض؟',
+  short:'الحكم',
+  gq:'متى نثق بالآلة... ومتى نملك الشجاعة لنعترض على توصيتها؟',
+  blocks:[
+   {t:'h',id:'s4-open',title:'بين الحكمة والجرأة',sub:'الآلة قد تقترح القرار... لكن من يملك شجاعة رفضه عندما يكون خاطئًا؟'},
+   {t:'vs',a:{t:'الحكمة: متى نثق بالآلة؟',b:'حين تصمد التوصية أمام الأدلة والمنطق... لا لأنها تبدو واثقة.'},b:{t:'الجرأة: متى نعترض؟',b:'حين تقول الأدلة والخبرة إن التوصية خاطئة... مهما بدت مقنعة.'}},
+   {t:'h',id:'s4-nl',title:'قضية من الواقع: إعانات رعاية الأطفال في هولندا',sub:'وصلتك توصية: «هذه الأسرة عالية الاشتباه بالاحتيال، ودرجة المخاطرة مرتفعة». النظام لديه نموذج متقدم ومؤشرات متعددة ونتيجة تبدو موضوعية. هل تعتمد التوصية... أم تتوقف وتسأل: لماذا؟'},
+   {t:'stats',items:[['26<small> ألف</small>','أسرة أُدرجت بصورة خاطئة ضمن حالات الاشتباه بالاحتيال'],['2021','يناير: استقالة الحكومة الهولندية بعد تداعيات القضية'],['خطأ منظومة','لم تكن المشكلة مجرد خطأ تقني، بل ارتبطت بكيفية استخدام مخرجات النظام وتفسيرها']]},
+   {t:'vs',a:{t:'ما كان يفترض أن يحدث',b:'مخرجات النظام مؤشرات تستدعي التحقق والمراجعة البشرية: نقطة بداية للفحص... لا نهاية للقرار.'},b:{t:'ما حدث فعلًا',b:'تعامل بعض الموظفين مع المخرجات باعتبارها حكمًا نهائيًا لا يُراجع ولا يُسأل عنه، فتحوّل وجود الإنسان من إشراف حقيقي إلى ختم شكلي.'}},
+   {t:'rule',text:'ليس السؤال: هل الذكاء الاصطناعي دقيق؟ بل: هل هذه التوصية تستحق أن نعتمد عليها في هذا القرار تحديدًا؟',small:'أثر القرار + درجة عدم اليقين + إمكانية التحقق + إمكانية التراجع',ic:'?'},
+   {t:'h',id:'s4-steps',title:'من «ماذا قالت الآلة؟» إلى «هل ينبغي أن أقبل ما قالته؟»',sub:'خمس خطوات تفصل بين قبول التوصية وبين الحكم عليها.'},
+   {t:'steps',items:[['فحص الدليل','على أي بيانات بُنيت التوصية؟'],['تقدير عدم اليقين','ما الذي لا نعرفه عن هذه الحالة؟'],['اختبار الملاءمة','هل تناسب التوصية هذا القرار تحديدًا؟'],['مراجعة الأثر','من يتضرر لو كانت خاطئة؟'],['الاعتراض عند الحاجة','وأن تملك الشجاعة لتقول: لا.']]},
+   {t:'boxes',cols:3,items:[
+     {t:'التنبؤ ≠ الحقيقة',b:'ما قد يحدث... ليس ما حدث.'},{t:'الاحتمال ≠ اليقين',b:'درجة ثقة مرتفعة ليست دليلًا على صحة التوصية.'},{t:'التوصية ≠ القرار',b:'الآلة تقترح... وأنت تقرر. الفرق بين الاثنين هو مساحة الحكم البشري.'}]},
+   {t:'boxes',cols:1,items:[{t:'متى يجب رفع مستوى التحقق؟',b:'عندما تكون التوصية عالية الأثر (ضرر كبير أو غير قابل للإصلاح)، أو توجد مؤشرات على تحيّز (نمط يتكرر ضد فئة أو منطقة)، أو لا تستطيع تفسير أساسها (صندوق أسود)، أو لا تستطيع التحقق بشكل مستقل، أو تكون البيانات غير مناسبة لهذه الحالة، أو لا توجد آلية واضحة للمراجعة أو التراجع. كلما ارتفع أثر القرار... ارتفع مستوى التحقق المطلوب.',tint:1}]},
+   {t:'h',id:'s4-oversight',title:'الإشراف البشري: وجود الإنسان لا يعني وجود إشراف',sub:'الموظف الذي يعتمد عشرات القرارات الآلية دون وقت أو صلاحية للمراجعة... يمارس إشرافًا شكليًا.'},
+   {t:'table',head:['النمط','دور الإنسان','متى يناسب؟'],rows:[
+     ['<b>داخل الحلقة</b> <span class="en">Human-in-the-loop</span>','يشارك في كل قرار','الحالات الحرجة: يراجع الإنسان التوصية قبل اعتمادها'],
+     ['<b>فوق الحلقة</b> <span class="en">Human-on-the-loop</span>','يراقب النظام ويتدخل عند الحاجة','الحالات منخفضة الأثر'],
+     ['<b>في القيادة</b> <span class="en">Human-in-command</span>','يحتفظ بالسلطة العليا في التوجيه والإيقاف','على مستوى المنظومة كلها']]},
+   {t:'stats',items:[['200','حالة يوميًا يتعامل معها موظف واحد'],['30″','ثانية للحالة: نصف دقيقة لقرار يخص إنسانًا'],['؟','هل يستطيع ممارسة مراجعة حقيقية؟ التوقيع البشري ليس دليلًا كافيًا على إشراف فعّال']]},
+   {t:'boxes',cols:3,items:[{t:'الوقت',b:'هل أملك وقتًا كافيًا للمراجعة؟'},{t:'المعلومات',b:'هل أملك المعلومات اللازمة لفهم المخرج؟'},{t:'الصلاحية',b:'هل أستطيع رفض التوصية أو تعديلها أو إيقاف النظام؟'}]},
+   {t:'rule',text:'إذا غاب أحد شروط الإشراف الثلاثة... فقد يتحول الإشراف إلى إجراء شكلي.',ic:'!'},
+   {t:'h',id:'s4-risk',title:'النهج القائم على المخاطر',sub:'لا تحدّد مستوى الرقابة بناءً على نوع التقنية، بل بناءً على: أثر القرار، واحتمالية الضرر، وقابلية التراجع، وحساسية البيانات.'},
+   {t:'vs',a:{t:'الإنذار الكاذب',b:'النظام يقول: هناك خطر، بينما لا يوجد خطر فعلي. قد يكلّف ساعة عمل إضافية.'},b:{t:'الحالة المفقودة',b:'النظام يقول: لا يوجد خطر، بينما توجد حالة فعلية. قد يؤدي إلى إصابة أو ضرر جسيم.'}},
+   {t:'rule',text:'لا يكفي أن نسأل: «ما دقة النموذج؟» بل: «ما تكلفة كل نوع من أنواع الخطأ؟»',small:'عدم تماثل الخطأ: كلفة الإنذار الكاذب ≠ كلفة الحالة المفقودة',ic:'≠'},
+   {t:'vs',a:{t:'التراجع التقني',b:'هل أستطيع إلغاء الإجراء في النظام؟'},b:{t:'التراجع الواقعي',b:'هل أستطيع إزالة آثاره عن المستفيدين والجهة؟ «إذا تراجعنا عن القرار غدًا... ما الأثر الذي لن نستطيع إصلاحه؟»'}},
+   {t:'boxes',cols:1,items:[{t:'من المسؤول عندما يخطئ النظام؟',b:'الأتمتة لا تعني غياب المساءلة، واستخدام الذكاء الاصطناعي لا يلغي مسؤولية الجهة. التعاقد مع مزوّد التقنية ينظّم العلاقة بين الجهة والمزوّد... لكنه لا يلغي مسؤولية الجهة تجاه المستفيد. لكل قرار: مالك بشري واضح، وتاريخ القرار، ومبررات القرار، ومسار اعتراض وتظلّم.',tint:1}]},
+   {t:'h',id:'s4-authority',title:'اختبار سلطة القرار',sub:'أمامك أربع حالات حقيقية في طبيعتها، لكنها تختلف في أثرها على الإنسان. لا تبحث عن الإجابة الصحيحة الآن... ابحث عن المعيار الذي ستبني عليه إجابتك.'},
+   {t:'act',id:'authority'},
+   {t:'h',id:'s4-matrix',title:'مصفوفة الإنسان والآلة',sub:'«الإنسان في الحلقة» عبارة تبدو مطمئنة، لكنها لا تجيب: أي إنسان؟ في أي مرحلة؟ وبأي صلاحية؟ وتحت أي شروط؟ المصفوفة تحوّلها إلى أداة تشغيلية بمعيارين فقط: أثر الخطأ على الإنسان، وقابلية التراجع.'},
+   {t:'act',id:'matrix'},
+   {t:'rule',text:'لا يوجد قرار مؤتمت بلا شرط إيقاف.',small:'لكل قرار مؤتمت ثلاثة أشياء مكتوبة: شرط الإيقاف (رقم... لا نيّة)، ومالك المراقبة بالاسم (لا «إدارة» ولا «فريق»)، ودورية المراجعة بالعيّنة (كل كم؟ وكم عيّنة؟ ومن يوقّع؟)',ic:'■'},
+   {t:'h',id:'s4-crisis',title:'غرفة الأزمة: تمرين تحت الضغط',sub:'لا توجد ورشة هادئة الآن: معلومات ناقصة ومتعارضة، وتوصية من نظام ذكاء اصطناعي، وضغط زمني. المطلوب قرار يمكن الدفاع عنه.'},
+   {t:'act',id:'crisis'},
+   {t:'rule',text:'القرار الجيد ليس القرار الذي اتبع توصية الذكاء الاصطناعي أو خالفها، بل القرار الذي يمكن تفسيره من خلال: الأدلة، والمخاطر، والبدائل، والتوقيت، والمسؤولية.',small:'الذكاء الاصطناعي قد يغيّر رأيك... لكن يجب أن تعرف لماذا غيّرت رأيك.',ic:'✎'},
+   {t:'act',id:'judge6'}
+  ]},
+
+{ id:'s5', emo:'🚀', n:5, code:'DECIDE', color:'var(--s5)', tint:'var(--s5t)',
+  title:'الجرأة المسؤولة وحوكمة القرار',
+  short:'الجرأة المسؤولة',
+  gq:'كيف نتخذ القرار الجريء والمسؤول في بيئة غير مؤكدة؟',
+  blocks:[
+   {t:'h',id:'s5-open',title:'ماذا لو كان التأخير... قرارًا أيضًا؟',sub:'معلومات غير مكتملة، ومخاطر متعارضة، وضغط زمني متزايد، وتوصية من الذكاء الاصطناعي، وفريق ينتظر توجيهك. القرار الجيد ليس بالضرورة الأكثر أمانًا... بل الأكثر ملاءمة لمستوى المخاطر والسياق.'},
+   {t:'act',id:'stance'},
+   {t:'vs',a:{t:'الاعتقاد الشائع',b:'قرار أسرع ← تفكير أقل ← أخطاء أكبر.'},b:{t:'ما وجده بحث ماكنزي',b:'المؤسسات التي تتخذ قراراتها بسرعة كانت أكثر ميلًا بنحو الضعف إلى اتخاذ قرارات عالية الجودة.'}},
+   {t:'rule',text:'المشكلة ليست في سرعة القرار... بل في قرار سريع لا تحكمه قواعد واضحة.',small:'خمسة ممكّنات: وضوح الصلاحيات، وتفويض فعّال، ومعلومات كافية للقرار، وحدود واضحة للمخاطر، وآلية للتراجع والتصحيح.',ic:'⚡'},
+   {t:'h',id:'s5-doors',title:'السرعة... أم التصميم؟',sub:'تخيّل القرار نفسه خلف بابين: التزام نهائي لخمس سنوات، أو تجربة محدودة لمدة شهر يمكن إيقافها. هل ستحتاج إلى المدة نفسها لاتخاذ القرار؟ كثير من المؤسسات تعامل القرار القابل للتراجع كأنه غير قابل للتراجع: إجراءات أكثر، واجتماعات أكثر، وموافقات أكثر، وقرار أبطأ.'},
+   {t:'act',id:'doors'},
+   {t:'h',id:'s5-unc',title:'ليس كل ما يمكن حسابه... مخاطرة',sub:'هل تعرف فعلًا ما الذي لا تعرفه؟ إذا أخطأت في تشخيص نوع عدم المعرفة، فقد تستخدم أداة دقيقة جدًا للإجابة عن سؤال لا يمكنها الإجابة عنه.'},
+   {t:'table',head:['النوع','الوصف','الأداة المناسبة'],rows:[
+     ['<b>المخاطرة</b> <span class="en">Risk</span>','النتائج والاحتمالات معروفة أو قابلة للتقدير','الاحتمالات ومصفوفة المخاطر'],
+     ['<b>عدم اليقين</b> <span class="en">Uncertainty</span>','النتائج معروفة... والاحتمالات مجهولة','السيناريوهات والخيارات الحقيقية'],
+     ['<b>الالتباس</b> <span class="en">Ambiguity</span>','توجد تفسيرات متعددة للموقف نفسه','تعدّد وجهات النظر والفريق الأحمر'],
+     ['<b>الجهل</b> <span class="en">Ignorance</span>','متغيرات أو أحداث لم نتصورها أصلًا','المرونة والاحتياطي والاستعداد للمفاجآت']]},
+   {t:'act',id:'uncsort'},
+   {t:'boxes',cols:1,items:[{t:'فخ الدقة الزائفة',b:'قد يعطيك النظام احتمالًا بكسور عشرية دقيقة لحدوث سيناريو ما. السؤال ليس «هل الرقم دقيق؟» بل «هل تبرّر معرفتنا أصلًا إعطاء هذا الرقم؟». من أين جاء الرقم؟ ما البيانات التي بُني عليها؟ ماذا لو كان الحدث خارج البيانات التاريخية؟ الدقة الحسابية لا تعوّض نقص المعرفة.',tint:1}]},
+   {t:'h',id:'s5-scen',title:'السيناريوهات واختبار التحمّل',sub:'السيناريوهات لا تتنبأ بالمستقبل. ليس السؤال «ماذا سيحدث؟» بل «هل سيظل قرارنا صالحًا إذا تغيّرت الظروف؟». الهدف ليس اختيار «السيناريو الصحيح»، بل معرفة أين يمكن أن ينهار القرار.'},
+   {t:'boxes',cols:4,items:[{t:'الأرجح',b:'ماذا يحدث إذا استمرت الظروف المتوقعة؟'},{t:'الأفضل',b:'ماذا لو تحسّنت الظروف؟'},{t:'الأسوأ',b:'ماذا لو تدهورت الظروف؟'},{t:'الصدمة',b:'ماذا لو حدث شيء لم نخطط له؟'}]},
+   {t:'act',id:'scen2x2'},
+   {t:'steps',title:'اكتشف نقطة الانهيار',items:[['الافتراض الحرج','المشرفون يلتزمون بالقاعدة.'],['مؤشر قابل للرصد','نسبة البلاغات المصنّفة «عاجل».'],['عتبة إنذار','إذا تجاوزت النسبة الحد المتفق عليه: إنذار.'],['إجراء محدد','مراجعة القرار وتعليق التفويض عند الحاجة.']]},
+   {t:'h',id:'s5-options',title:'الخيارات الحقيقية: القرار الذكي لا يقفز',sub:'تصميم القرار على مراحل، بحيث تمنحك الخطوة الأولى معلومات إضافية قبل الالتزام الأكبر. أحيانًا يكون أفضل قرار هو الذي يشتري لك حق اتخاذ القرار الأكبر لاحقًا.'},
+   {t:'steps',items:[['التزام محدود','أصغر التزام يمنح أكبر قدر من المعلومات'],['معلومات جديدة','قياس الأداء وتقييم المخاطر'],['تقييم','مراجعة النتائج في تاريخ محدد'],['توسّع أو توقف','وفق شروط معلنة مسبقًا']]},
+   {t:'rule',text:'التجربة ليست «تأجيلًا»... يجب أن يكون لها معيار نجاح، وتاريخ قرار، وشروط توسّع، وشروط توقف.',ic:'⏱'},
+   {t:'vs',a:{t:'القرار الجريء',b:'يسعى إلى فرصة أو أثر كبير مع: فهم المخاطر، ومعرفة البدائل، وتحديد حدود الخسارة، ووجود آلية للتراجع.'},b:{t:'القرار المتهور',b:'يتقدّم دون ضوابط كافية، ودون خطة للتراجع، ودون معرفة واضحة بحدود الخسارة.'}},
+   {t:'rule',text:'حجم المخاطرة لا يجعل القرار جريئًا؛ جودة إدارة المخاطرة هي التي تصنع الجرأة المسؤولة.',small:'إذا لم تستطع الإجابة: ما الذي سيجعلنا نتراجع؟ من يملك صلاحية التراجع؟ كيف سنعرف أن الوقت قد حان؟ فأنت لا تملك قرارًا جريئًا... بل التزامًا كبيرًا بلا مكابح.',ic:'◢'},
+   {t:'h',id:'s5-gov',title:'حوكمة القرار المدعوم بالذكاء الاصطناعي',sub:'القرار لا ينتهي لحظة اعتماده: بعده تبدأ الحوكمة بمسؤول واضح، ومؤشرات متابعة، ونقطة توقف أو تراجع، وتصحيح. والحوكمة ليست وثيقة، بل دورة مستمرة: السياسات، والأدوار والمسؤوليات، وإدارة المخاطر، ودورة حياة الأنظمة، والتحسين المستمر.'},
+   {t:'vs',a:{t:'الامتثال الورقي',b:'«نحن ملتزمون بالشفافية.» وثيقة واحدة... بلا أثر.'},b:{t:'الامتثال القابل للإثبات',b:'«لدينا سجل، ومسؤول، وإجراء، ودليل.» لأن الجهة الرقابية ستسأل: أين الدليل؟'}},
+   {t:'act',id:'controls'},
+   {t:'boxes',cols:1,items:[{t:'قياس أثر التدريب: مستويات كيركباتريك',b:'لا تقِس التدريب بابتسامة المتدرب. (1) التفاعل: هل كانت التجربة إيجابية؟ (2) التعلم: ماذا تعلّم المتدرب؟ (3) السلوك: هل تغيّر ما يفعله في العمل؟ (4) النتائج: ماذا تغيّر بعد التدريب؟ الرضا دليل على تجربة جيدة، لكنه ليس دليلًا كافيًا على أثر التدريب؛ القيمة في المستوى الأخير: ممارسة أو قرار مطبّق ومرتبط بمؤشرات الأداء.',tint:1}]},
+   {t:'act',id:'bold6'},
+   {t:'rule',text:'لا ننتظر اليقين الكامل... بل نصمم قرارًا يستطيع التعامل مع عدم اليقين.',small:'نقرر لأننا صمّمنا القرار ليكون: سريعًا عندما يمكن، حذرًا عندما يجب، قابلًا للتجربة عندما لا نعرف، قابلًا للتراجع عندما نخطئ، قابلًا للتدقيق عندما نُسأل: لماذا قررنا؟',ic:'★'}
+  ]}
+];
+
+const FLASH = [
+ [1,'ذكاء القرار','Decision Intelligence','منهج يتعامل مع القرار باعتباره منظومة قابلة للتصميم والقياس والتحسين، تجمع بين علم القرار والبيانات والعلوم السلوكية والذكاء الاصطناعي والحوكمة.'],
+ [1,'عناصر جودة القرار الستة','Decision Quality','تأطير المشكلة، والبدائل، والمعلومات، والقيم والمفاضلات، والاستدلال، والالتزام بالتنفيذ. ابحث عن أضعف عنصر لا أقواه.'],
+ [1,'قرار جيد ≠ نتيجة جيدة','Decision vs Outcome','الحظ لا يجعل القرار الجيد سيئًا ولا السيئ جيدًا. قيّم جودة القرار أولًا وفق المعلومات المتاحة لحظة اتخاذه... ثم قيّم النتيجة.'],
+ [1,'الضجيج','Noise','اختلاف غير مبرر بين الأحكام المهنية عند التعامل مع الحالة نفسها. قِس الاختلاف قبل أن تحاول أتمتته.'],
+ [1,'قانون غودهارت','Goodhart\'s Law','عندما يصبح المقياس هدفًا يتوقف عن كونه مقياسًا جيدًا. لكل مؤشر مهم ضع مؤشرًا موازنًا يحمي الغاية.'],
+ [1,'باب واحد / أكثر من باب','One-way / Two-way Door','القرار غير القابل للتراجع يستحق مسارًا متأنيًا، والقابل للتراجع يمكن تسريعه. السرعة تتناسب مع صعوبة التراجع لا مع الحجم المالي فقط.'],
+ [1,'مستويات نضج صانع القرار','Decision Maturity','حدسي ← واعٍ بالبيانات ← مبني على البيانات ← معزّز بالذكاء الاصطناعي ← ذكاء القرار.'],
+ [1,'واعٍ بالبيانات','Data Aware','مرحلة تُستخدم فيها البيانات غالبًا لتبرير قرار اتُّخذ مسبقًا: «أعطني أرقامًا تؤيد القرار».'],
+ [1,'الأعطال الثمانية','Decision Failures','الإغراق المعلوماتي، شلل التحليل، سوء تأطير المشكلة، التحيزات الإدراكية، السياسات التنظيمية، رداءة البيانات، المؤشرات الخاطئة، الضجيج.'],
+ [2,'تحيّز الأتمتة','Automation Bias','الميل إلى قبول مخرجات الأنظمة الآلية دون تحقق كافٍ. صورتاه: أخطاء الإغفال وأخطاء الارتكاب.'],
+ [2,'الهلوسة','Hallucination','محتوى يبدو متماسكًا ومقنعًا لكنه غير صحيح أو غير مستند إلى مصدر موثوق، مثل مرجع نظامي برقم مادة غير موجود.'],
+ [2,'انحراف البيانات والنموذج','Drift','النموذج لم يتغيّر... لكن العالم تغيّر. قد يتدهور الأداء مع الوقت دون أي تعديل على النموذج.'],
+ [2,'الارتباط ≠ السببية','Correlation ≠ Causation','الارتباط يوضح علاقة بين متغيرين ولا يثبت أن أحدهما سبب للآخر.'],
+ [2,'مغالطة المعدل الأساسي','Base Rate Fallacy','تجاهل معدل حدوث الحدث عند تفسير نتائج النموذج؛ الحدث النادر يخفض القيمة التنبؤية الموجبة حتى مع حساسية ونوعية مرتفعتين.'],
+ [2,'المتغيّر البديل','Proxy Variable','متغير قابل للقياس يُستخدم بديلًا عن متغير يصعب قياسه، وقد يُدخل تحيّزًا غير مقصود.'],
+ [2,'القيمة التنبؤية الموجبة','PPV','من بين الحالات التي صنّفها النظام إيجابية، كم منها إيجابية فعلًا؟ في التحقق الخارجي كانت ≈ 12%.'],
+ [2,'قاعدة الإنسان أولًا','Human First','سجّل حكمك المستقل قبل رؤية مخرجات النظام، ثم قارن ودوّن سبب أي تغيير.'],
+ [3,'مساعد القرار','Decision Copilot','منظومة تفكير منظمة لدعم قرار محدد: مدخلات واضحة، ونطاق محدد، ووظائف ومعايير قبول، ومخرجات موحّدة قابلة للمراجعة.'],
+ [3,'تحليل ما قبل الوفاة','Pre-mortem','افترض أن القرار فشل بعد ستة أشهر؛ ما السبب الأكثر احتمالًا؟ يُجرى قبل الاعتماد لا بعده.'],
+ [3,'الفريق الأحمر','Red Teaming','تكليف مستقل بمهاجمة القرار لاكتشاف نقاط ضعفه؛ وكل اعتراض ينتهي بإجراء أو بتوثيق سبب رفضه.'],
+ [3,'توثيق المصدر','Provenance','تسجيل ما أنتجه الذكاء الاصطناعي، وما أضافه الإنسان، ومتى؛ لتتبع مسار القرار ومساءلته.'],
+ [3,'تقنيع البيانات','Data Masking','استبدال البيانات الحساسة بقيم بديلة تحافظ على البنية التحليلية. إخفاء الاسم لا يعني إخفاء الهوية.'],
+ [3,'عناصر الصياغة التسعة','Prompt Structure','الدور، السياق، الهدف، القيود، الأدلة، البدائل، المخاطر، معايير التقييم، شكل المخرج.'],
+ [4,'داخل الحلقة / فوق الحلقة / في القيادة','HITL / HOTL / HIC','يشارك في كل قرار / يراقب ويتدخل عند الحاجة / يحتفظ بالسلطة العليا في التوجيه والإيقاف.'],
+ [4,'شروط الإشراف الفعّال','Effective Oversight','الوقت الكافي، والمعلومات اللازمة، والصلاحية للرفض أو التعديل أو الإيقاف. غياب أحدها يحوّله إلى إجراء شكلي.'],
+ [4,'عدم تماثل الخطأ','Error Asymmetry','كلفة الإنذار الكاذب لا تساوي كلفة الحالة المفقودة؛ اسأل عن تكلفة كل نوع من الخطأ لا عن الدقة وحدها.'],
+ [4,'التراجع التقني والواقعي','Reversibility','إلغاء الإجراء في النظام شيء، وإزالة آثاره عن المستفيدين والجهة شيء آخر.'],
+ [4,'شرط الإيقاف','Stop Condition','لا قرار مؤتمت بلا شرط إيقاف رقمي، ومالك مراقبة بالاسم، ومراجعة دورية بالعيّنة.'],
+ [4,'مصفوفة الإنسان والآلة','Human–Machine Matrix','معياران فقط: أثر الخطأ على الإنسان، وقابلية التراجع. كلما ارتفع الأثر وانخفضت قابلية التراجع ارتفعت الحاجة لتدخل بشري أقوى.'],
+ [5,'أنواع عدم المعرفة الأربعة','Risk · Uncertainty · Ambiguity · Ignorance','مخاطرة (احتمالات معروفة)، عدم يقين (احتمالات مجهولة)، التباس (تفسيرات متعددة)، جهل (ما لم نتصوره أصلًا).'],
+ [5,'الدقة الزائفة','False Precision','رقم دقيق مبني على معرفة ضعيفة. الدقة الحسابية لا تعوّض نقص المعرفة.'],
+ [5,'تخطيط السيناريوهات','Scenario Planning','بناء مسارات مستقبلية مختلفة لاختبار قدرة القرار على الصمود، لا للتنبؤ بالمستقبل.'],
+ [5,'الخيارات الحقيقية','Real Options','تصميم القرار على مراحل: التزام محدود يشتري معلومات قبل الالتزام الأكبر.'],
+ [5,'الجرأة مقابل التهور','Bold vs Reckless','الجرأة: فرصة مع فهم للمخاطر وحدود للخسارة وآلية تراجع. التهور: تقدّم بلا ضوابط ولا خطة تراجع.'],
+ [5,'الامتثال القابل للإثبات','Provable Compliance','لكل ضابط: متطلب، ومرجع معتمد، ودليل. «أرني الدليل» بدل «هل نحن متوافقون؟».'],
+ [5,'مستويات كيركباتريك','Kirkpatrick Levels','التفاعل، التعلم، السلوك، النتائج. رضا المتدرب لا يكفي دليلًا على الأثر.'],
+ [0,'نموذج WISDOM','Wisdom × AI × Courage','الحكمة، الذكاء، الشك المنهجي، القرار، المسؤولية، المراقبة... وسؤال سابع بعد الحسم: هل لدينا الشجاعة لتنفيذ القرار وتحمل تبعاته؟']
+];
+
+const QUIZ = [
+ [1,'أدخلت جهة نموذجًا لترتيب أولوية البلاغات. ما أول سؤال يجب طرحه؟',['ما أفضل نموذج ذكاء اصطناعي متاح؟','ما دقة النموذج؟','كم تكلفة النظام؟','ما القرار الذي نحاول تحسينه؟ وكيف نعرّف «الأولوية»؟'],3,'أخطر خطأ ليس اختيار الحل الخطأ بل حل المشكلة الخطأ. بلا تعريف للأولوية سيُحسّن النموذج قرارًا لم نحدده.'],
+ [1,'انخفض زمن إغلاق البلاغات 40% بعد ربط الحوافز به، لكن إعادة الفتح ارتفعت إلى 19%. ما المفهوم الذي يفسر ذلك؟',['الضجيج','قانون غودهارت','انحراف النموذج','مغالطة المعدل الأساسي'],1,'عندما يصبح الرقم هدفًا يبدأ الناس بتحسين الرقم لا الأداء. الحل: مؤشر موازن مثل نسبة إعادة الفتح.'],
+ [1,'مديران قيّما البلاغ نفسه فاختلف زمن الاستجابة ثلاثة أيام. ما الاسم الدقيق لهذه الظاهرة؟',['التحيّز','الضجيج','الهلوسة','شلل التحليل'],1,'الضجيج اختلاف غير مبرر بين الأحكام المهنية على الحالة نفسها، ويختلف عن التحيز الذي له اتجاه يمكن اكتشافه.'],
+ [1,'اتخذ مدير قرارًا مدروسًا جيدًا ثم جاءت النتيجة سيئة بسبب ظرف لم يكن متوقعًا. كيف نحكم على القرار؟',['قرار سيئ لأن النتيجة سيئة','نحكم عليه وفق المعلومات المتاحة لحظة اتخاذه','لا يمكن الحكم عليه','نعاقب صاحبه لتحفيز الحذر'],1,'قيّم جودة القرار أولًا ثم النتيجة؛ الحكم بالنتيجة وحدها يعلّم الدرس الخطأ ويولّد قرارات أكثر تحفظًا.'],
+ [1,'مدير يقول «أعطني أرقامًا تؤيد القرار» بعد أن حسم رأيه. في أي مرحلة نضج يقع هذا السلوك؟',['حدسي','واعٍ بالبيانات','مبني على البيانات','ذكاء القرار'],1,'في مرحلة «واعٍ بالبيانات» تُستخدم البيانات غالبًا لتبرير قرار اتُّخذ مسبقًا.'],
+ [1,'«نحتاج دراسة إضافية... لننتظر بيانات الربع القادم» رغم توفر البيانات الأساسية. ما العطل؟ وما علاجه؟',['الإغراق المعلوماتي: تقليل المؤشرات','شلل التحليل: تحديد موعد القرار قبل بدء التحليل','رداءة البيانات: تنظيف البيانات','الضجيج: توحيد المعايير'],1,'شلل التحليل يجعل طلب البيانات طريقة لتأجيل القرار. حدّد موعد الحسم قبل أن تبدأ التحليل.'],
+ [2,'نموذج بحساسية 80% ونوعية 90% لحدث معدل حدوثه 3%. من كل 100 إنذار يصدره، كم إنذارًا صحيحًا تقريبًا؟',['نحو 90','نحو 80','نحو 50','نحو 20'],3,'بسبب ندرة الحدث تكثر الإنذارات الكاذبة: القيمة التنبؤية الموجبة قرابة 20% فقط. هذه مغالطة المعدل الأساسي.'],
+ [2,'في التحقق الخارجي لنموذج التنبؤ بالحالات الخطرة (38,455 حالة تنويم) كانت القيمة التنبؤية الموجبة ≈ 12%. ماذا يعني ذلك؟',['النموذج دقيق بنسبة 88%','نحو 12 فقط من كل 100 تنبيه كانت صحيحة','النموذج التقط 12% من الحالات','الخطأ 12% فقط'],1,'معظم التنبيهات تحتاج إلى مراجعة بشرية قبل اتخاذ الإجراء، والسؤال الحقيقي: هل كان أداؤه مناسبًا للاستخدام الذي أُسند إليه؟'],
+ [2,'موظف يتبع توصية آلية خاطئة دون تكوين حكم مستقل. ما نوع الخطأ؟',['خطأ إغفال','خطأ ارتكاب','انحراف نموذج','متغير بديل'],1,'اتباع توصية خاطئة خطأ ارتكاب، أما عدم ملاحظة ما أغفله النظام فخطأ إغفال. وكلاهما من صور تحيّز الأتمتة.'],
+ [2,'ما أفضل ممارسة للحد من تحيّز الأتمتة؟',['معرفة وجود التحيّز تكفي','تسجيل تقييمك الأولي قبل رؤية مخرجات النظام ثم المقارنة وتوثيق سبب التغيير','الاعتماد على النظام الأعلى ثقة','تقليل وقت المراجعة'],1,'المعرفة وحدها لا تكفي؛ الإنسان أولًا ثم الآلة، مع توثيق سبب أي تغيير في الحكم.'],
+ [2,'نظام أولويات يعطي الأولوية للبلاغات الأكثر انفعالًا لأنه يقيس حدّة لغة البلاغ. ما المشكلة؟',['هلوسة','متغيّر بديل لا يمثل الهدف الحقيقي','انحراف البيانات','ضجيج'],1,'المتغير البديل يقيس شيئًا يشبه الهدف فقط، فيقدّم الأكثر انفعالًا بدل الأكثر حاجة.'],
+ [2,'ما السؤال الذي يهمّك أكثر عند التعامل مع أنظمة التوصية؟',['هل تعلّم النمط الصحيح؟','هل المخرج مقنع فقط؟','ما الذي صُمم النظام لتحسينه فعلًا؟','ما عدد معاملاته؟'],2,'أنظمة التوصية تحسّن مؤشرًا (نقرات، تفاعل) قد لا يطابق الهدف المؤسسي الأوسع.'],
+ [3,'أي صياغة تحوّل الذكاء الاصطناعي من «مجيب» إلى «مساعد قرار»؟',['أعطني أفضل قرار','لخّص لي المعلومات','أي خيار أختار؟','قدّم لي أقوى حجة ضد قراري'],3,'طلب الحجة المعارضة واختبار الافتراضات يوسّع مساحة التفكير بدل أن يُغلقها بإجابة جاهزة.'],
+ [3,'متى يجب إجراء تحليل ما قبل الوفاة؟',['بعد فشل القرار','بعد اعتماد القرار لتبريره','قبل التنفيذ، في القرارات عالية الأثر','في التقرير السنوي'],2,'إجراؤه بعد الاعتماد يحوّله من أداة استباقية لاكتشاف المخاطر إلى محاولة لتبرير القرار.'],
+ [3,'ما معيار قبول وظيفة «توليد البدائل»؟',['عدد كبير من البدائل','صياغات مختلفة للبديل نفسه','بديل واحد قابل للتنفيذ لم يكن مطروحًا أصلًا','بديل يوافق رأي المدير'],2,'التمايز في الجوهر لا في الصياغة.'],
+ [3,'حذفت الإدارة أسماء المستفيدين قبل إدخال البيانات إلى أداة ذكاء اصطناعي، وأبقت الحي وتاريخ الميلاد والوظيفة. ما التقييم؟',['تقنيع كافٍ','إخفاء الاسم لا يعني إخفاء الهوية؛ يمكن إعادة التعرف بالدمج','لا حاجة للتقنيع','يكفي توقيع اتفاقية سرية مع المزوّد'],1,'الخطأ الشائع حذف الاسم فقط مع الإبقاء على تفاصيل يمكن دمجها لإعادة تحديد الهوية.'],
+ [4,'موظف يراجع 200 حالة يوميًا بمعدل 30 ثانية للحالة ويوقّع على توصيات النظام. ما التوصيف الأدق؟',['إشراف بشري فعّال','إشراف شكلي لغياب الوقت الكافي','أتمتة كاملة','الإنسان في القيادة'],1,'الإشراف الفعّال يتطلب وقتًا ومعلومات وصلاحية؛ التوقيع البشري وحده ليس دليلًا على إشراف فعّال.'],
+ [4,'نظام يكتشف مؤشر شذوذ ويقترح إيقاف خدمة عن مستفيد. ما الدور المناسب للإنسان؟',['أتمتة كاملة مع شرط إيقاف','الإنسان داخل الحلقة: لا يُنفّذ دون اعتماد مدير التشغيل','الإنسان فوق الحلقة يراقب لاحقًا','لا حاجة لتدخل بشري'],1,'أثر الخطأ مرتفع والتراجع قد لا يعيد كل الآثار، لذا يكون الإنسان داخل الحلقة لا بعدها.'],
+ [4,'ما الذي تعلّمناه من قضية إعانات رعاية الأطفال في هولندا؟',['الخطأ تقني بحت في الخوارزمية','الخطر في التعامل مع مخرجات النظام كحكم نهائي بدل مؤشر يستدعي التحقق','الحل تحسين دقة النموذج فقط','الأتمتة تلغي المساءلة'],1,'لم تكن المشكلة مجرد خطأ تقني؛ بل في كيفية استخدام المخرجات وتفسيرها وتحوّل الإشراف إلى ختم شكلي.'],
+ [4,'تعاقدت جهة مع مزوّد تقنية، ثم أخطأ النظام في حق مستفيد. من يتحمل المسؤولية تجاه المستفيد؟',['المزوّد وحده','النظام','الجهة؛ فالعقد ينظم العلاقة مع المزوّد ولا يلغي مسؤوليتها','لا أحد'],2,'الأتمتة لا تعني غياب المساءلة، ولكل قرار مالك بشري ومسار اعتراض وتظلّم.'],
+ [4,'ما العناصر الثلاثة الإلزامية لأي قرار مؤتمت؟',['سياسة، ميزانية، مزوّد','شرط إيقاف رقمي، ومالك مراقبة بالاسم، ومراجعة دورية بالعيّنة','نموذج دقيق، بيانات كبيرة، سرعة','لجنة، تقرير، اعتماد'],1,'إذا لم تستطع كتابة شرط الإيقاف فأنت لم تصمم القرار بالكامل.'],
+ [5,'ارتفاع مفاجئ في الشكاوى وله عدة تفسيرات محتملة. ما نوع عدم المعرفة؟ وما الأداة؟',['مخاطرة: مصفوفة المخاطر','عدم يقين: السيناريوهات','التباس: تعدد وجهات النظر والفريق الأحمر','جهل: الاحتياطي'],2,'الالتباس يعني تعدد التفسيرات للموقف نفسه؛ صنّف طبيعة عدم المعرفة أولًا ثم اختر الأداة.'],
+ [5,'قرار «أكثر من باب» وأثره منخفض. ما المسار حسب قاعدة سرعة القرار؟',['مذكرة كاملة وتحليل ما قبل الوفاة واعتماد صريح','حسم خلال أسبوع ومذكرة نصف صفحة','تفويض وحسم خلال 48 ساعة وتسجيل موجز','الانتظار حتى اكتمال المعلومات'],2,'كلما زادت قابلية التراجع أمكن تصميم القرار ليكون أسرع.'],
+ [5,'ما الذي يميّز «التجربة المحدودة» عن التأجيل؟',['مدتها قصيرة','لها معيار نجاح وتاريخ قرار وشروط توسع وشروط توقف','لا تحتاج مسؤولًا','تُطلق دون مؤشرات'],1,'الخيارات الحقيقية: أصغر التزام يمنح أكبر قدر من التعلّم، بشروط معلنة مسبقًا.'],
+ [5,'«نحن ملتزمون بالشفافية» في وثيقة سياسة واحدة. ما التوصيف؟',['امتثال قابل للإثبات','امتثال ورقي بلا أثر','حوكمة متقدمة','ذكاء القرار'],1,'الامتثال القابل للإثبات يعني: سجل، ومسؤول، وإجراء، ودليل لكل ضابط.'],
+ [5,'أيّ مما يلي يجعل القرار «جريئًا» لا «متهورًا»؟',['حجم المخاطرة الكبير','الثقة الشخصية العالية','وجود حدود للخسارة وآلية تراجع ومن يملك صلاحيته','سرعة الإعلان'],2,'جودة إدارة المخاطرة لا حجمها هي التي تصنع الجرأة المسؤولة.']
+];
+
+const GLOSS_EXTRA = [
+ ['الخطأ بالإغفال','Omission Error','عدم ملاحظة ما أغفله النظام الآلي.'],
+ ['الخطأ بالارتكاب','Commission Error','اتباع توصية آلية خاطئة.'],
+ ['AUC','Area Under the Curve','مقياس لقدرة النموذج على التمييز بين الحالات؛ 0.5 تعادل التخمين و1 تمييز تام.'],
+ ['الحساسية','Sensitivity','نسبة الحالات الإيجابية الفعلية التي التقطها النموذج.'],
+ ['النوعية','Specificity','نسبة الحالات السلبية الفعلية التي صنّفها النموذج سلبية بشكل صحيح.'],
+ ['القيمة التنبؤية الموجبة','PPV','من بين الحالات التي صنفها النموذج إيجابية، نسبة الإيجابية فعلًا.'],
+ ['القرار القابل للتراجع','Two-way Door','قرار يمكن التراجع عنه أو تعديله بتكلفة محدودة.'],
+ ['القرار غير القابل للتراجع','One-way Door','قرار يصعب التراجع عنه أو تكون كلفة عكس آثاره مرتفعة.'],
+ ['الإنسان داخل الحلقة','Human-in-the-loop','الإنسان يشارك في كل قرار ويراجع التوصية قبل اعتمادها.'],
+ ['الإنسان فوق الحلقة','Human-on-the-loop','الإنسان يراقب النظام ويتدخل عند الحاجة.'],
+ ['الإنسان في القيادة','Human-in-command','الإنسان يحتفظ بالسلطة العليا في التوجيه والإيقاف.'],
+ ['عدم تماثل الخطأ','Error Asymmetry','اختلاف كلفة الإنذار الكاذب عن كلفة الحالة المفقودة.'],
+ ['شرط الإيقاف','Stop Condition','عتبة رقمية مكتوبة تتوقف عندها الأتمتة تلقائيًا.'],
+ ['المخاطرة','Risk','حالة تكون فيها النتائج واحتمالاتها معروفة أو قابلة للتقدير.'],
+ ['عدم اليقين','Uncertainty','النتائج معروفة لكن الاحتمالات مجهولة.'],
+ ['الالتباس','Ambiguity','توجد تفسيرات متعددة للموقف نفسه.'],
+ ['الجهل','Ignorance','متغيرات أو أحداث لم نتصورها أصلًا.'],
+ ['الدقة الزائفة','False Precision','رقم دقيق حسابيًا مبني على معرفة أو افتراضات ضعيفة.'],
+ ['تخطيط السيناريوهات','Scenario Planning','بناء مسارات مستقبلية مختلفة لاختبار صمود القرار.'],
+ ['اختبار الإجهاد','Stress Test','البحث عن النقطة التي يتوقف عندها القرار عن كونه جيدًا.'],
+ ['الخيارات الحقيقية','Real Options','تصميم القرار على مراحل بحيث تشتري الخطوة الأولى معلومات قبل الالتزام الأكبر.'],
+ ['الامتثال القابل للإثبات','Provable Compliance','لكل ضابط حوكمة: متطلب ومرجع معتمد ودليل يمكن عرضه.'],
+ ['نظام إدارة الذكاء الاصطناعي','AI Management System','دورة مستمرة تشمل السياسات والأدوار وإدارة المخاطر ودورة حياة الأنظمة والتحسين المستمر.'],
+ ['قابلية التفسير','Explainability','القدرة على فهم كيف وصل النظام إلى مخرجاته، بدل التعامل معه كصندوق مغلق.'],
+ ['مستويات كيركباتريك','Kirkpatrick Model','نموذج تقييم أثر التدريب بأربعة مستويات: التفاعل، التعلم، السلوك، النتائج.'],
+ ['المنطق الضبابي','Fuzzy Logic','منطق يتعامل مع درجات الصحة بين الصواب والخطأ، ويُستخدم لتمثيل عدم اليقين في القرارات.']
+];
+
+/* ---------- helpers ---------- */
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const AR=n=>String(n).replace(/\d/g,d=>'٠١٢٣٤٥٦٧٨٩'[d]);
+const store={get(k,d){try{const v=localStorage.getItem('dm28:'+k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem('dm28:'+k,JSON.stringify(v))}catch(e){}}};
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(toast._t);toast._t=setTimeout(()=>t.classList.remove('on'),2200)}
+function copyText(txt){ if(navigator.clipboard){navigator.clipboard.writeText(txt).then(()=>toast('تم النسخ'),()=>fallbackCopy(txt))} else fallbackCopy(txt)}
+function fallbackCopy(txt){const ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');toast('تم النسخ')}catch(e){toast('تعذر النسخ')}ta.remove()}
+const stColor=n=>n? `var(--s${n})`:'var(--wisdom)';
+const stTint=n=>n? `var(--s${n}t)`:'#EEF0FA';
+function setAcc(el,n){el.style.setProperty('--acc',stColor(n));el.style.setProperty('--acct',stTint(n))}
+
+/* ---------- views ---------- */
+const VIEWS=[
+ {id:'home',label:'الرئيسية'},
+ ...STATIONS.map(s=>({id:s.id,label:s.short,n:s.n})),
+ {sep:1},
+ {id:'lab',label:'مختبر الأنشطة',ic:'🧪'},
+ {id:'flash',label:'البطاقات التعليمية',ic:'🃏'},
+ {id:'quiz',label:'الاختبار الذاتي',ic:'✅'},
+ {id:'gloss',label:'المسرد',ic:'📖'}
+];
+function done(){return store.get('done',{})}
+function renderTabs(){
+  const d=done();
+  $('#tabs').innerHTML=VIEWS.map(v=>v.sep?'<span class="sep" aria-hidden="true"></span>':
+   `<a class="tab" href="#${v.id}" data-v="${v.id}">${v.n?`<span class="d" style="background:${stColor(v.n)}"></span>${AR(v.n)}. `:(v.ic?`<span aria-hidden="true">${v.ic}</span>`:'')}${v.label}${v.n&&d[v.id]?'<span class="chk" aria-label="مكتملة">✔</span>':''}</a>`).join('');
+  const c=Object.keys(d).filter(k=>d[k]).length;
+  $('#progTxt').textContent=`${AR(c)} من ${AR(5)} محطات`;
+  $('#progBar').style.width=(c/5*100)+'%';
+}
+const main=$('#main');
+function route(){
+  const h=(location.hash||'#home').slice(1).split('/');
+  const id=VIEWS.find(v=>v.id===h[0])?h[0]:'home';
+  let el=$('#v-'+id);
+  if(!el){el=document.createElement('section');el.className='view';el.id='v-'+id;main.appendChild(el);BUILD[id]?BUILD[id](el):buildStation(el,STATIONS.find(s=>s.id===id))}
+  $$('.view').forEach(v=>v.classList.toggle('on',v===el));
+  $$('.tab').forEach(t=>{if(t.dataset.v===id)t.setAttribute('aria-current','page');else t.removeAttribute('aria-current')});
+  const at=$('.tab[aria-current]');at&&at.scrollIntoView({block:'nearest',inline:'center'});
+  document.title=(id==='home'?'':(VIEWS.find(v=>v.id===id).label+' · '))+'بين الحكمة والجرأة';
+  if(h[1]){const t=document.getElementById(h[1]);if(t){setTimeout(()=>t.scrollIntoView({behavior:'smooth',block:'start'}),60);return}}
+  window.scrollTo(0,0);
+}
+window.addEventListener('hashchange',route);
+
+/* ---------- home ---------- */
+const PILLARS=[
+ ['🔷','الذكاء الاصطناعي','يوسّع البدائل ويحلل البيانات ويتنبأ ويحاكي السيناريوهات... لكنه مُدخل للقرار لا القرار نفسه.','var(--s1)'],
+ ['🗄','البيانات','وفرة البيانات لا تعني جودة القرار؛ السؤال: هل البيانات صالحة لهذا القرار تحديدًا؟','var(--s3)'],
+ ['🔍','التفكير النقدي','الشك المنهجي في المخرجات: ما الذي يجعل هذه التوصية خاطئة؟','var(--s4)'],
+ ['⚖','الحكم البشري','القرار المسؤول يظل مسؤولية بشرية ومؤسسية؛ الآلة تقترح وأنت تقرر.','var(--s2)'],
+ ['🛡','الحوكمة','مسؤول واضح، ومؤشرات متابعة، وشرط إيقاف، ودليل قابل للمراجعة.','var(--s5)']
+];
+const OBJ=['رفع وعي المشاركين بمفاهيم اتخاذ القرار في عصر الذكاء الاصطناعي وأثره على الأداء المؤسسي','تمكين المشاركين من توظيف أدوات وتقنيات الذكاء الاصطناعي لدعم القرارات بكفاءة وفعالية','تنمية مهارات التفكير النقدي والتحليلي في تقييم البيانات ومخرجات الأنظمة الذكية','تعزيز القدرة على اتخاذ قرارات فعالة في بيئات تتسم بالغموض وعدم اليقين','إكساب المتدربين مهارات الموازنة بين المخاطر والفرص في سياق القرارات الاستراتيجية','تطوير القدرة على المفاضلة بين البدائل باستخدام منهجيات عملية مدعومة بالبيانات','تعزيز الوعي بالأبعاد الأخلاقية والمسؤولية في اتخاذ القرارات عند استخدام الذكاء الاصطناعي','تطبيق سيناريوهات ومحاكاة عملية، وتنمية مهارات القيادة واتخاذ القرارات'];
+const WISDOM=[['W','WISDOM','الحكمة','هل فهمنا المشكلة الصحيحة قبل أن نبحث عن حل؟','var(--s1)'],['I','INTELLIGENCE','الذكاء','ماذا تقول البيانات والنماذج؟ وما الذي لا تقوله؟','var(--s3)'],['S','SKEPTICISM','الشك المنهجي','ما الذي يجعل هذه التوصية خاطئة؟','var(--s2)'],['D','DECISION','القرار','ما الخيار الأفضل وفق معايير أعلنّاها مسبقًا؟','var(--s4)'],['O','OWNERSHIP','المسؤولية','من يتحمل القرار ويوقّع عليه؟','#8B3FD9'],['M','MONITORING','المراقبة','ما مؤشرات الإنذار التي توجب إعادة النظر؟','var(--s5)'],['C','COURAGE','الشجاعة · بعد الحسم','هل لدينا الشجاعة لتنفيذ القرار وتحمّل تبعاته؟','var(--courage)']];
+
+const BUILD={};
+BUILD.home=el=>{
+  setAcc(el,0);
+  const d=done();
+  el.innerHTML=`
+  <div class="frame hero-frame"><div class="hero">
+    <div>
+      <span class="badge" style="--acc:#5B3FD9;margin-bottom:14px">🧭 برنامج تدريبي · ٢٨ سبتمبر ٢٠٢٦</span>
+      <h1>اتخاذ القرار في عصر الذكاء الاصطناعي<span class="l2"><span>بين الحكمة والجرأة</span></span></h1>
+      <p class="lead" style="margin-top:18px">رحلة تعلّم من خمس محطات تنقلك من الحدس إلى ذكاء القرار: كيف تشرّح القرار، ومتى تثق بالآلة، ومتى تملك الشجاعة لتعترض، وكيف تتخذ قرارًا جريئًا ومسؤولًا حين لا تملك كل المعلومات.</p>
+      <div class="slogan">لا تجعل الذكاء الاصطناعي يتخذ قرارك... بل يجعلك أفضل في اتخاذ القرار.<small>فالحكمة تمنع القرار الخاطئ، والجرأة تمنع ضياع الفرصة.</small></div>
+      <div class="meta"><div><b>د. غالب الشمري</b>أستاذ الذكاء الاصطناعي المشارك، جامعة الملك سعود</div><div><b>رئيس مجلس الإدارة</b>الجمعية السعودية للذكاء الاصطناعي والأنظمة الذكية</div></div>
+      <div style="display:flex;gap:10px;margin-top:26px;flex-wrap:wrap"><a class="btn" href="#s1">ابدأ المحطة الأولى</a><a class="btn ghost" href="#lab">استعرض الأنشطة التفاعلية</a></div>
+    </div>
+    <div class="eq" aria-label="المعادلة المرجعية للبرنامج">
+      <h2>المعادلة المرجعية للبرنامج</h2><div class="cap">خمسة أركان تلتقي في نقطة واحدة · اضغط على أي ركن</div>
+      <div class="eq-row">${PILLARS.map((p,i)=>`${i?'<span class="op" aria-hidden="true">+</span>':''}<button class="pillar" style="--pc:${p[3]}" data-p="${i}" aria-pressed="false"><span class="num">${AR(i+1)}</span><span class="ico" aria-hidden="true">${p[0]}</span>${p[1]}</button>`).join('')}</div>
+      <div class="eq-result"><span class="op">=</span><span class="res">ذكاء القرار</span></div>
+      <div class="eq-note" id="eqNote">حين تجتمع الآلة والمعرفة والعقل والضمير والنظام... يولد القرار الذكي.</div>
+    </div>
+  </div><div class="slide-foot" style="padding-top:18px"><span class="dots3"><i class="on"></i><i></i><i></i><i></i></span><span>⚖️ الذكاء الاصطناعي × صناعة القرار</span></div></div>
+
+  <section class="sec" id="h-journey"><h2>الأسئلة الكبرى: رحلة من خمس محطات</h2><p class="sub">التسلسل مقصود: كل مرحلة تفتح باب التي بعدها. فهمٌ، ثم تشكيك، ثم تعاون، ثم حكم، ثم جرأة مسؤولة.</p>
+   <div class="journey">${STATIONS.map(s=>`<a class="stc" href="#${s.id}" style="--c:${s.color};text-decoration:none"><span class="emo" aria-hidden="true">${s.emo}</span>${d[s.id]?'<span class="done">✔ مكتملة</span>':''}<div class="n"><span>${AR(s.n)}</span></div><span class="code">${s.code}</span><h3>${s.title}</h3><span class="gqc">السؤال الحاكم</span><div class="q">${s.gq}</div></a>`).join('')}</div>
+   <div class="lcg g3" style="margin-top:22px">
+    ${lc('#5B3FD9','القاعدة الأولى','لا تعليم لاستخدام الذكاء الاصطناعي في صناعة القرار قبل فهم القرار وتشريحه.','🧠')}
+    ${lc('#E0314B','القاعدة الثانية','لا صلاحية للاعتراض على مخرجات النظام قبل إدراك حدوده ومخاطره.','🔍')}
+    ${lc('#16A34A','القاعدة الثالثة','لا دعوة إلى الجرأة في اتخاذ القرار قبل امتلاك أدوات فعّالة لضبط المخاطر وإدارتها.','🚀')}
+   </div>
+  </section>
+
+  <section class="sec"><h2>لماذا هذا البرنامج؟</h2><p class="sub">ثلاث حقائق تعيد تعريف العلاقة بين الإنسان والآلة والقرار.</p>
+   <div class="lcg g3">
+    <div class="lc" style="--k:#3B6FE0"><span class="lc-tag">وفرة البيانات ≠ جودة القرار</span>تواجه المؤسسات تحديًا متزايدًا يتمثل في كثرة الخيارات وضعف الانضباط المنهجي في صناعة القرار، وجزء كبير من وقت القيادات يُهدر في عملياته.</div>
+    <div class="lc" style="--k:#E39A12"><span class="lc-tag">السرعة والجودة ليستا متعارضتين</span>المؤسسات القادرة على اتخاذ قرارات أسرع أكثر قدرة على الوصول إلى قرارات عالية الجودة، وهذا يعيد تعريف العلاقة بين سرعة القرار وجودته.</div>
+    <div class="lc" style="--k:#E0314B"><span class="lc-tag">مخرجات الذكاء ليست حقائق نهائية</span>المخاطر قد تنتج من ضعف التحقق والحوكمة والاعتماد المفرط على مخرجات الأنظمة، لا من قصور النماذج وحده؛ والقرار يظل مسؤولية بشرية ومؤسسية.</div>
+   </div>
+   <div class="rule q"><span class="ic">السؤال الجوهري</span><span>السؤال الجوهري لم يعد: «هل لدينا بيانات كافية؟» بل: «هل نستطيع اختيار القرار الصحيح من بين الكم الهائل من البدائل التي يستطيع الذكاء الاصطناعي توليدها؟»<small>الذكاء الاصطناعي يوسّع مساحة الخيارات... والحكمة تحدد الخيار.</small></span></div>
+  </section>
+
+  <section class="sec" id="h-open"><h2>قبل الانطلاق</h2><p class="sub">تخيّل أن أمامك قرارًا مصيريًا اليوم، والذكاء الاصطناعي يقول لك: «هذا هو الخيار الأفضل بنسبة ثقة 94%».</p>
+   ${discHTML('هل ستتخذ القرار فورًا؟ أم ستتوقف؟ ولماذا؟','إذا كانت الآلة أسرع منا في التحليل وأقدر على معالجة البيانات، فما الذي يبقى للإنسان ليضيفه إلى القرار؟ وأيهما أخطر على مؤسستك: قرار خاطئ اتخذته بسرعة، أم قرار صحيح اتخذته بعد فوات الفرصة؟ المشكلة اليوم ليست: هل نستطيع أن نجعل القرار أسرع؟ بل: كيف نجعله أسرع دون أن نفقد جودته، وأجرأ دون أن نفقد حكمته؟',0)}
+  </section>
+
+  <section class="sec" id="h-wisdom"><h2>نموذج الهوية الفكرية: WISDOM × AI × COURAGE</h2><p class="sub">قائمة تحقق ذهنية ترافق صانع القرار مع كل قرار: ستة أسئلة قبل الحسم... وسؤال أخير بعده. استخدمها على قرار تعمل عليه الآن.</p>
+   <div class="wis" id="wisList">${WISDOM.map((w,i)=>`<div class="wr"><span class="L" style="background:${w[4]}">${w[0]}</span><span class="nm"><span style="color:${w[4]}">${w[1]}</span><b>${w[2]}</b></span><span class="q">${w[3]}</span><label><input type="checkbox" data-w="${i}"> أجبت عنه</label></div>`).join('')}</div>
+   <div class="fb info on" id="wisFb" style="margin-top:12px"></div>
+  </section>
+
+  <section class="sec"><h2>أهداف البرنامج</h2><p class="sub">ثمانية أهداف تعلّم تتوزع على المحطات الخمس.</p>
+   <div class="grid g2">${[0,1].map(c=>`<div>${OBJ.slice(c*4,c*4+4).map((o,i)=>`<div class="obj"><span class="k">${AR(c*4+i+1)}</span><span>${o}</span></div>`).join('')}</div>`).join('')}</div>
+  </section>
+
+  <section class="sec"><h2>توزيع الوقت</h2>
+   <div class="sched">
+    <div class="box"><div class="t">الجلسة الأولى</div><span class="muted">٩:٣٠ ص – ١١:٠٠ ص</span></div>
+    <div class="box"><div class="t">الجلسة الثانية</div><span class="muted">١١:٠٠ ص – ١٢:٠٠ م</span></div>
+    <div class="box tint"><div class="t">صلاة الظهر</div><span class="muted">استراحة</span></div>
+    <div class="box"><div class="t">الجلستان الثالثة والرابعة</div><span class="muted">١٢:٣٠ م – ٢:٣٠ م</span></div>
+   </div>
+  </section>
+
+  <section class="sec"><h2>كيف تتعلّم في هذا الموقع؟</h2><p class="sub">تنوّع مقصود في أساليب التعلّم: من الاكتشاف والتجربة إلى الاسترجاع والتطبيق على واقع عملك.</p>
+   <div class="methods">
+    <a class="mth" href="#flash" style="text-decoration:none"><span class="i">🃏</span><b>بطاقات تعليمية</b><span>${AR(FLASH.length)} بطاقة للاسترجاع النشط مع تتبع ما أتقنته.</span></a>
+    <a class="mth" href="#quiz" style="text-decoration:none"><span class="i">✅</span><b>اختبار ذاتي</b><span>${AR(QUIZ.length)} سؤالًا مبنيًا على حالات، مع تغذية راجعة فورية.</span></a>
+    <a class="mth" href="#s2/act-trap" style="text-decoration:none"><span class="i">🤖</span><b>محاكاة تجريبية</b><span>عِش تحيّز الأتمتة بنفسك في تجربة «فخ الذكاء الاصطناعي».</span></a>
+    <a class="mth" href="#s4/act-crisis" style="text-decoration:none"><span class="i">🚨</span><b>غرفة الأزمة</b><span>قرار تحت الضغط عبر ست موجات معلومات وسجل زمني.</span></a>
+    <a class="mth" href="#s2/act-baserate" style="text-decoration:none"><span class="i">🎚</span><b>حاسبة تفاعلية</b><span>اكتشف أثر المعدل الأساسي على موثوقية الإنذارات.</span></a>
+    <a class="mth" href="#s1/act-scenes" style="text-decoration:none"><span class="i">🧩</span><b>تصنيف وفرز</b><span>صنّف المشاهد والمواقف والقدرات في أماكنها الصحيحة.</span></a>
+    <a class="mth" href="#s3/act-prompt" style="text-decoration:none"><span class="i">🛠</span><b>أدوات تطبيقية</b><span>منشئ الصياغة، ولوحة تشريح القرار، ومصفوفة الإنسان والآلة.</span></a>
+    <a class="mth" href="#s1/act-survey" style="text-decoration:none"><span class="i">📋</span><b>تقييم ذاتي</b><span>استبانة نضج القرار المؤسسي وخريطة توافق الحوكمة.</span></a>
+   </div>
+  </section>`;
+  $$('.pillar',el).forEach(b=>b.onclick=()=>{$$('.pillar',el).forEach(x=>x.setAttribute('aria-pressed',x===b));const p=PILLARS[b.dataset.p];$('#eqNote').innerHTML=`<b style="color:${p[3]}">${p[1]}:</b> ${p[2]}`});
+  const ws=store.get('wisdom',{});
+  const upd=()=>{const c=Object.values(ws).filter(Boolean).length;$('#wisFb').textContent=c===7?'أجبت عن الأسئلة السبعة: قرارك الآن قابل للدفاع عنه.':`أجبت عن ${AR(c)} من ${AR(7)}. الأسئلة الستة الأولى قبل الحسم، والسابع بعده.`};
+  $$('#wisList input',el).forEach(i=>{i.checked=!!ws[i.dataset.w];i.onchange=()=>{ws[i.dataset.w]=i.checked;store.set('wisdom',ws);upd()}});upd();
+  bindDisc(el);
+};
+
+/* ---------- discussion ---------- */
+let discN=0;
+function discHTML(q,ins,n){const id='disc'+(discN++);return `<div class="disc" style="--acc:${stColor(n)};--acct:${stTint(n)}"><span class="ic" aria-hidden="true">🤖</span><div><span class="lbl">مناقشة</span><p>${q}</p></div><div class="timer"><span class="tm" id="${id}t">٥:٠٠</span><button class="btn sm" data-timer="${id}">ابدأ المؤقت</button>${ins?`<button class="btn sm ghost" data-ins="${id}">فكرة للنقاش</button>`:''}</div>${ins?`<div class="ins" id="${id}i">${ins}</div>`:''}</div>`}
+const timers={};
+function bindDisc(root){
+ $$('[data-timer]',root).forEach(b=>b.onclick=()=>{const id=b.dataset.timer,t=$('#'+id+'t');
+   if(timers[id]){clearInterval(timers[id].h);delete timers[id];b.textContent='ابدأ المؤقت';return}
+   let s=300;timers[id]={h:setInterval(()=>{s--;t.textContent=AR(Math.floor(s/60)+':'+String(s%60).padStart(2,'0'));if(s<=0){clearInterval(timers[id].h);delete timers[id];b.textContent='ابدأ المؤقت';toast('انتهى وقت النقاش')}},1000)};b.textContent='إيقاف'});
+ $$('[data-ins]',root).forEach(b=>b.onclick=()=>{const i=$('#'+b.dataset.ins+'i');i.classList.toggle('on');b.textContent=i.classList.contains('on')?'إخفاء':'فكرة للنقاش'});
+}
+
+/* ---------- station ---------- */
+function buildStation(el,s){
+  setAcc(el,s.n);
+  const heads=s.blocks.filter(b=>b.t==='h');
+  let h=`<header class="shead frame"><span class="badge">${s.emo} المحطة ${['','الأولى','الثانية','الثالثة','الرابعة','الخامسة'][s.n]} · <span style="font-family:'Readex Pro';letter-spacing:1.5px">${s.code}</span></span><div class="emo" aria-hidden="true">${s.emo}</div><h1>${s.title}</h1><div class="gq"><span>السؤال الحاكم</span><p>${s.gq}</p><b class="qm" aria-hidden="true">؟</b></div>
+   <nav class="toc" aria-label="محتويات المحطة">${heads.map(x=>`<a href="#${s.id}/${x.id}">${x.title.length>42?x.title.slice(0,40)+'…':x.title}</a>`).join('')}</nav>
+   <div class="slide-foot"><span class="dots3">${[1,2,3,4,5].map(k=>`<i class="${k===s.n?'on':''}"></i>`).join('')}</span><span>⚖️ الذكاء الاصطناعي × صناعة القرار</span></div></header>`;
+  let open=false;
+  for(const b of s.blocks){
+    if(b.t==='h'){ if(open)h+='</section>'; h+=`<section class="sec" id="${b.id}"><h2>${b.title}</h2>${b.sub?`<p class="sub">${b.sub}</p>`:''}`; open=true; continue;}
+    h+=`<div style="margin-top:16px">${blockHTML(b,s)}</div>`;
+  }
+  if(open)h+='</section>';
+  const idx=STATIONS.indexOf(s), nx=STATIONS[idx+1];
+  h+=`<div class="complete"><div><h3>هل أنهيت هذه المحطة؟</h3><span class="muted">سجّل إنجازك ثم راجع بطاقاتها أو اختبر نفسك في أسئلتها.</span></div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" data-done="${s.id}"></button><a class="btn ghost" href="#flash">بطاقات المحطة</a>${nx?`<a class="btn ghost" href="#${nx.id}">المحطة التالية: ${nx.short}</a>`:'<a class="btn ghost" href="#quiz">الاختبار الذاتي الشامل</a>'}</div></div>`;
+  el.innerHTML=h;
+  $$('.cc>button',el).forEach(b=>b.onclick=()=>{const c=b.parentElement;const o=c.dataset.open==='1';c.dataset.open=o?'0':'1';b.setAttribute('aria-expanded',!o)});
+  $$('[data-act]',el).forEach(a=>{const f=ACTS[a.dataset.act];if(f)f.init(a,s.n)});
+  bindDisc(el);
+  const db=$('[data-done]',el);const setDb=()=>{const d=done();db.textContent=d[s.id]?'✔ مكتملة (تراجع)':'تمييز المحطة كمكتملة'};setDb();
+  db.onclick=()=>{const d=done();d[s.id]=!d[s.id];store.set('done',d);setDb();renderTabs();toast(d[s.id]?'أحسنت! سُجّلت المحطة مكتملة':'أُلغي التمييز');const hm=$('#v-home');if(hm){hm.remove()}};
+}
+const PAL=['#3B6FE0','#E39A12','#E0314B','#16A34A','#7C3AED','#0A8FA8'];
+const lc=(k,tag,body,ic)=>`<div class="lc" style="--k:${k}"><span class="lc-tag">${tag}</span>${ic?`<span class="lc-ic" aria-hidden="true">${ic}</span>`:''}${body}</div>`;
+function statHTML(i){const raw=i[0].replace(/<[^>]+>/g,'');const m=raw.match(/^≈?\s*([\d.]+)\s*%$/);let v=`<div class="v num">${i[0]}</div>`;
+ if(m){const n=Math.min(100,parseFloat(m[1])),C=2*Math.PI*44;v=`<div class="ring"><svg viewBox="0 0 104 104"><circle cx="52" cy="52" r="44" fill="none" stroke="color-mix(in srgb,var(--acc) 15%,#fff)" stroke-width="9"/><circle cx="52" cy="52" r="44" fill="none" stroke="var(--acc)" stroke-width="9" stroke-linecap="round" stroke-dasharray="${C*n/100} ${C}"/></svg><div class="v num">${i[0]}</div></div>`}
+ return `<div class="stat">${v}<p>${i[1]}</p></div>`}
+function blockHTML(b,s){
+ switch(b.t){
+  case 'stats':return `<div class="stats" style="--sacc:${stColor(s.n)}">${b.items.map(statHTML).join('')}</div>`;
+  case 'rule':{const ic=b.ic||'◆';const kind=['⚠','!'].includes(ic)?'warn':ic==='?'?'q':'';const lab={'⚠':'تنبيه','!':'تنبيه','?':'السؤال الجوهري','★':'الخلاصة','💡':'اكتشاف','■':'قاعدة حاكمة'}[ic]||'قاعدة';
+   return `<div class="rule ${kind}"><span class="ic">${lab}</span><span>${b.text}${b.small?`<small>${b.small}</small>`:''}</span></div>`}
+  case 'cards':return `<div class="grid g2">${b.items.map(c=>`<article class="cc" data-open="0"><button aria-expanded="false"><span class="ic" aria-hidden="true">${c.ic}</span><span><h3>${c.t} <span class="en">${c.en}</span></h3><span class="d">${c.d}</span></span><span class="ar" aria-hidden="true">▾</span></button><div class="more"><div class="lcg">${c.why?lc('#3B6FE0','لماذا يهمّ صانع القرار؟',c.why):''}${c.ex?lc('#E39A12','في الحالة الجارية',c.ex):''}${c.m?lc('#E0314B','الخطأ الشائع',c.m):''}${c.p?lc('#16A34A','كيف تستخدمه عمليًا؟',c.p):''}${c.q?lc('#7C3AED','سؤال الفحص',c.q):''}</div></div></article>`).join('')}</div>`;
+  case 'vs':return `<div class="vs" style="padding-top:14px">${lc('#3B6FE0',b.a.t,b.a.b)}<div class="mid"><b>VS</b></div>${lc('#E0314B',b.b.t,b.b.b)}</div>`;
+  case 'boxes':return `<div class="lcg" style="grid-template-columns:repeat(${Math.min(b.cols,4)},minmax(0,1fr))">${b.items.map((i,k)=>lc(PAL[(k+s.n)%PAL.length],i.t,i.b||'')).join('')}</div>`;
+  case 'steps':return `${b.title?`<h3 style="font-size:19px;margin-bottom:12px">${b.title}</h3>`:''}<div class="steps">${b.items.map(i=>`<div class="step"><div><b>${i[0]}</b><span>${i[1]}</span></div></div>`).join('')}</div>`;
+  case 'table':return `<div class="tw"><table class="t"><thead><tr>${b.head.map(x=>`<th>${x}</th>`).join('')}</tr></thead><tbody>${b.rows.map(r=>`<tr>${r.map(x=>`<td>${x}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+  case 'disc':return discHTML(b.q,b.ins,s.n);
+  case 'act':{const a=ACTS[b.id];return a?`<div class="act" id="act-${b.id}" data-act="${b.id}"><div class="ah"><span class="tag">${a.tag}</span><h3>${a.title}</h3></div><div class="ab"></div></div>`:''}
+ }
+ return '';
+}
+
+const ACTS={};
+const B=r=>$('.ab',r);
+function chipsSorter(root,items,cats,key,doneMsg){
+ const st=store.get(key,{});
+ B(root).innerHTML=`<div class="sorter">${items.map((it,i)=>`<div class="item"><span>${it[0]}</span><div class="chips" data-i="${i}">${cats.map((c,j)=>`<button class="chip" data-j="${j}" aria-pressed="false">${c}</button>`).join('')}</div></div>`).join('')}</div>
+ <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap"><button class="btn sm" data-chk>تحقّق من إجاباتي</button><button class="btn sm ghost" data-rst>إعادة</button></div><div class="fb"></div>`;
+ const paint=(check)=>{$$('.chips',root).forEach(g=>{const i=+g.dataset.i;$$('.chip',g).forEach(c=>{const j=+c.dataset.j;c.classList.remove('ok','no');c.setAttribute('aria-pressed',st[i]===j);if(check&&st[i]===j)c.classList.add(j===items[i][1]?'ok':'no');if(check&&st[i]!==j&&j===items[i][1]&&st[i]!=null)c.classList.add('ok')})})};
+ $$('.chip',root).forEach(c=>c.onclick=()=>{st[+c.parentElement.dataset.i]=+c.dataset.j;store.set(key,st);paint(false);$('.fb',root).className='fb'});
+ $('[data-chk]',root).onclick=()=>{paint(true);const n=items.filter((it,i)=>st[i]===it[1]).length,a=Object.keys(st).length;const fb=$('.fb',root);fb.className='fb on '+(n===items.length?'good':'warn');fb.innerHTML=(a<items.length?`صنّفت ${AR(a)} من ${AR(items.length)}. `:'')+`إجاباتك الصحيحة: ${AR(n)} من ${AR(items.length)}. `+(n===items.length?doneMsg:(items.some(it=>it[2])?'<br>'+items.map((it,i)=>st[i]!==it[1]&&it[2]?`• ${it[2]}`:'').filter(Boolean).join('<br>'):''))};
+ $('[data-rst]',root).onclick=()=>{for(const k in st)delete st[k];store.set(key,st);paint(false);$('.fb',root).className='fb'};
+ paint(false);
+}
+
+ACTS.priority={tag:'سؤال صادم',title:'ما معنى «الأولوية» أصلًا؟',init(r){
+ const o=['الأكثر خطورة','الأكثر تأثيرًا','الأقدم','الأكثر تكرارًا','الأكثر شكوى'];
+ B(r).innerHTML=`<p>قبل أن يرتّب النموذج البلاغات «حسب الأولوية»: ماذا تعني الأولوية في جهتك؟ اختر التعريف الذي تعتمده.</p><div class="chips">${o.map((x,i)=>`<button class="chip" data-i="${i}" aria-pressed="false">${x}؟</button>`).join('')}</div><div class="fb info"></div>`;
+ $$('.chip',r).forEach(c=>c.onclick=()=>{$$('.chip',r).forEach(x=>x.setAttribute('aria-pressed',x===c));const f=$('.fb',r);f.classList.add('on');f.innerHTML=`اخترت «${o[c.dataset.i]}». كل تعريف من الخمسة مشروع... لكن كل واحد منها سينتج نموذجًا مختلفًا وترتيبًا مختلفًا للبلاغ نفسه. ما دام التعريف لم يُحسم ويُوثَّق، فسيختار النموذج تعريفًا ضمنيًا نيابةً عنك. <b>من يملك حق تحديد الأولوية؟</b> هذا قرار إداري قبل أن يكون تقنيًا.`});
+}};
+
+ACTS.anatomy={tag:'أداة تطبيقية',title:'لوحة تشريح القرار',init(r){
+ const f=[['المشكلة','ما المشكلة الحقيقية التي نريد حلها؟'],['القرار','ما القرار الذي سيتغير فعلًا؟'],['المعيار','بأي معيار سنفاضل بين البدائل؟'],['الأدلة','ما المعلومات التي نحتاجها قبل الحسم؟'],['المخاطر','ماذا يحدث إذا كان القرار خاطئًا؟'],['البدائل','هل الذكاء الاصطناعي هو الحل الأفضل أصلًا؟']];
+ const st=store.get('anatomy',{});
+ B(r).innerHTML=`<div class="fld"><label>القرار المدروس<small>اكتب قرارًا من عملك</small></label><input type="text" data-k="t" placeholder="مثال: شراء نموذج لترتيب أولوية البلاغات"></div>${f.map((x,i)=>`<div class="fld"><label>${AR(i+1)}. ${x[0]}<small>${x[1]}</small></label><textarea rows="2" data-k="${i}"></textarea></div>`).join('')}
+ <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px"><button class="btn sm" data-cp>نسخ اللوحة</button><button class="btn sm ghost" data-clr>مسح</button></div>
+ <div class="fb info on" style="margin-top:12px">أمامك أسبوع واحد لاتخاذ القرار... هل تبدأ بشراء النموذج أم بتشريح القرار؟ المسار: الحدس ← البيانات ← الأدلة ← الذكاء الاصطناعي ← ذكاء القرار.</div>`;
+ $$('[data-k]',r).forEach(i=>{i.value=st[i.dataset.k]||'';i.oninput=()=>{st[i.dataset.k]=i.value;store.set('anatomy',st)}});
+ $('[data-cp]',r).onclick=()=>copyText(`تشريح القرار: ${st.t||''}\n`+f.map((x,i)=>`${i+1}. ${x[0]}: ${st[i]||'—'}`).join('\n'));
+ $('[data-clr]',r).onclick=()=>{$$('[data-k]',r).forEach(i=>{i.value='';st[i.dataset.k]=''});store.set('anatomy',st)};
+}};
+
+ACTS.twoareas={tag:'تمرين تفاعلي في ٦٠ ثانية',title:'اختبار القرار: بلاغان... وفريق واحد',init(r){
+ B(r).innerHTML=`<p><b>الموقف:</b> انقطعت الخدمة منذ 3 ساعات عن حيّين سكنيين، ولا يتوفر سوى فريق صيانة واحد. أين ترسل الفريق أولًا؟</p>
+ <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><button class="btn sm" data-go>ابدأ العدّ (٦٠ ثانية)</button><span class="num" data-t style="font-size:22px;font-weight:700">٦٠</span></div>
+ <div class="grid g2"><button class="opt" data-a="1"><b style="font-family:var(--display);font-size:18px">الحي الأول</b><br><span class="num" style="font-size:28px;font-weight:700;color:var(--acc)">400</span> وحدة سكنية متأثرة<br><span class="muted">أكبر عدد من المتضررين</span></button><button class="opt" data-a="2"><b style="font-family:var(--display);font-size:18px">الحي الثاني</b><br><span class="num" style="font-size:28px;font-weight:700;color:var(--acc)">90</span> وحدة سكنية متأثرة<br><span class="muted">➕ يضم مركز غسيل كلوي</span></button></div>
+ <div class="fb info"></div>`;
+ let h,s=60;const t=$('[data-t]',r);
+ $('[data-go]',r).onclick=()=>{clearInterval(h);s=60;t.textContent=AR(60);h=setInterval(()=>{s--;t.textContent=AR(s);if(s<=0){clearInterval(h);toast('انتهى الوقت')}},1000)};
+ $$('.opt',r).forEach(o=>o.onclick=()=>{clearInterval(h);$$('.opt',r).forEach(x=>x.setAttribute('aria-pressed',x===o));const f=$('.fb',r);f.classList.add('on');f.innerHTML=`<b>بعد الاختيار... قبل أن تدافع عن قرارك، اسأل نفسك:</b><br>• ما المعلومة التي كان يجب أن أعرفها قبل أن أقرر؟ (مدة تحمّل مرضى الغسيل الكلوي؟ هل للمركز مصدر بديل؟ هل تتفاوت مدة الإصلاح بين الحيين؟)<br>• هل اتخذت قرارًا سريعًا... أم اتخذت قرارًا قبل أن تفهم المشكلة؟<br><b>القرار السريع ليس المشكلة؛ القرار الذي لا يسبقه السؤال الصحيح هو المشكلة.</b>`});
+}};
+
+ACTS.dmtest={tag:'اختبار صانع القرار',title:'قبل أن تثق بقرارك... شرّحه',init(r){
+ const o=['ما أفضل نموذج ذكاء اصطناعي؟','ما دقة النموذج؟','كم تكلفة النظام؟','ما القرار الذي نحاول تحسينه؟ وكيف نعرّف «الأولوية»؟'];
+ B(r).innerHTML=`<p>جهة تستقبل 9,000 بلاغ شهريًا، ومتوسط الإغلاق 6.4 أيام، وإعادة الفتح 19%. تقترح الإدارة شراء نموذج ذكاء اصطناعي لترتيب الأولويات. <b>ما أول سؤال ستطرحه؟</b></p><div class="opts">${o.map((x,i)=>`<button class="opt" data-i="${i}">${x}</button>`).join('')}</div><div class="fb"></div>`;
+ $$('.opt',r).forEach(b=>b.onclick=()=>{const ok=b.dataset.i==='3';$$('.opt',r).forEach(x=>x.classList.remove('ok','no'));b.classList.add(ok?'ok':'no');if(!ok)$$('.opt',r)[3].classList.add('ok');const f=$('.fb',r);f.className='fb on '+(ok?'good':'warn');f.innerHTML=(ok?'إجابة صانع قرار. ':'سؤال مشروع... لكنه ليس الأول. ')+'أخطر خطأ في القرار ليس اختيار الحل الخطأ... بل حل المشكلة الخطأ.'});
+}};
+
+const LEVELS=[['حدسي','Intuitive','القرار قائم على الخبرة والانطباع، ولا يوجد توثيق يُراجع لاحقًا.'],['واعٍ بالبيانات','Data Aware','تُستخدم البيانات غالبًا لتبرير قرار اتُّخذ مسبقًا.'],['مبني على البيانات','Data Driven','الأدلة تسبق الحسم، وتوجد مؤشرات ومعايير معلنة.'],['معزّز بالذكاء الاصطناعي','AI Augmented','الذكاء الاصطناعي يوسّع البدائل ويختبر الافتراضات، والحكم بشري.'],['ذكاء القرار','Decision Intelligent','دمج منهجي للحكم البشري والنماذج والبيانات والمخاطر والحوكمة، مع قياس جودة القرار نفسه.']];
+ACTS.ladder={tag:'نموذج مرجعي',title:'مستويات نضج صانع القرار: من الحدس إلى ذكاء القرار',init(r){
+ const E=['💭','📊','📈','🤖','🧠'],K=['#8E95C9','#E0314B','#E39A12','#0A8FA8','#2BA36B'];
+ B(r).innerHTML=`<div class="ladder">${LEVELS.map((l,i)=>`<div class="lv" style="--c:${K[i]};min-height:${220+i*34}px"><span class="nb">${AR(i+1)}</span><span class="e" aria-hidden="true">${E[i]}</span><span class="en2">${l[1].toUpperCase()}</span><b>${l[0]}</b><p>${l[2]}</p></div>`).join('')}</div><p class="muted" style="margin:18px 0 0">وفي كل مرحلة نسأل: ما الذي نعرفه؟ ما الذي نفترضه؟ ما الذي لا نعرفه؟ ومن يملك حق القرار؟ الذكاء الاصطناعي لا يجعل القرار ذكيًا تلقائيًا؛ القرار يصبح ذكيًا عندما تكون المشكلة واضحة، والأدلة مناسبة، والبدائل حاضرة، والمخاطر محسوبة، والمسؤولية واضحة.</p>`;
+}};
+ACTS.scenes={tag:'نشاط تصنيف',title:'لا تحكم من الاسم... راقب السلوك: خمسة مشاهد مؤسسية',init(r){
+ chipsSorter(r,[
+  ['<q>أعطني أرقامًا تؤيد القرار</q>: اتُّخذ القرار أولًا، ثم جُمعت البيانات لتبرير الاختيار.',1],
+  ['<q>أنا أعرف السوق</q>: مدير يقرر التوسع اعتمادًا على خبرته وانطباعه، دون تحليل أو توثيق.',0],
+  ['<q>ماذا لا نراه؟</q>: الذكاء الاصطناعي يولّد بدائل ويحلل السيناريوهات ويختبر الافتراضات، والقرار النهائي بشري.',3],
+  ['<q>كيف نحسّن القرار نفسه؟</q>: البيانات والنماذج والخبرة والحوكمة تعمل ضمن منظومة واحدة، ويتم قياس جودة القرارات وتحسينها باستمرار.',4],
+  ['<q>لنقارن قبل أن نقرر</q>: بدائل متعددة، ومؤشرات واضحة، وتكاليف ومخاطر تُدرس قبل الحسم.',2]
+ ],LEVELS.map(l=>l[0]),'scenes','ممتاز! لاحظ أن وجود الذكاء الاصطناعي لا يعني أن المؤسسة وصلت إلى ذكاء القرار.');
+}};
+
+ACTS.survey={tag:'تقييم ذاتي',title:'استبانة نضج القرار المؤسسي',init(r){
+ const q=['هل لكل قرار جوهري مالك قرار واضح؟','هل تُعرّف المشكلة والهدف والقيود قبل الحسم؟','هل تستند القرارات إلى بيانات موثوقة وملائمة وحديثة؟','هل نبحث عن بدائل وسيناريوهات قبل اختيار الحل؟','هل نكشف الافتراضات ونختبرها قبل الالتزام؟','هل تُقيَّم جودة القرار بعيدًا عن النتيجة فقط؟','هل نستخدم الذكاء الاصطناعي لتوسيع التفكير لا لإعطاء إجابة فقط؟','هل نتحقق بشريًا من مخرجات الذكاء الاصطناعي؟','هل توجد مسؤولية بشرية واضحة وإشراف فعّال؟','هل نتعلم من القرارات السابقة ونحسّن القادمة بنتائجها؟'];
+ const st=store.get('survey',{});
+ B(r).innerHTML=`<p>لا تقِس ما تتمنى أن تكون عليه مؤسستك... قِس ما يحدث فعلًا. قيّم كل عبارة من ١ (غير متحقق) إلى ٥ (متحقق بالكامل). <b>قاعدة:</b> لا تحصل على ٤ أو ٥ بلا دليل؛ وإن لم يوجد دليل قابل للمراجعة فاخصم درجة.</p>
+ <div class="tw"><table class="t"><thead><tr><th>العبارة</th><th>الدرجة</th><th>لديّ دليل؟</th></tr></thead><tbody>${q.map((x,i)=>`<tr><td>${AR(i+1)}. ${x}</td><td><div class="chips" style="flex-wrap:nowrap" data-i="${i}">${[1,2,3,4,5].map(v=>`<button class="chip" data-v="${v}" aria-pressed="false">${AR(v)}</button>`).join('')}</div></td><td><label style="display:flex;gap:6px;align-items:center;white-space:nowrap"><input type="checkbox" data-e="${i}" style="width:18px;height:18px;accent-color:var(--acc)"> نعم</label></td></tr>`).join('')}</tbody></table></div>
+ <div class="fb info on" data-res style="margin-top:14px"></div>`;
+ const calc=()=>{let t=0,n=0;q.forEach((_,i)=>{const v=st['v'+i];if(v){n++;let x=v;if(!st['e'+i]&&x>1)x-=1;t+=x}});
+  const lv=t>=42?4:t>=34?3:t>=26?2:t>=18?1:0;
+  $('[data-res]',r).innerHTML=n<10?`أجبت عن ${AR(n)} من ${AR(10)} عبارات. المجموع الحالي بعد خصم غياب الدليل: <b>${AR(t)}</b>`:`مجموعك بعد تطبيق قاعدة الدليل: <b class="num" style="font-size:22px">${AR(t)}</b> من ${AR(50)}. قراءة استرشادية: أقرب مستوى هو <b>«${LEVELS[lv][0]}»</b>. <br>والسؤال الذي يهم القيادة: ما الذي يمنعنا من الانتقال إلى المرحلة التالية؟ اختر عائقًا واحدًا فقط: جودة البيانات، ملكية القرار غير الواضحة، ثقافة لا تسمح بالاعتراض، ضعف الحوكمة، غياب الاستخدام المنهجي للذكاء الاصطناعي، أو ضعف مهارات صناع القرار.`};
+ $$('.chips[data-i]',r).forEach(g=>{const i=g.dataset.i;const paint=()=>$$('.chip',g).forEach(c=>c.setAttribute('aria-pressed',+c.dataset.v===st['v'+i]));paint();$$('.chip',g).forEach(c=>c.onclick=()=>{st['v'+i]=+c.dataset.v;store.set('survey',st);paint();calc()})});
+ $$('[data-e]',r).forEach(c=>{c.checked=!!st['e'+c.dataset.e];c.onchange=()=>{st['e'+c.dataset.e]=c.checked;store.set('survey',st);calc()}});calc();
+}};
+
+ACTS.chain={tag:'تحدي الفرق',title:'أين ينكسر القرار؟',init(r){
+ const c=['المشكلة','السياق','الأهداف','البدائل','الأدلة','المخاطر','القرار','التنفيذ','المراجعة'];
+ B(r).innerHTML=`<p><b>الحالة:</b> انخفض زمن إغلاق البلاغات فبدا ذلك نجاحًا واضحًا... ثم ارتفعت إعادة فتح البلاغات. أعيدوا بناء القرار وتتبّعوا المسار خطوة بخطوة. اختاروا نقطة انكسار واحدة فقط وادعموها بالدليل.</p><div class="chain">${c.map((x,i)=>`${i?'<i aria-hidden="true">←</i>':''}<button data-i="${i}" aria-pressed="false">${x}</button>`).join('')}</div><div class="fb info"></div>`;
+ $$('.chain button',r).forEach(b=>b.onclick=()=>{$$('.chain button',r).forEach(x=>x.setAttribute('aria-pressed',x===b));const f=$('.fb',r);f.classList.add('on');const i=+b.dataset.i;f.innerHTML=(i===2||i===0?'<b>قراءة قوية.</b> ':'<b>اختيار ممكن، لكن ارجع خطوة أو اثنتين.</b> ')+'نقطة الانكسار نادرًا ما تكون حيث تظهر. الخلل ظهر عند التنفيذ والمراجعة، لكنه بدأ عند <b>تحديد الأهداف</b>: مؤشر واحد يقيس السرعة فقط ورُبطت به الحوافز، فصار الموظفون يحسّنون الرقم لا الخدمة. ولماذا لم يُكتشف مبكرًا؟ لأنه لم يوجد مؤشر موازن ولا إشارة إنذار. الضابط الذي كان سيمنعه: لا يُحتسب البلاغ مغلقًا بنجاح إذا أُعيد فتحه خلال 14 يومًا.'});
+}};
+
+ACTS.failures={tag:'ملف التشخيص',title:'ثمانية أعطال... والبيانات ليست بريئة دائمًا',init(r){
+ const CAT={data:['البيانات','#0A8FA8'],mind:['العقل','#D12A45'],org:['المنظمة','#C98505'],metric:['المقياس','#5B3FD9']};
+ const S={
+  overload:`<g class="fl-rain">${Array.from({length:34},(_,i)=>`<rect x="${14+(i*37)%172}" y="${6+((i*23)%44)}" width="${4+(i%3)*2}" height="${3+(i%2)*2}" rx="1" style="animation-delay:${(i%7)*.15}s"/>`).join('')}</g><path d="M40 60 H160 L112 96 V112 H88 V96 Z" fill="none" stroke-width="2.4"/><circle cx="100" cy="116" r="0" /><text x="100" y="86" text-anchor="middle" font-size="18" font-weight="700" stroke="none">؟</text>`,
+  paralysis:`<g class="fl-spin" style="transform-origin:100px 64px"><path d="M100 22a42 42 0 1 1-38 24" fill="none" stroke-width="3" stroke-dasharray="7 7"/><path d="M58 36l4 12 11-6" fill="none" stroke-width="3"/></g><rect x="84" y="46" width="32" height="38" rx="3" fill="none" stroke-width="2.4"/><rect x="89" y="41" width="32" height="38" rx="3" fill="none" stroke-width="2" opacity=".45"/><path d="M90 58h20M90 66h20M90 74h12" stroke-width="2"/>`,
+  framing:`<g opacity=".3"><circle cx="58" cy="64" r="36" fill="none" stroke-width="2"/><circle cx="58" cy="64" r="22" fill="none" stroke-width="2"/><circle cx="58" cy="64" r="7"/></g><g><circle cx="142" cy="64" r="30" fill="none" stroke-width="2.4"/><circle cx="142" cy="64" r="17" fill="none" stroke-width="2.4"/><circle cx="142" cy="64" r="5" /></g><g class="fl-dart"><path d="M100 12 L140 62" stroke-width="3"/><path d="M96 8l10 1-2 9z"/></g><path d="M58 108 q40 12 84 0" fill="none" stroke-width="1.6" stroke-dasharray="3 4"/>`,
+  bias:`<path d="M14 64 q30-30 60 0 q-30 30-60 0z" fill="none" stroke-width="2.6"/><circle cx="44" cy="64" r="9"/><path class="fl-beam" d="M74 60 L186 34 L186 94 L74 68z" stroke="none" opacity=".16"/>${[[110,20],[128,108],[160,18],[176,112],[196,64],[100,100],[150,64],[120,52]].map((p,i)=>`<circle cx="${p[0]}" cy="${p[1]}" r="${i>5?6:4}" ${i>5?'':'opacity=".28"'}/>`).join('')}`,
+  politics:`<path d="M18 64 H104" stroke-width="3.4"/><path d="M98 56l8 8-8 8" fill="none" stroke-width="3.4"/><rect x="112" y="30" width="16" height="68" rx="2" opacity=".85"/><path d="M114 44h12M114 58h12M114 72h12M114 86h12" stroke="#fff" stroke-width="1.4" opacity=".6"/><path class="fl-dash" d="M60 64 C70 10 170 10 176 60" fill="none" stroke-width="2.4" stroke-dasharray="6 6"/><path d="M168 54l8 8 6-10" fill="none" stroke-width="2.4"/><circle cx="186" cy="64" r="7" fill="none" stroke-width="2.4"/>`,
+  baddata:`<ellipse cx="100" cy="28" rx="44" ry="12" fill="none" stroke-width="2.6"/><path d="M56 28v64c0 7 20 12 44 12s44-5 44-12V28" fill="none" stroke-width="2.6"/><path d="M56 50c0 7 20 12 44 12s44-5 44-12M56 72c0 7 20 12 44 12s44-5 44-12" fill="none" stroke-width="1.6" opacity=".5"/><path class="fl-crack" d="M104 40 l-8 14 l10 8 l-12 16 l8 10 l-6 12" fill="none" stroke-width="2.8"/><rect x="150" y="60" width="9" height="9" rx="1" opacity=".5" transform="rotate(18 154 64)"/><rect x="164" y="80" width="7" height="7" rx="1" opacity=".35" transform="rotate(-14 168 84)"/>`,
+  metric:`<path d="M30 92a44 44 0 0 1 88 0" fill="none" stroke-width="7" stroke-linecap="butt" opacity=".22"/><path d="M92 54a44 44 0 0 1 26 38" fill="none" stroke-width="7" stroke-linecap="butt"/><g class="fl-needle" style="transform-origin:74px 92px"><path d="M74 92 L108 60" stroke-width="3"/></g><circle cx="74" cy="92" r="5"/><path d="M132 36 L150 50 L164 44 L190 96" fill="none" stroke-width="2.6"/><path d="M182 90l8 8 3-11" fill="none" stroke-width="2.6"/>`,
+  noise:`<circle cx="100" cy="64" r="48" fill="none" stroke-width="2" opacity=".35"/><circle cx="100" cy="64" r="30" fill="none" stroke-width="2" opacity=".55"/><circle cx="100" cy="64" r="12" fill="none" stroke-width="2.4"/>${[[64,34],[140,46],[82,100],[128,92],[150,70],[56,72],[110,24],[96,78]].map((p,i)=>`<g class="fl-hit" style="animation-delay:${i*.12}s"><circle cx="${p[0]}" cy="${p[1]}" r="4.5"/></g>`).join('')}`
+ };
+ const F=[
+  ['overload','data','الإغراق المعلوماتي','معلومات كثيرة بلا سؤال قرار واضح','لوحة قيادة بأربعين مؤشرًا لمركز خدمة، والقرار المطلوب: هل نزيد عدد الموظفين؟ ولا يوجد مؤشر يجيب مباشرة.','ما المؤشرات الثلاثة التي تحتاجها فعلًا لهذا القرار؟','لوحة واحدة ← قرار واحد. إذا لم يؤثر المؤشر في القرار فلماذا نعرضه؟'],
+  ['paralysis','org','شلل التحليل','دراسة بعد دراسة... بلا حسم','البيانات الأساسية متاحة، لكن كلما اقترب موعد الحسم: «نحتاج تحليلًا أكثر تفصيلًا»، «لننتظر بيانات الربع القادم».','هل نقص المعلومات هو المشكلة فعلًا... أم غياب موعد الحسم؟','حدّد موعد القرار قبل أن تبدأ التحليل.'],
+  ['framing','mind','سوء تأطير المشكلة','حل العرض بدل معالجة السبب','السؤال المطروح: كيف نخفض زمن معالجة الطلب؟ بينما أصل المشكلة طلبات ناقصة تعود للمعالجة مرة بعد مرة.','هل نحل المشكلة الصحيحة... أم نتقن حل المشكلة الخطأ؟','أعد صياغة السؤال: كيف نقلل الطلبات الناقصة وإعادة المعالجة؟ جودة السؤال تحدد جودة الحل.'],
+  ['bias','mind','التحيزات الإدراكية','العقل ينتقي ما يؤكد ما نعتقده','حادثة إعلامية كبيرة وقفزة شكاوى في أسبوع واحد، فيُقترح زيادة الرقابة فورًا، بينما الاتجاه طويل الأجل لم يرتفع.','هل نحل مشكلة حقيقية... أم نستجيب لحدث ما زال حاضرًا في أذهاننا؟','لا تجعل آخر حدث يكتب لك تاريخ المشكلة، واحذر التثبيت على أول رقم.'],
+  ['politics','org','السياسات التنظيمية','القرار الآمن سياسيًا يتغلب على الأفضل','التحليل يشير إلى أن خدمة معينة منخفضة الكفاءة ويقترح إيقافها أو إعادة تصميمها، والنظام يقول: استمر لتجنب ردود الفعل الداخلية.','من يملك القرار؟ ومن يملك حق الاعتراض؟','إذا لم تكن سلطة القرار واضحة، فلن تكون الأدلة وحدها كافية.'],
+  ['baddata','data','رداءة البيانات','بيانات ناقصة أو غير متسقة تقود لاستنتاج خاطئ','نموذج يُدرَّب على بيانات ناقصة أو لا تمثّل الحالة المطلوبة، فيخرج باستنتاج يبدو دقيقًا وهو مبني على أساس هش.','هل البيانات صالحة لهذا القرار تحديدًا؟','افحص الاكتمال والاتساق والتمثيل قبل التحليل؛ البيانات ليست بريئة دائمًا.'],
+  ['metric','metric','المؤشر الخاطئ','تحسين الرقم بدل تحسين النتيجة','انخفض زمن الإغلاق فبدا نجاحًا واضحًا، بينما تكدّست الإغلاقات في آخر الوردية وعادت الطلبات بعد إغلاقها.','هل كان الموظفون يحسّنون الخدمة... أم يحسّنون الرقم؟','قانون غودهارت: لا تكافئ الرقم الذي يمكن تحسينه على حساب النتيجة، وضع مؤشرًا موازنًا.'],
+  ['noise','mind','الضجيج','أشخاص مختلفون يعطون أحكامًا مختلفة للحالة نفسها','الحالة ذاتها تُعرض على خبيرين فيختلف حكمهما، بل قد يتغير حكم الشخص نفسه بتغيّر وقته وظروفه.','لو عُرضت الحالة نفسها على شخص آخر، هل سنحصل على الحكم نفسه؟','قِس الاختلاف قبل أن تحاول أتمتته؛ الأتمتة لا تزيل الضجيج بل قد تثبّته.']
+ ];
+ const seen=store.get('fails',{});let flt='all';
+ B(r).innerHTML=`<div class="fl-top"><p style="margin:0">قد تمتلك المؤسسة بيانات ممتازة... لكنها تستخدمها داخل عملية قرار سيئة. ثمانية ملفات أعطال: اقلب الملف لتقرأ التشخيص، وعلّم ما رصدته في جهتك.</p>
+  <div class="fl-legend" role="group" aria-label="تصفية حسب مصدر العطل"><button class="fl-lg" data-c="all" aria-pressed="true">كل الأعطال</button>${Object.entries(CAT).map(([k,v])=>`<button class="fl-lg" data-c="${k}" aria-pressed="false" style="--k:${v[1]}"><i></i>منشؤه ${v[0]}</button>`).join('')}</div></div>
+ <div class="fl-grid">${F.map((f,i)=>{const c=CAT[f[1]];return `<div class="fl-card" data-c="${f[1]}" style="--k:${c[1]}"><div class="fl-in" tabindex="0" role="button" aria-label="ملف العطل ${i+1}: ${f[2]}. اضغط للقلب">
+  <div class="fl-face fl-front"><div class="fl-head"><span class="fl-code">عطل<b>${AR(String(i+1).padStart(2,'0'))}</b></span><span class="fl-cat">${c[0]}</span></div>
+   <div class="fl-art"><svg viewBox="0 0 200 124" aria-hidden="true" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">${S[f[0]]}</svg></div>
+   <h4>${f[2]}</h4><p class="fl-sym">${f[3]}</p><span class="fl-flip">اقرأ التشخيص ↺</span><span class="fl-seen" ${seen[i]?'':'hidden'}>● رُصد في جهتي</span></div>
+  <div class="fl-face fl-back"><div class="fl-head"><span class="fl-code">تشخيص<b>${AR(String(i+1).padStart(2,'0'))}</b></span><span class="fl-cat">${f[2]}</span></div>
+   <dl><dt>كيف يظهر؟</dt><dd>${f[4]}</dd><dt>سؤال الكشف</dt><dd class="fl-q">${f[5]}</dd><dt>العلاج</dt><dd>${f[6]}</dd></dl>
+   <label class="fl-mark" onclick="event.stopPropagation()"><input type="checkbox" data-i="${i}" ${seen[i]?'checked':''}> رصدتُ هذا العطل في جهتي</label></div>
+ </div></div>`}).join('')}</div>
+ <div class="fl-meter"><div><b data-n></b><span>أعطال رصدتها في جهتك</span></div><div class="fl-bars">${F.map((f,i)=>`<i data-b="${i}" style="--k:${CAT[f[1]][1]}"></i>`).join('')}</div><p data-msg></p></div>`;
+ const upd=()=>{const n=F.filter((_,i)=>seen[i]).length;$('[data-n]',r).textContent=AR(n)+' / '+AR(8);F.forEach((_,i)=>$(`[data-b="${i}"]`,r).classList.toggle('on',!!seen[i]));
+  const cats={};F.forEach((f,i)=>{if(seen[i])cats[f[1]]=(cats[f[1]]||0)+1});const top=Object.entries(cats).sort((a,b)=>b[1]-a[1])[0];
+  $('[data-msg]',r).innerHTML=n===0?'افتح الملفات وعلّم الأعطال التي تراها في بيئة عملك.':n>=5?`رصدت ${AR(n)} أعطال: المشكلة في منظومة القرار لا في البيانات وحدها.${top?` أغلبها منشؤه <b>${CAT[top[0]][0]}</b>.`:''}`:`ابدأ بالعطل الأقرب إلى قرار قادم${top?`؛ أغلب ما رصدته منشؤه <b>${CAT[top[0]][0]}</b>`:''}.`};
+ $$('.fl-in',r).forEach(c=>{c.onclick=()=>c.classList.toggle('flip');c.onkeydown=e=>{if(e.target!==c)return;if(e.key==='Enter'||e.key===' '){e.preventDefault();c.classList.toggle('flip')}}});
+ $$('.fl-mark input',r).forEach(x=>x.onchange=()=>{const i=+x.dataset.i;seen[i]=x.checked;store.set('fails',seen);$$('.fl-seen',r)[i].hidden=!x.checked;upd()});
+ $$('.fl-lg',r).forEach(b=>b.onclick=()=>{flt=b.dataset.c;$$('.fl-lg',r).forEach(x=>x.setAttribute('aria-pressed',x===b));$$('.fl-card',r).forEach(c=>c.classList.toggle('dim',flt!=='all'&&c.dataset.c!==flt))});
+ upd();
+}};
+ACTS.baserate={tag:'حاسبة تفاعلية',title:'مغالطة المعدل الأساسي: كم إنذارًا صحيحًا من كل ١٠٠؟',init(r){
+ B(r).innerHTML=`<div class="grid g2" style="align-items:center"><div>
+ <div class="slider"><label for="br1">معدل حدوث الحدث</label><input id="br1" type="range" min="0.5" max="40" step="0.5" value="3"><output></output></div>
+ <div class="slider"><label for="br2">الحساسية</label><input id="br2" type="range" min="10" max="99" step="1" value="80"><output></output></div>
+ <div class="slider"><label for="br3">النوعية</label><input id="br3" type="range" min="50" max="99.5" step="0.5" value="90"><output></output></div>
+ <button class="btn sm ghost" data-p>مثال الشريحة (3% · 80% · 90%)</button>
+ <div class="fb info on" data-o style="margin-top:14px"></div></div>
+ <div><div class="dots" data-d aria-hidden="true"></div><div class="legend"><span><i style="background:var(--s5)"></i>إنذار صحيح</span><span><i style="background:#F4B6BF"></i>إنذار خاطئ</span><span>من كل ١٠٠ إنذار</span></div></div></div>`;
+ const [a,b,c]=['#br1','#br2','#br3'].map(s=>$(s,r));
+ const upd=()=>{const p=a.value/100,se=b.value/100,sp=c.value/100;const tp=p*se,fp=(1-p)*(1-sp);const ppv=tp/(tp+fp);const k=Math.round(ppv*100);
+  $$('output',r).forEach((o,i)=>o.textContent=AR([a,b,c][i].value)+'%');
+  $('[data-d]',r).innerHTML=Array.from({length:100},(_,i)=>`<i class="${i<k?'tp':'fp'}"></i>`).join('');
+  const per=10000,alerts=Math.round(per*(tp+fp)),missed=Math.round(per*p*(1-se));
+  $('[data-o]',r).innerHTML=`من كل ١٠٠ إنذار يصدره النظام، نحو <b class="num" style="font-size:24px;color:var(--ok)">${AR(k)}</b> فقط صحيحة فعلًا (القيمة التنبؤية الموجبة ${AR((ppv*100).toFixed(1))}%).<br><span class="muted">في كل ${AR('10,000')} حالة: سيصدر نحو ${AR(alerts.toLocaleString('en'))} إنذار، وستفوت ${AR(missed)} حالة حقيقية.</span>`};
+ [a,b,c].forEach(x=>x.oninput=upd);$('[data-p]',r).onclick=()=>{a.value=3;b.value=80;c.value=90;upd()};upd();
+}};
+
+ACTS.capmap={tag:'نشاط جماعي',title:'خريطة قدرات وحدود الذكاء الاصطناعي',init(r){
+ chipsSorter(r,[['توليد البدائل والأفكار والصياغات',0],['معرفة السياق المؤسسي غير المتاح له',1],['تلخيص المعلومات واستخراج الأنماط',0],['إثبات العلاقة السببية',1],['تحليل النصوص وتحديد التناقضات المنطقية المحتملة',0],['ضمان صحة المعلومات دون تحقق',1],['محاكاة السيناريوهات وصياغة الاحتمالات',0],['معرفة الأحداث خارج نطاق بياناته ومصادره المتاحة',1],['تسريع المقارنة والتحليل الأولي',0],['تحمّل المسؤولية عن القرار',1],['دعم التفكير وصناعة البدائل',0],['استبدال الحكم البشري في القرارات عالية الأثر',1]],['يستطيع أن يساعد فيه','لا ينبغي افتراض قدرته عليه'],'capmap','ممتاز. ولا تسأل فقط «هل يستطيع الذكاء الاصطناعي فعل ذلك؟» بل اسأل: «هل ينبغي أن نعتمد عليه في فعل ذلك؟»');
+}};
+
+ACTS.trap={tag:'محاكاة من ٣ جولات',title:'فخ الذكاء الاصطناعي: هل تثق بقرارك أم بالآلة؟',init(r){
+ const A='البلاغ (أ): انقطاع مياه عن مبنى سكني يضم مركز رعاية نهارية لكبار السن، مستمر منذ 5 ساعات. بلاغ واحد مسجّل من إدارة المركز.';
+ const Bb='البلاغ (ب): تسرّب مياه في شارع تجاري، 14 بلاغًا من المارة وأصحاب المحلات خلال ساعة، وانتشار صور على وسائل التواصل.';
+ let st=store.get('trap',{step:0});
+ const save=()=>store.set('trap',st);
+ const choice=(k)=>`<div class="grid g2"><button class="opt" data-c="A" ${st[k]==='A'?'aria-pressed="true"':''}>أرسل الفريق إلى <b>البلاغ (أ)</b></button><button class="opt" data-c="B" ${st[k]==='B'?'aria-pressed="true"':''}>أرسل الفريق إلى <b>البلاغ (ب)</b></button></div>`;
+ const ai=(rec,conf,why)=>`<div class="box" style="margin:14px 0;border-color:var(--acc)"><div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px"><b style="font-family:var(--display)">🤖 نظام دعم القرار يوصي: البلاغ (${rec})</b><span class="pill">درجة الثقة ${AR(conf)}%</span></div><p style="margin:8px 0 0">${why}</p></div>`;
+ const R=()=>{
+  const b=B(r);let h=`<div class="box tint" style="margin-bottom:14px"><b style="font-family:var(--display)">الحالة (توضيحية):</b> فريق صيانة واحد متاح الآن، وأمامه بلاغان:<br>• ${A}<br>• ${Bb}</div>`;
+  if(st.step===0){h+=`<h3 style="font-size:17px;margin-bottom:6px">الجولة الأولى: قرارك أنت</h3><p class="muted">قبل أن تسأل الآلة... ماذا ستقرر؟ القرار فردي، وهو خط الأساس.</p>${choice('r1')}<textarea rows="2" data-w placeholder="اكتب سبب اختيارك في جملة واحدة" style="margin-top:10px">${esc(st.w1||'')}</textarea><button class="btn sm" data-n style="margin-top:10px" ${st.r1?'':'disabled'}>ثبّت قرارك وانتقل للجولة الثانية</button>`}
+  else if(st.step===1){h+=`<h3 style="font-size:17px">الجولة الثانية: الذكاء الاصطناعي يقترح</h3>${ai('أ',88,'مدة الانقطاع طويلة، والمتأثرون فئة هشة تعتمد على المياه في الرعاية اليومية، والبلاغ الواحد لا يعني أثرًا أقل.')}<p>قرارك الأول كان: <b>البلاغ (${st.r1==='A'?'أ':'ب'})</b>. هل ستغيّر قرارك؟</p>${choice('r2')}<button class="btn sm" data-n style="margin-top:10px" ${st.r2?'':'disabled'}>التالي</button>`}
+  else if(st.step===2){h+=`<h3 style="font-size:17px">الجولة الثالثة: الذكاء الاصطناعي يقترح مرة أخرى</h3><p class="muted">حدّث المزوّد النموذج. انتبه إلى طريقة عرض التوصية.</p>${ai('ب',97,'النموذج المحدّث (مدرّب على 2.1 مليون بلاغ) رصد ارتفاعًا بنسبة 1300% في كثافة البلاغات حول البلاغ (ب)، ومؤشر التفاعل الرقمي يدل على أثر مجتمعي أوسع بـ 6.3 أضعاف. احتمالية تصاعد الضرر خلال الساعة القادمة: 91.4%.')}<p>قرارك الحالي: <b>البلاغ (${st.r2==='A'?'أ':'ب'})</b>. هل ستغيّر قرارك؟</p>${choice('r3')}<textarea rows="2" data-w3 placeholder="إذا غيّرت قرارك... ما الذي أقنعك؟" style="margin-top:10px">${esc(st.w3||'')}</textarea><button class="btn sm" data-n style="margin-top:10px" ${st.r3?'':'disabled'}>كشف الحقيقة</button>`}
+  else {const ch2=st.r1!==st.r2,ch3=st.r2!==st.r3;
+   h+=`<h3 style="font-size:17px">لحظة القياس: ماذا حدث لقرارك؟</h3><div class="tw" style="margin:10px 0"><table class="t"><thead><tr><th>الجولة</th><th>ما الذي حدث؟</th><th>قرارك</th></tr></thead><tbody><tr><td>الأولى</td><td>قرار بشري مستقل</td><td>البلاغ (${st.r1==='A'?'أ':'ب'})</td></tr><tr><td>الثانية</td><td>توصية آلية صحيحة ومعللة</td><td>البلاغ (${st.r2==='A'?'أ':'ب'}) ${ch2?'· <b>غيّرت</b>':''}</td></tr><tr><td>الثالثة</td><td>توصية آلية <b style="color:var(--bad)">خاطئة ومقنعة</b></td><td>البلاغ (${st.r3==='A'?'أ':'ب'}) ${ch3?'· <b>غيّرت</b>':''}</td></tr></tbody></table></div>
+   <div class="fb on ${st.r3==='B'?'warn':'good'}"><b>الحقيقة التي لم تكن تعرفها: التوصية الثالثة كانت خاطئة.</b> ${st.r3==='B'?'وقد غيّرت قرارك استجابةً لها، وهذا بالضبط ما تكشفه التجربة: تحيّز الأتمتة.':'وقد صمدت أمامها. لاحظ ما الذي جعلك تتوقف.'}<br>لماذا بدت مقنعة؟ أرقام دقيقة (1300%، 6.3 أضعاف، 91.4%)، ودرجة ثقة 97%، وحجم بيانات مبهر، ولغة مهنية. لكنها بنت الأولوية على <b>متغيّر بديل</b>: عدد البلاغات وتفاعل الوسائط يقيس الضجيج لا الحاجة. أين كان التأثير؟ هل تحققت من الدليل؟ هل اختبرت الافتراضات؟ هل قارنت التوصية ببدائل أخرى؟</div>
+   <div class="rule" style="margin-top:14px"><span class="ic">!</span><span>المشكلة ليست أن الآلة أخطأت... المشكلة أن الإنسان قد يتوقف عن التحقق عندما تبدو الآلة واثقة.<small>في القاعة تُجمع نسب تغيير القرار لكل جولة وتُقارن: لماذا قد نغيّر قرارنا بدرجة أكبر أمام توصية خاطئة؟</small></span></div>
+   <div class="fld" style="margin-top:14px"><label>قاعدة الفحص الخاصة بك<small>«لكي لا أقع في فخ الذكاء الاصطناعي، سأحرص قبل اعتماد أي توصية آلية على...»</small></label><textarea rows="2" data-rule>${esc(st.rule||'')}</textarea></div>
+   <button class="btn sm ghost" data-reset>أعد التجربة</button>`}
+  b.innerHTML=h;
+  $$('.opt[data-c]',b).forEach(o=>o.onclick=()=>{const k=['r1','r2','r3'][st.step];st[k]=o.dataset.c;save();R()});
+  const w=$('[data-w]',b);if(w)w.oninput=()=>{st.w1=w.value;save()};
+  const w3=$('[data-w3]',b);if(w3)w3.oninput=()=>{st.w3=w3.value;save()};
+  const ru=$('[data-rule]',b);if(ru)ru.oninput=()=>{st.rule=ru.value;save()};
+  const n=$('[data-n]',b);if(n)n.onclick=()=>{st.step++;save();R();r.scrollIntoView({block:'start',behavior:'smooth'})};
+  const rs=$('[data-reset]',b);if(rs)rs.onclick=()=>{st={step:0};save();R()};
+ };R();
+}};
+
+function checklist(r,key,items,foot){
+ const st=store.get(key,{});
+ B(r).innerHTML=`<div class="opts">${items.map((x,i)=>`<label class="opt" style="display:flex;gap:12px;align-items:center;cursor:pointer"><input type="checkbox" data-i="${i}" style="width:20px;height:20px;accent-color:var(--acc);flex-shrink:0"> <span>${x}</span></label>`).join('')}</div><div class="fb on info" data-f></div>`;
+ const u=()=>{const c=items.filter((_,i)=>st[i]).length;$('[data-f]',r).innerHTML=foot(c,items.length)};
+ $$('input',r).forEach(i=>{i.checked=!!st[i.dataset.i];i.onchange=()=>{st[i.dataset.i]=i.checked;store.set(key,st);u()}});u();
+}
+ACTS.verify7={tag:'قائمة تحقق',title:'قاعدة «التحقق قبل الاعتماد»: سبعة أسئلة',init(r){checklist(r,'verify7',['هل أفهم ما الذي أوصى به النظام؟','هل أعرف الأدلة التي استند إليها؟','هل يمكنني التحقق من المعلومات؟','هل اختبرت البدائل؟','هل أعرف حدود النموذج؟','هل توجد مراجعة بشرية؟','هل أستطيع الاعتراض أو إيقاف القرار؟'],(c,n)=>c===n?'اجتازت التوصية الأسئلة السبعة: يمكنك اعتمادها وأنت تعرف لماذا.':`أجبت بـ«نعم» عن ${AR(c)} من ${AR(n)}. كل سؤال بلا إجابة يعني أن التوصية ما زالت «مُدخلًا» لا «قرارًا».`)}};
+ACTS.copilot9={tag:'اختبار جودة',title:'قبل أن تثق بالمساعد... اختبره: تسع علامات',init(r){checklist(r,'copilot9',['يعمل ضمن نطاق قرار محدد','يستخدم مدخلات واضحة','ينتج مخرجات موحّدة','يوضّح درجة الثقة وعدم اليقين','يسمح باختبار الافتراضات والبدائل','يخضع لمراجعة بشرية','يحتفظ بسجل للمصدر والتعديلات','يحمي البيانات الحساسة','يتضمن نقاط توقف أو إيقاف'],(c,n)=>n-c>1?`<b>${AR(n-c)} علامات غائبة.</b> إذا كانت الإجابة «لا» على أكثر من بند، فأنت لا تملك مساعد قرار بعد... بل تملك محادثة مع الذكاء الاصطناعي.`:'لديك مساعد قرار حقيقي، لا مجرد محادثة.')}};
+ACTS.judge6={tag:'تحدٍّ تدريبي: دقيقة واحدة',title:'اختبار الحكم: ستة أسئلة في ستين ثانية',init(r){
+ B(r).innerHTML=`<p>أمامك توصية صادرة عن نظام ذكاء اصطناعي. قبل اعتمادها لديك دقيقة واحدة فقط. هذه هي «عادة الحكم».</p><div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><button class="btn sm" data-go>ابدأ الدقيقة</button><span class="num" data-t style="font-size:24px;font-weight:700">٦٠</span></div><div class="grid g3">${['ماذا أعرف؟','ماذا لا أعرف؟','ما الدليل؟','ما درجة عدم اليقين؟','ما أثر الخطأ؟','هل أقبل... أم أعترض؟ ولماذا؟'].map((q,i)=>`<div class="box" style="padding:14px"><b style="font-family:var(--display)">${AR(i+1)}. ${q}</b></div>`).join('')}</div>`;
+ let h;$('[data-go]',r).onclick=()=>{clearInterval(h);let s=60;const t=$('[data-t]',r);t.textContent=AR(s);h=setInterval(()=>{s--;t.textContent=AR(s);if(s<=0){clearInterval(h);toast('انتهت الدقيقة: هل تقبل أم تعترض؟')}},1000)};
+}};
+
+ACTS.reframe={tag:'حوّل السؤال',title:'غيّر السؤال... يتغيّر دور الذكاء الاصطناعي',init(r){
+ const P=[['أعطني أفضل قرار','اختبر قراري'],['أعطني إجابة','اكشف افتراضاتي'],['لخّص المعلومات','اكشف ما ينقصني'],['أي خيار أختار؟','ما مخاطر كل خيار؟'],['أعطني توصية','قدّم لي حجة معارضة'],['ماذا أفعل؟','ما الخيارات المتاحة؟']];
+ B(r).innerHTML=`<p class="muted">اضغط على السؤال التقليدي لتحويله إلى سؤال «مساعد قرار».</p><div class="grid g3">${P.map((p,i)=>`<button class="opt" data-i="${i}" style="min-height:74px"><span class="muted" style="font-size:13px">الاستخدام التقليدي</span><br><b style="font-family:var(--display)">«${p[0]}»</b></button>`).join('')}</div><p class="muted" style="margin-top:12px">الذكاء الاصطناعي لا يُستخدم هنا كصاحب القرار، بل كأداة لتوسيع مساحة التفكير قبل القرار.</p>`;
+ $$('.opt',r).forEach(b=>b.onclick=()=>{const p=P[b.dataset.i];b.classList.add('ok');b.innerHTML=`<span style="font-size:13px;color:var(--ok)">مساعد القرار</span><br><b style="font-family:var(--display)">«${p[1]}»</b> <span class="muted" style="font-size:13px">بدل «${p[0]}»</span>`});
+}};
+
+ACTS.prompt={tag:'منشئ تفاعلي',title:'بنية هندسة التعليمات: صياغة القرار بتسعة عناصر',init(r){
+ const F=[['الدور','بأي صفة يفكّر النظام؟','مستشار قرار تشغيلي'],['السياق','أين نحن وما الخلفية؟','جهة خدمية تستقبل 9,000 بلاغ شهريًا، متوسط الإغلاق 6.4 أيام، وإعادة الفتح 19%.'],['الهدف','ما القرار المطلوب دعمه؟','تقييم تفويض ترتيب الأولوية لمشرف الوردية بقاعدة مكتوبة.'],['القيود','ما الذي لا يمكن تجاوزه؟','لا زيادة في الوظائف. النظام الحالي لا يدعم قواعد ديناميكية قبل 6 أشهر.'],['الأدلة','على أي بيانات نستند؟','1.7 يوم من التأخير سببه انتظار قرار الترتيب.'],['البدائل','ما الخيارات المطروحة؟','بدائل مختلفة جوهريًا: التفويض بقاعدة مكتوبة، الإبقاء على الوضع الحالي، نموذج آلي مع مراجعة بشرية.'],['المخاطر','ما الذي قد يفشل؟','نقاط الفشل المحتملة لكل بديل، ومنها تحوّل القاعدة إلى إجراء شكلي.'],['معايير التقييم','كيف نفاضل؟','نسبة إعادة الفتح، وزمن الإغلاق، وعدالة الترتيب بين المناوبات.'],['شكل المخرج','كيف تريد الإجابة؟','جدول بثلاثة أعمدة: البديل، المزايا والمخاطر، مدى تحقيق المعايير.']];
+ const st=store.get('prompt',null)||{};
+ B(r).innerHTML=`<div class="grid g2" style="align-items:start"><div>${F.map((f,i)=>`<div class="fld"><label>${f[0]}<small>${f[1]}</small></label><textarea rows="2" data-i="${i}"></textarea></div>`).join('')}
+ <label style="display:flex;gap:8px;align-items:center;font-size:15px;margin-top:6px"><input type="checkbox" data-g checked style="width:18px;height:18px;accent-color:var(--acc)"> إضافة قيود الحماية الإلزامية</label>
+ <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap"><button class="btn sm ghost" data-ex>تعبئة مثال «قرار التفويض»</button><button class="btn sm ghost" data-clr>مسح</button></div></div>
+ <div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><b style="font-family:var(--display)">الصياغة الناتجة</b><button class="btn sm" data-cp>نسخ</button></div><div class="out" data-o></div><div class="fb info on" data-q style="margin-top:10px"></div></div></div>`;
+ const tas=$$('textarea',r);
+ const build=()=>{const g=$('[data-g]',r).checked;let t=F.map((f,i)=>st[i]?`【${f[0]}】 ${st[i]}`:'').filter(Boolean).join('\n');
+  if(g)t+=(t?'\n\n':'')+'【قيود الحماية】\n- حدّد صراحةً ما لا تعرفه عن هذا السياق.\n- افصل بين ما هو مثبت وما هو مفترض.\n- لا تقدّم أرقامًا أو مراجع دون مصدر قابل للتحقق.';
+  $('[data-o]',r).textContent=t||'ابدأ بتعبئة العناصر لتظهر الصياغة هنا.';
+  const n=F.filter((_,i)=>st[i]).length;$('[data-q]',r).innerHTML=n<9?`اكتمل ${AR(n)} من ${AR(9)} عناصر. كلما زادت الصياغة وضوحًا... أصبح الحوار أكثر قابلية للمراجعة.`:'صياغة مكتملة. جرّبها، ثم قارن مخرجها بصياغتك الأولى، واحفظ الأفضل في مكتبة الإدارة.';return t};
+ tas.forEach(t=>{t.value=st[t.dataset.i]||'';t.oninput=()=>{st[t.dataset.i]=t.value;store.set('prompt',st);build()}});
+ $('[data-g]',r).onchange=build;
+ $('[data-ex]',r).onclick=()=>{F.forEach((f,i)=>{st[i]=f[2];tas[i].value=f[2]});store.set('prompt',st);build()};
+ $('[data-clr]',r).onclick=()=>{F.forEach((f,i)=>{st[i]='';tas[i].value=''});store.set('prompt',st);build()};
+ $('[data-cp]',r).onclick=()=>copyText(build());build();
+}};
+
+ACTS.authority={tag:'تصويت ومناقشة',title:'من يملك حق اتخاذ القرار؟ أربع حالات',init(r){
+ const C=[['غرامة تأخير','تستخدم الجهة نظامًا آليًا لحساب غرامات التأخير وفق قواعد معتمدة، ولا توجد سلطة تقديرية كبيرة في تحديد المبلغ.','الأثر محدود والقاعدة واضحة والتراجع ممكن: تميل المصفوفة إلى الأتمتة مع شرط إيقاف ومسار تظلّم.'],['إيقاف خدمة بمؤشر شذوذ','اكتشف النظام نمطًا غير معتاد في استخدام مستفيد للخدمة، وتشير الخوارزمية إلى أن الحالة عالية الخطورة وتقترح إيقاف الخدمة مؤقتًا.','هل يكفي أن يقول النظام «هناك شذوذ»؟ أثر الخطأ مرتفع والتراجع قد لا يعيد كل الآثار: الإنسان داخل الحلقة قبل التنفيذ.'],['ترتيب قائمة انتظار علاجية','يستخدم النظام بيانات المرضى لترتيب الأولوية في قائمة انتظار علاجية، وقد يؤدي تغيير الترتيب إلى تقديم مريض على آخر.','إذا أخطأ النظام، من يتحمل أثر الخطأ؟ أثر مباشر على صحة إنسان: حكم بشري بدعم آلي ومراجعة إلزامية.'],['الاستبعاد المتقدم لوظيفة','يستخدم نظام لفرز طلبات المتقدمين للوظائف واستبعاد بعضهم في مرحلة مبكرة.','هل يختلف قرارك إذا علمت أن القرار يؤثر في فرصة إنسان، وأن البيانات التاريخية قد تحتوي على تحيّز، وأن من الصعب معرفة سبب الاستبعاد؟ الإنسان يقرر، والآلة تساعد.']];
+ const O=['النظام','النظام + مراجعة بشرية','الإنسان'];const st=store.get('authority',{});
+ B(r).innerHTML=C.map((c,i)=>`<div class="box" style="margin-bottom:12px"><span class="pill">الحالة ${AR(i+1)}</span><h3 style="display:inline">${c[0]}</h3><p style="margin:6px 0 10px">${c[1]}</p><div class="chips" data-i="${i}">${O.map((o,j)=>`<button class="chip" data-j="${j}" aria-pressed="${st[i]===j}">${o}</button>`).join('')}</div><div class="fb info ${st[i]!=null?'on':''}" data-f="${i}">${c[2]}</div></div>`).join('')+`<div class="box tint"><h3>وقفة تحليل: ما المعيار الذي استخدمته؟</h3>لماذا قبلنا الأتمتة في حالة ورفضناها في أخرى؟ هل هو حجم القرار المالي؟ أم أثر الخطأ على الإنسان (على من يقع؟)، وقابلية التراجع (هل يمكن إصلاحه؟)، ودرجة المخاطر؟ الانقسام في التصويت ليس مشكلة... إنه نقطة البداية.</div>`;
+ $$('.chips',r).forEach(g=>$$('.chip',g).forEach(c=>c.onclick=()=>{const i=g.dataset.i;st[i]=+c.dataset.j;store.set('authority',st);$$('.chip',g).forEach(x=>x.setAttribute('aria-pressed',x===c));$(`[data-f="${i}"]`,r).classList.add('on')}));
+}};
+
+ACTS.matrix={tag:'أداة تشغيلية',title:'ضع كل قرار في خانته',init(r){
+ const D=[['إشعار تذكير آلي للمستفيد',0,1,'أتمتة كاملة، لكن ما شرط الإيقاف؟ مثال: عدد محدد من شكاوى الإزعاج في الأسبوع ← إيقاف فوري عند التجاوز.'],['ترتيب أولوية البلاغ',0,1,'دعم آلي مع مراجعة بشرية: النظام يرتّب والإنسان يعتمد. شرط الإيقاف: إذا تجاوز التباين في التصنيف حدًا متفقًا عليه يُوقف الاعتماد الآلي فورًا.'],['إيقاف خدمة بمؤشر شذوذ',1,0,'الإنسان داخل الحلقة لا بعدها: لا يُنفّذ القرار دون اعتماد مدير التشغيل؛ لأن أثر الخطأ مرتفع والتراجع قد لا يعيد كل الآثار.'],['فرض غرامة على مقاول',1,0,'قيادة بشرية بدعم آلي: النظام يحسب قيمة الغرامة وفق البيانات والقواعد، ويبقى للإنسان قرار فرضها وتحمّل أثرها. الحساب شيء... والقرار شيء آخر.']];
+ const cells={'1-0':['قيادة بشرية','الإنسان يقرر، والآلة تحسب وتدعم.','hot'],'1-1':['الإنسان داخل الحلقة','مراجعة بشرية قبل كل اعتماد.','warm'],'0-0':['دعم آلي + مراجعة','الآلة تقترح والإنسان يعتمد، مع رقابة دورية.','warm'],'0-1':['أتمتة مع شرط إيقاف','النظام ينفذ، والإنسان فوق الحلقة يراقب.','cool']};
+ let sel=null,imp=null,rev=null;
+ B(r).innerHTML=`<div class="grid g2" style="align-items:start"><div><label style="font-family:var(--display);font-weight:600;font-size:14.5px">اختر قرارًا</label><select data-s><option value="">—</option>${D.map((d,i)=>`<option value="${i}">${d[0]}</option>`).join('')}<option value="x">قرار من جهتي</option></select>
+ <input type="text" data-own class="hide" placeholder="اكتب القرار" style="margin-top:8px">
+ <p style="margin:14px 0 6px;font-family:var(--display);font-weight:600;font-size:14.5px">أثر الخطأ على الإنسان</p><div class="chips" data-imp><button class="chip" data-v="1">مرتفع</button><button class="chip" data-v="0">منخفض</button></div>
+ <p style="margin:14px 0 6px;font-family:var(--display);font-weight:600;font-size:14.5px">قابلية التراجع</p><div class="chips" data-rev><button class="chip" data-v="1">عالية (يسهل التراجع)</button><button class="chip" data-v="0">منخفضة (يصعب التراجع)</button></div>
+ <div class="fb" data-f></div></div>
+ <div class="mx" aria-live="polite"><div class="ax ay">أثر مرتفع</div><div class="cell hot" data-c="1-0"></div><div class="cell warm" data-c="1-1"></div><div class="ax ay">أثر منخفض</div><div class="cell warm" data-c="0-0"></div><div class="cell cool" data-c="0-1"></div><div></div><div class="ax">يصعب التراجع</div><div class="ax">يسهل التراجع</div></div></div>`;
+ $$('.cell',r).forEach(c=>{const x=cells[c.dataset.c];c.innerHTML=`<b>${x[0]}</b>${x[1]}`});
+ const upd=()=>{$$('.cell',r).forEach(c=>c.classList.toggle('hit',imp!=null&&rev!=null&&c.dataset.c===imp+'-'+rev));
+  const f=$('[data-f]',r);if(imp==null||rev==null){f.className='fb';return}
+  const x=cells[imp+'-'+rev];let h=`الدور المقترح: <b>${x[0]}</b>.`;
+  if(sel!=null&&sel!=='x'){const d=D[sel];const m=d[1]==imp&&d[2]==rev;h+=`<br>${m?'✔ يطابق قراءة الدورة:':'قراءة الدورة لهذه الحالة مختلفة:'} ${d[3]}`}
+  h+='<br><span class="muted">ولا تنسَ: لا قرار مؤتمت بلا شرط إيقاف ومالك مراقبة بالاسم.</span>';f.className='fb on info';f.innerHTML=h};
+ $('[data-s]',r).onchange=e=>{sel=e.target.value===''?null:e.target.value;$('[data-own]',r).classList.toggle('hide',sel!=='x');upd()};
+ $$('[data-imp] .chip',r).forEach(c=>c.onclick=()=>{imp=+c.dataset.v;$$('[data-imp] .chip',r).forEach(x=>x.setAttribute('aria-pressed',x===c));upd()});
+ $$('[data-rev] .chip',r).forEach(c=>c.onclick=()=>{rev=+c.dataset.v;$$('[data-rev] .chip',r).forEach(x=>x.setAttribute('aria-pressed',x===c));upd()});
+}};
+
+ACTS.crisis={tag:'محاكاة لعب أدوار',title:'غرفة الأزمة: حدث تشغيلي عالي الأثر',init(r){
+ const W=[
+  ['الموجة الأولى','ظهرت أول إشارة إلى المشكلة: بلاغ أول عن مؤشرات غير طبيعية في إحدى العمليات التشغيلية.',['تشغيل خطة الطوارئ جزئيًا','الانتظار حتى تتضح الصورة','إيقاف العملية بالكامل فورًا'],0,'القرار المبدئي: تشغيل خطة الطوارئ جزئيًا بناءً على البلاغ الأول فقط. ما الذي لا تعرفه بعد؟'],
+  ['الموجة الثانية','النظام الآلي يوصي بالإيقاف الكامل. المراجعة تكشف أن التوصية تعتمد على بيانات صادرة من حسّاس واحد فقط.',['تنفيذ توصية الإيقاف الكامل','تعليق التوصية الآلية بالإيقاف الكامل','تجاهل المشكلة كليًا'],1,'مصدر واحد... لا تحقق متقاطع. تعليق التوصية الآلية بالإيقاف الكامل هو تحدٍّ مبرر لتوصية النظام.'],
+  ['الموجة الثالثة','وصل تأكيد ميداني مستقل يدعم وجود المشكلة.',['توسيع نطاق الإجراء','الإبقاء على الوضع كما هو','إلغاء خطة الطوارئ'],0,'مصدران مستقلان = تحقق متقاطع. توسيع النطاق مبرر بمعلومة جديدة.'],
+  ['إعلان القرار المبدئي','يجب الآن إعلان القرار. السؤال ما زال قائمًا: ما الذي قد يجعل هذا القرار خاطئًا؟',['إشعار المستفيدين الآن مع ذكر ما لا نعرفه','تأجيل الإشعار حتى اكتمال المعلومات','عدم الإشعار'],0,'رفض اتخاذ القرار هو أيضًا قرار... وله كلفة. القرار المبدئي إلزامي حتى لو كانت المعلومات ناقصة.'],
+  ['الموجتان الرابعة والخامسة','ظهرت معلومات جديدة: بعضها يقوّي الأساس القائم، وبعضها إشارة تهدد الأساس نفسه.',['إيقاف جزئي لتقليل الأثر','العودة إلى الإيقاف الكامل','إلغاء كل الإجراءات'],0,'لا تسأل فقط: هل ظهرت معلومة جديدة؟ بل: هل تغيّر أساس القرار؟ الإيقاف الجزئي يقلل الأثر في ضوء المعلومات المتاحة.'],
+  ['الموجة السادسة','يزداد الضغط الإعلامي لاتخاذ إجراء مختلف. لم ترد أي معلومة جديدة تبرر تغيير القرار.',['تثبيت القرار رغم الضغط الإعلامي','تغيير القرار استجابةً للضغط','إصدار بيان دون تغيير الإجراء أو توثيقه'],0,'هل تغيير القرار بسبب الضغط يُعدّ قرارًا مبنيًا على الأدلة؟ التثبيت هنا جرأة مسؤولة.']];
+ let st=store.get('crisis',{i:0,log:[]});const save=()=>store.set('crisis',st);
+ const R=()=>{let h=`<div class="roles">${[['🎯','قائد القرار','مسؤول عن القرار النهائي'],['🗂','البيانات','جودة المعلومات ومصادرها'],['⚠','المخاطر','تقدير العواقب'],['📣','الاتصال','الأثر على التواصل والمستفيدين'],['⚖','القانوني','الآثار والمتطلبات القانونية']].map(x=>`<div class="box"><span class="i">${x[0]}</span><b>${x[1]}</b><span>${x[2]}</span></div>`).join('')}</div>
+  <p class="muted" style="margin:12px 0">لا يمكن لأي عضو أداء دور عضو آخر. ثلاث قواعد لا تُتجاوز: لا تغيّر القرار دون تسجيل السبب، وسجّل وقت التغيير، وأعلن قرارًا مبدئيًا حتى لو كانت المعلومات ناقصة.</p>`;
+  if(st.i<W.length){const w=W[st.i];h+=`<div class="wave"><div class="wt"><span class="pill">${AR(st.i+1)} / ${AR(W.length)}</span><b>${w[0]}</b></div><p>${w[1]}</p><textarea rows="2" data-why placeholder="اكتب سبب قرارك أولًا (إلزامي)، ثم اختر القرار" style="margin-bottom:10px"></textarea><div class="opts">${w[2].map((o,j)=>`<button class="opt" data-j="${j}">${o}</button>`).join('')}</div><div class="fb" data-f></div><button class="btn sm hide" data-n style="margin-top:10px">الموجة التالية</button></div>`}
+  else h+=`<div class="fb on good">انتهت المحاكاة. تحت الضغط تظهر جودة نظام القرار.</div>`;
+  if(st.log.length)h+=`<h3 style="font-size:17px;margin:18px 0 8px">السجل الزمني: القرار ليس النتيجة فقط</h3><div class="tw"><table class="log"><thead><tr><th>الوقت</th><th>المرحلة</th><th>قرارك</th><th>السبب</th><th>قراءة الدورة</th></tr></thead><tbody>${st.log.map(l=>`<tr><td class="num">${esc(l.t)}</td><td>${esc(l.w)}</td><td>${esc(l.c)}</td><td>${esc(l.y)}</td><td>${l.ok?'✔ متسق':'↺ مختلف'}</td></tr>`).join('')}</tbody></table></div>`;
+  if(st.i>=W.length)h+=`<div class="box tint" style="margin-top:14px"><h3>بعد الأزمة: تخيّل أنك تعرض القرار أمام جهة رقابية</h3>من اتخذ القرار؟ ما الدليل؟ ما الذي كان معلومًا وقتها؟ ما الذي كان مجرد افتراض؟ لماذا تغيّر القرار؟ لماذا لم يتغيّر؟ متى تدخّل الإنسان؟ متى أوقف النظام؟ السجل يشرح كيف تغيّر القرار... وليس فقط ماذا كان القرار.</div>`;
+  h+=`<button class="btn sm ghost" data-rs style="margin-top:12px">إعادة المحاكاة</button>`;
+  B(r).innerHTML=h;let pick=null;
+  $$('.wave .opt',r).forEach(o=>o.onclick=()=>{pick=+o.dataset.j;$$('.wave .opt',r).forEach(x=>x.setAttribute('aria-pressed',x===o))
+   ;const w=W[st.i],y=$('[data-why]',r).value.trim();if(!y){toast('اكتب سبب القرار أولًا');return}
+   const ok=pick===w[3];$$('.wave .opt',r).forEach((x,j)=>{x.disabled=true;if(j===w[3])x.classList.add('ok');else if(j===pick)x.classList.add('no')});
+   const f=$('[data-f]',r);f.className='fb on '+(ok?'good':'warn');f.innerHTML=w[4];
+   const d=new Date();st.log.push({t:AR(d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit',second:'2-digit'})),w:w[0],c:w[2][pick],y,ok});save();$('[data-n]',r).classList.remove('hide')});
+  const n=$('[data-n]',r);if(n)n.onclick=()=>{st.i++;save();R()};
+  $('[data-rs]',r).onclick=()=>{st={i:0,log:[]};save();R()};
+ };R();
+}};
+
+ACTS.stance={tag:'سجّل موقفك',title:'أنت الآن صاحب القرار',init(r){
+ const O=['أتخذ قرارًا قابلًا للتراجع مع نقطة مراجعة محددة','أفوّض القرار إلى الذكاء الاصطناعي','أنتظر اكتمال المعلومات','أتخذ القرار فورًا'];const st=store.get('stance',{});
+ B(r).innerHTML=`<p>لديك قرار تشغيلي يجب اتخاذه اليوم، والبيانات المتاحة تكفي لقرار أولي. معلومات مهمة لن تصل قبل 48 ساعة، وكل ساعة تأخير لها تكلفة. ماذا ستفعل؟ لا تبحث عن الإجابة الصحيحة الآن... اختر موقفك، وستعود إليه في نهاية المحطة.</p><div class="grid g2">${O.map((o,i)=>`<button class="opt" data-i="${i}" aria-pressed="${st.v===i}">${o}</button>`).join('')}</div><div class="fb info ${st.v!=null?'on':''}">سُجّل موقفك. ستجده في «التحدي النهائي» آخر المحطة.</div>`;
+ $$('.opt',r).forEach(b=>b.onclick=()=>{st.v=+b.dataset.i;store.set('stance',st);$$('.opt',r).forEach(x=>x.setAttribute('aria-pressed',x===b));$('.fb',r).classList.add('on')});
+}};
+
+ACTS.doors={tag:'بطاقة تصنيف الباب',title:'قاعدة سرعة القرار',init(r){
+ B(r).innerHTML=`<p>قبل أن تبدأ أي مذكرة قرار، صمّم «باب القرار» قبل أن تناقش سرعته.</p>
+ <p style="margin:10px 0 6px;font-family:var(--display);font-weight:600">ما نوع القرار؟</p><div class="chips" data-a><button class="chip" data-v="1">أكثر من باب (قابل للتراجع)</button><button class="chip" data-v="0">باب واحد (غير قابل للتراجع)</button></div>
+ <div data-imp class="hide"><p style="margin:14px 0 6px;font-family:var(--display);font-weight:600">ما مستوى الأثر؟</p><div class="chips"><button class="chip" data-v="0">منخفض</button><button class="chip" data-v="1">متوسط</button></div></div>
+ <div class="fb" data-f></div>
+ <div class="tw" style="margin-top:16px"><table class="t"><thead><tr><th>نوع القرار</th><th>المسار</th></tr></thead><tbody><tr data-r="0"><td><b>أكثر من باب · أثر منخفض</b><br><span class="muted">مسار سريع</span></td><td>تفويض + حسم خلال 48 ساعة + تسجيل موجز</td></tr><tr data-r="1"><td><b>أكثر من باب · أثر متوسط</b><br><span class="muted">مسار متوسط</span></td><td>حسم خلال أسبوع + مذكرة نصف صفحة</td></tr><tr data-r="2"><td><b>باب واحد</b><br><span class="muted">مسار متأنٍّ</span></td><td>مذكرة كاملة + تحليل ما قبل الوفاة + اعتماد صريح</td></tr></tbody></table></div>`;
+ let a=null,m=null;const u=()=>{let k=a===0?2:(a===1&&m!=null?m:null);$$('tr[data-r]',r).forEach(t=>t.style.background=+t.dataset.r===k?'var(--acct)':'');const f=$('[data-f]',r);if(k==null){f.className='fb';return}f.className='fb on info';f.innerHTML=['المسار السريع: فوّض واحسم خلال 48 ساعة مع تسجيل موجز.','المسار المتوسط: احسم خلال أسبوع بمذكرة نصف صفحة.','المسار المتأني: مذكرة كاملة وتحليل ما قبل الوفاة واعتماد صريح.'][k]+'<br>ثم حدّد: من يملك قرار التوقف؟ ومتى يُراجع القرار؟ كلما زادت قابلية التراجع أمكن تصميم القرار ليكون أسرع.'};
+ $$('[data-a] .chip',r).forEach(c=>c.onclick=()=>{a=+c.dataset.v;$$('[data-a] .chip',r).forEach(x=>x.setAttribute('aria-pressed',x===c));$('[data-imp]',r).classList.toggle('hide',a!==1);u()});
+ $$('[data-imp] .chip',r).forEach(c=>c.onclick=()=>{m=+c.dataset.v;$$('[data-imp] .chip',r).forEach(x=>x.setAttribute('aria-pressed',x===c));u()});
+}};
+
+ACTS.uncsort={tag:'تمرين تصنيف',title:'قبل أن تحلّل... صنّف',init(r){
+ chipsSorter(r,[['توقع عدد البلاغات الشهر القادم اعتمادًا على بيانات خمس سنوات',0,'التوقع من بيانات تاريخية طويلة = مخاطرة: الاحتمالات قابلة للتقدير.'],['إطلاق نموذج ذكاء اصطناعي جديد لم تُختبر آثاره على بيئة الجهة',1,'النموذج الجديد غير المختبر = عدم يقين: النتائج معروفة والاحتمالات مجهولة.'],['ارتفاع مفاجئ في الشكاوى مع عدة تفسيرات محتملة',2,'تعدد التفسيرات = التباس.'],['ظهور نوع جديد من المخاطر لم يكن ضمن أي فرضية سابقة',3,'ما لم نتصوره أصلًا = جهل.']],['مخاطرة','عدم يقين','التباس','جهل'],'uncsort','ممتاز. هل ستستخدم الأداة نفسها في الحالات الأربع؟ صنّف طبيعة عدم المعرفة أولًا... ثم اختر أداة التحليل.');
+}};
+
+ACTS.scen2x2={tag:'اختبار التحمّل',title:'قرار التفويض أمام أربعة سيناريوهات',init(r){
+ const S={'s-s':['نمو منضبط','طلب مستقر · التزام قوي بالقاعدة','القرار يعمل جيدًا.','cool'],'s-w':['شكلية','طلب مستقر · التزام ضعيف','القرار ينهار إذا تجاوزت نسبة «عاجل» العتبة المحددة؛ فتتحول القاعدة إلى إجراء شكلي.','warm'],'g-s':['توسّع سريع','طلب متزايد · التزام قوي','القرار يعمل بشرط تحديث القاعدة.','warm'],'g-w':['ضغط مزدوج','طلب متزايد · التزام ضعيف','القرار ينهار سريعًا ولا يحتمل التأجيل.','hot']};
+ B(r).innerHTML=`<p>أطلقت الجهة قاعدة لتفويض ترتيب أولوية البلاغات. في البداية يبدو القرار ناجحًا... لكن ماذا لو أصبح كل شيء «عاجلًا»؟ المحركان: الطلب (مستقر / متزايد) والالتزام بالقاعدة (قوي / ضعيف). اضغط على كل سيناريو.</p>
+ <div class="mx" style="max-width:720px"><div class="ax ay">طلب مستقر</div>${['s-s','s-w'].map(k=>`<button class="cell ${S[k][3]}" data-k="${k}" style="text-align:start;cursor:pointer"><b>${S[k][0]}</b><span class="muted" style="font-size:13px">${S[k][1]}</span><span data-x class="hide" style="display:block;margin-top:6px;color:var(--ink)">${S[k][2]}</span></button>`).join('')}<div class="ax ay">طلب متزايد</div>${['g-s','g-w'].map(k=>`<button class="cell ${S[k][3]}" data-k="${k}" style="text-align:start;cursor:pointer"><b>${S[k][0]}</b><span class="muted" style="font-size:13px">${S[k][1]}</span><span data-x class="hide" style="display:block;margin-top:6px;color:var(--ink)">${S[k][2]}</span></button>`).join('')}<div></div><div class="ax">التزام قوي</div><div class="ax">التزام ضعيف</div></div>
+ <p class="muted" style="margin-top:12px">ممنوع أن تكون السيناريوهات مجرد أربع نسخ من «الوضع الحالي». ابحث عن أربعة اختبارات للقرار، لا عن أربع تنبؤات.</p>`;
+ $$('.cell',r).forEach(c=>c.onclick=()=>$('[data-x]',c).classList.toggle('hide'));
+}};
+
+ACTS.controls={tag:'خريطة توافق',title:'أرني الدليل: تسعة ضوابط حوكمة',init(r){
+ const C=[['المساءلة','مالك بشري مسمّى لكل قرار','مصفوفة صلاحيات معتمدة'],['الشفافية','إفصاح عن استخدام الذكاء الاصطناعي','إشعار منشور للمستفيدين'],['قابلية التفسير','تبرير مفهوم للتوصية','نموذج تفسير لكل حالة'],['الإشراف البشري','مراجعة الحالات الحرجة','سجل المراجعة'],['الخصوصية','تقنيع البيانات الحساسة','إجراء التقنيع وسجله'],['الأمن','ضوابط الوصول والحماية','تقرير اختبار أمني'],['العدالة','اختبار الأثر التفاضلي','تقرير الاختبار'],['جودة البيانات','ملاءمة البيانات وحداثتها','تقرير جودة البيانات'],['القابلية للتدقيق','حفظ مخرجات النظام','سجل المخرجات والنسخ']];
+ const L=['مستوفى + دليل','مستوفى جزئيًا','فجوة بلا دليل'];const col=['var(--ok)','#C98505','var(--bad)'];const st=store.get('controls',{});
+ B(r).innerHTML=`<p>لا تسأل «هل نحن متوافقون؟» بل «أرني الدليل». اختر حالة استخدام في جهتك، ثم ضع حالة كل ضابط.</p><div class="tw"><table class="t"><thead><tr><th>الضابط</th><th>المتطلب (مثال)</th><th>الدليل (مثال)</th><th>الحالة</th></tr></thead><tbody>${C.map((c,i)=>`<tr><td><b>${c[0]}</b></td><td>${c[1]}</td><td>${c[2]}</td><td><div class="chips" style="flex-wrap:nowrap" data-i="${i}">${L.map((l,j)=>`<button class="chip" data-j="${j}" aria-pressed="${st[i]===j}">${l}</button>`).join('')}</div></td></tr>`).join('')}</tbody></table></div><div class="fb on info" data-f style="margin-top:12px"></div>`;
+ const u=()=>{const n=[0,0,0];Object.values(st).forEach(v=>n[v]++);const bar=`<div style="display:flex;height:12px;border-radius:8px;overflow:hidden;margin:8px 0;background:var(--surface2)">${n.map((x,j)=>`<i style="width:${x/9*100}%;background:${col[j]}"></i>`).join('')}</div>`;$('[data-f]',r).innerHTML=`<b>خريطة التوافق:</b> ${L.map((l,j)=>`${l}: ${AR(n[j])}`).join(' · ')}${bar}${n[1]+n[2]?'الهدف النهائي: خريطة توافق من صفحة واحدة + خطة لسدّ الفجوات.':''}`};
+ $$('.chips',r).forEach(g=>$$('.chip',g).forEach(c=>c.onclick=()=>{st[g.dataset.i]=+c.dataset.j;store.set('controls',st);$$('.chip',g).forEach(x=>x.setAttribute('aria-pressed',x===c));u()}));u();
+}};
+
+ACTS.bold6={tag:'التحدي النهائي',title:'هل قرارك جريء... أم متهور؟',init(r){
+ const Q=['ما الذي لا تعرفه؟','ما أسوأ ما يمكن أن يحدث؟','ما الافتراض الحرج؟','هل نستطيع تجربة القرار قبل الالتزام الكامل؟','ما الذي سيجعلنا نتراجع؟','من يملك صلاحية التراجع؟'];const st=store.get('bold6',{});const sv=store.get('stance',{});
+ const O=['قرار قابل للتراجع مع نقطة مراجعة','تفويض القرار إلى الذكاء الاصطناعي','انتظار اكتمال المعلومات','اتخاذ القرار فورًا'];
+ B(r).innerHTML=`${sv.v!=null?`<div class="fb info on" style="margin:0 0 14px">موقفك في بداية المحطة كان: <b>${O[sv.v]}</b>. هل تغيّر الآن؟</div>`:''}<div class="fld"><label>قرارك</label><input type="text" data-k="t" placeholder="اكتب القرار الذي تعمل عليه"></div>${Q.map((q,i)=>`<div class="fld"><label>${AR(i+1)}. ${q}</label><textarea rows="2" data-k="${i}"></textarea></div>`).join('')}<div class="fb on" data-f></div><div class="fld" style="margin-top:12px"><label>التزامك<small>«سأعرف أن الوقت حان للتراجع عندما...»</small></label><textarea rows="2" data-k="c"></textarea></div>`;
+ const u=()=>{const n=Q.filter((_,i)=>(st[i]||'').trim()).length;const f=$('[data-f]',r);f.className='fb on '+(n===6?'good':'warn');f.innerHTML=n===6?'أجبت عن الأسئلة الستة: لديك قرار جريء ومسؤول، يعرف أين يمكن أن يفشل... وماذا سيفعل حينها.':`أجبت عن ${AR(n)} من ${AR(6)}. إذا لم تستطع الإجابة... فأنت لا تملك قرارًا جريئًا بعد؛ أنت تملك رهانًا.`};
+ $$('[data-k]',r).forEach(i=>{i.value=st[i.dataset.k]||'';i.oninput=()=>{st[i.dataset.k]=i.value;store.set('bold6',st);u()}});u();
+}};
+
+/* ---------- lab ---------- */
+BUILD.lab=el=>{
+ setAcc(el,0);
+ const items=[];STATIONS.forEach(s=>s.blocks.forEach(b=>{if(b.t==='act'&&ACTS[b.id])items.push([s,b.id])}));
+ el.innerHTML=`<span class="eyebrow">مختبر الأنشطة</span><h1 style="font-size:clamp(28px,4vw,40px)">${AR(items.length)} نشاطًا تفاعليًا في مكان واحد</h1><p class="lead" style="margin:10px 0 24px">تجارب ومحاكاة وأدوات تطبيقية وتقييمات ذاتية. تُحفظ إجاباتك وتقدّمك على هذا الجهاز فقط.</p>
+ ${STATIONS.map(s=>`<section class="sec" style="margin-top:34px"><h2 style="font-size:21px;display:flex;gap:10px;align-items:center"><span style="width:12px;height:12px;border-radius:50%;background:${s.color}"></span>المحطة ${AR(s.n)}: ${s.short}</h2><div class="lab-grid" style="margin-top:12px">${items.filter(x=>x[0]===s).map(([,id])=>`<a class="lab-card" href="#${s.id}/act-${id}" style="--c:${s.color};text-decoration:none"><span class="k">${ACTS[id].tag}</span><b>${ACTS[id].title}</b></a>`).join('')}</div></section>`).join('')}
+ <section class="sec"><h2 style="font-size:21px">أدوات المراجعة</h2><div class="lab-grid" style="margin-top:12px"><a class="lab-card" href="#flash" style="text-decoration:none"><span class="k" style="color:var(--wisdom)">استرجاع نشط</span><b>البطاقات التعليمية</b><span>${AR(FLASH.length)} بطاقة</span></a><a class="lab-card" href="#quiz" style="text-decoration:none"><span class="k" style="color:var(--wisdom)">تقويم ذاتي</span><b>الاختبار الذاتي</b><span>${AR(QUIZ.length)} سؤالًا</span></a><a class="lab-card" href="#home/h-wisdom" style="text-decoration:none"><span class="k" style="color:var(--wisdom)">قائمة تحقق</span><b>نموذج WISDOM × COURAGE</b><span>سبعة أسئلة ترافق كل قرار</span></a></div></section>
+ <div style="margin-top:40px"><button class="btn ghost sm" data-wipe>مسح كل إجاباتي المحفوظة</button></div>`;
+ $('[data-wipe]',el).onclick=()=>{if(!confirm('سيتم حذف جميع الإجابات والتقدّم المحفوظ على هذا الجهاز. متابعة؟'))return;try{Object.keys(localStorage).filter(k=>k.startsWith('dm28:')).forEach(k=>localStorage.removeItem(k))}catch(e){}location.hash='#home';location.reload()};
+};
+
+/* ---------- flashcards ---------- */
+BUILD.flash=el=>{
+ setAcc(el,0);
+ let f='all',order=[],i=0;const known=store.get('known',{});
+ el.innerHTML=`<div style="text-align:center"><span class="eyebrow">استرجاع نشط</span><h1 style="font-size:clamp(28px,4vw,40px)">البطاقات التعليمية</h1><p class="lead" style="margin:10px auto 22px">اقرأ المصطلح، حاول تذكّر معناه، ثم اقلب البطاقة. صنّف كل بطاقة: «أتقنتها» أو «أراجعها».</p></div>
+ <div class="filters" data-flt><button class="chip" data-f="all">الكل</button>${STATIONS.map(s=>`<button class="chip" data-f="${s.n}">المحطة ${AR(s.n)}</button>`).join('')}<button class="chip" data-f="rev">للمراجعة فقط</button></div>
+ <div class="fc-stage"><div class="fc" tabindex="0" role="button" aria-label="اقلب البطاقة"><div class="face front"><span class="st" data-st></span><h3 data-t></h3><span class="en" data-en style="font-size:15px"></span><span class="hint">اضغط أو استخدم المسافة للقلب · الأسهم للتنقل</span></div><div class="face back"><p data-b></p><span class="hint">اضغط للعودة</span></div></div></div>
+ <div class="fc-ctl"><button class="btn ghost sm" data-prev aria-label="السابقة">→ السابقة</button><span class="fc-count" data-c></span><button class="btn ghost sm" data-next aria-label="التالية">التالية ←</button></div>
+ <div class="fc-ctl"><button class="btn sm" data-k style="background:var(--ok);border-color:var(--ok)">✔ أتقنتها</button><button class="btn sm ghost" data-r>↺ أراجعها</button><button class="btn sm ghost" data-sh>🔀 خلط</button></div>
+ <p class="muted" style="text-align:center;margin-top:14px" data-sum></p>`;
+ const card=$('.fc',el);
+ const build=()=>{order=FLASH.map((x,k)=>k).filter(k=>f==='all'?true:f==='rev'?!known[k]:FLASH[k][0]==+f||(FLASH[k][0]===0&&f!=='rev'&&false));i=0;show()};
+ const show=()=>{card.classList.remove('flip');$$('[data-flt] .chip',el).forEach(c=>c.setAttribute('aria-pressed',c.dataset.f===f));
+  const tot=Object.values(known).filter(Boolean).length;$('[data-sum]',el).textContent=`أتقنت ${AR(tot)} من ${AR(FLASH.length)} بطاقة`;
+  if(!order.length){$('[data-t]',el).textContent='لا بطاقات هنا';$('[data-st]',el).textContent='';$('[data-en]',el).textContent='';$('[data-b]',el).textContent='أحسنت! أتقنت كل البطاقات في هذا التصنيف.';$('[data-c]',el).textContent='—';return}
+  const c=FLASH[order[i]];const n=c[0];
+  $('[data-st]',el).textContent=(n?`المحطة ${AR(n)} · ${STATIONS[n-1].short}`:'نموذج البرنامج')+(known[order[i]]?' · ✔ أتقنتها':'');$('[data-st]',el).style.color=stColor(n);
+  $('[data-t]',el).textContent=c[1];$('[data-en]',el).textContent=c[2];$('[data-b]',el).textContent=c[3];
+  $('.back',el).style.background=n?`color-mix(in srgb, ${stColor(n)} 88%, #000)`:'var(--wisdom)';
+  $('[data-c]',el).textContent=`${AR(i+1)} / ${AR(order.length)}`};
+ const mv=d=>{if(!order.length)return;i=(i+d+order.length)%order.length;show()};
+ card.onclick=()=>card.classList.toggle('flip');
+ card.onkeydown=e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();card.classList.toggle('flip')}if(e.key==='ArrowLeft')mv(1);if(e.key==='ArrowRight')mv(-1)};
+ $('[data-next]',el).onclick=()=>mv(1);$('[data-prev]',el).onclick=()=>mv(-1);
+ $('[data-k]',el).onclick=()=>{if(!order.length)return;known[order[i]]=true;store.set('known',known);if(f==='rev'){order.splice(i,1);if(i>=order.length)i=0;show()}else mv(1)};
+ $('[data-r]',el).onclick=()=>{if(!order.length)return;known[order[i]]=false;store.set('known',known);mv(1)};
+ $('[data-sh]',el).onclick=()=>{for(let k=order.length-1;k>0;k--){const j=Math.floor(Math.random()*(k+1));[order[k],order[j]]=[order[j],order[k]]}i=0;show()};
+ $$('[data-flt] .chip',el).forEach(c=>c.onclick=()=>{f=c.dataset.f;build()});
+ build();
+};
+
+/* ---------- quiz ---------- */
+BUILD.quiz=el=>{
+ setAcc(el,0);
+ let set=[],i=0,score=0,ans=[];
+ const start=f=>{set=QUIZ.map((q,k)=>k).filter(k=>f==='all'||QUIZ[k][0]==+f);i=0;score=0;ans=[];q()};
+ const intro=()=>{el.innerHTML=`<div class="qz"><div style="text-align:center"><span class="eyebrow">تقويم ذاتي</span><h1 style="font-size:clamp(28px,4vw,40px)">الاختبار الذاتي</h1><p class="lead" style="margin:10px auto 24px">أسئلة مبنية على حالات الدورة، مع تغذية راجعة فورية تشرح لماذا. اختر نطاق الاختبار.</p></div>
+  <div class="opts"><button class="opt" data-f="all"><b style="font-family:var(--display)">الاختبار الشامل</b> · ${AR(QUIZ.length)} سؤالًا</button>${STATIONS.map(s=>`<button class="opt" data-f="${s.n}"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${s.color};margin-inline-end:8px"></span><b style="font-family:var(--display)">المحطة ${AR(s.n)}: ${s.short}</b> · ${AR(QUIZ.filter(x=>x[0]===s.n).length)} أسئلة</button>`).join('')}</div>
+  ${store.get('best',null)!=null?`<p class="muted" style="text-align:center;margin-top:16px">أفضل نتيجة سابقة في الاختبار الشامل: ${AR(store.get('best'))}%</p>`:''}</div>`;
+  $$('.opt',el).forEach(b=>b.onclick=()=>{el.dataset.f=b.dataset.f;start(b.dataset.f)})};
+ const q=()=>{const Q=QUIZ[set[i]];const n=Q[0];el.style.setProperty('--acc',stColor(n));el.style.setProperty('--acct',stTint(n));
+  el.innerHTML=`<div class="qz"><div class="qhead"><span>السؤال ${AR(i+1)} من ${AR(set.length)} · المحطة ${AR(n)}</span><span>النتيجة: ${AR(score)}</span></div><div class="qbar"><i style="width:${i/set.length*100}%"></i></div><h3>${Q[1]}</h3><div class="opts">${Q[2].map((o,j)=>`<button class="opt" data-j="${j}">${o}</button>`).join('')}</div><div class="fb"></div><div style="margin-top:16px;display:flex;justify-content:space-between"><button class="btn ghost sm" data-quit>إنهاء</button><button class="btn sm hide" data-n>${i+1<set.length?'السؤال التالي':'عرض النتيجة'}</button></div></div>`;
+  $$('.opt',el).forEach(b=>b.onclick=()=>{const j=+b.dataset.j,ok=j===Q[3];if(ok)score++;ans.push(ok);$$('.opt',el).forEach((x,k)=>{x.disabled=true;if(k===Q[3])x.classList.add('ok');else if(k===j)x.classList.add('no')});const f=$('.fb',el);f.className='fb on '+(ok?'good':'warn');f.innerHTML=`<b>${ok?'إجابة صحيحة.':'ليست الإجابة الأدق.'}</b> ${Q[4]}`;$('[data-n]',el).classList.remove('hide');$('[data-n]',el).focus()});
+  $('[data-n]',el).onclick=()=>{i++;i<set.length?q():res()};$('[data-quit]',el).onclick=intro};
+ const res=()=>{const p=Math.round(score/set.length*100);if(el.dataset.f==='all'){const b=store.get('best',0);if(p>b)store.set('best',p)}
+  const wk=STATIONS.map(s=>{const idx=set.map((k,m)=>[k,m]).filter(([k])=>QUIZ[k][0]===s.n);if(!idx.length)return null;const c=idx.filter(([,m])=>ans[m]).length;return [s,c,idx.length]}).filter(Boolean);
+  el.style.setProperty('--acc','var(--wisdom)');
+  el.innerHTML=`<div class="qz"><div class="score"><span class="eyebrow">النتيجة</span><div class="big num">${AR(p)}%</div><p class="lead" style="margin:0 auto">${AR(score)} إجابات صحيحة من ${AR(set.length)}. ${p>=85?'أداء صانع قرار متمكّن.':p>=60?'أساس جيد؛ راجع المحطات الأضعف.':'راجع المحطات والبطاقات ثم أعد المحاولة.'}</p></div>
+  <div class="tw"><table class="t"><thead><tr><th>المحطة</th><th>الصحيحة</th><th></th></tr></thead><tbody>${wk.map(([s,c,t])=>`<tr><td>${AR(s.n)}. ${s.short}</td><td class="num">${AR(c)} / ${AR(t)}</td><td>${c<t?`<a href="#${s.id}">راجع المحطة</a>`:'✔'}</td></tr>`).join('')}</tbody></table></div>
+  <div style="display:flex;gap:10px;justify-content:center;margin-top:20px;flex-wrap:wrap"><button class="btn" data-again>أعد الاختبار</button><button class="btn ghost" data-other>اختر نطاقًا آخر</button><a class="btn ghost" href="#flash">البطاقات التعليمية</a></div></div>`;
+  $('[data-again]',el).onclick=()=>start(el.dataset.f);$('[data-other]',el).onclick=intro};
+ intro();
+};
+
+/* ---------- glossary ---------- */
+BUILD.gloss=el=>{
+ setAcc(el,0);
+ const G=[];const seen=new Set();
+ STATIONS.forEach(s=>s.blocks.forEach(b=>{if(b.t==='cards')b.items.forEach(c=>{if(!seen.has(c.t)){seen.add(c.t);G.push([c.t,c.en,c.d,s.n])}})}));
+ GLOSS_EXTRA.forEach(g=>{if(!seen.has(g[0])){seen.add(g[0]);G.push([g[0],g[1],g[2],0])}});
+ G.sort((a,b)=>a[0].localeCompare(b[0],'ar'));
+ el.innerHTML=`<span class="eyebrow">مرجع سريع</span><h1 style="font-size:clamp(28px,4vw,40px)">مسرد المصطلحات</h1><p class="lead" style="margin:10px 0 20px">${AR(G.length)} مصطلحًا بالعربية والإنجليزية. ابحث بأي من اللغتين.</p>
+ <input type="text" data-q placeholder="ابحث عن مصطلح… مثل: تحيّز، drift، الحلقة" aria-label="بحث في المسرد" style="max-width:520px;margin-bottom:20px"><div class="gl" data-l></div>`;
+ const R=q=>{q=q.trim().toLowerCase();const L=G.filter(g=>!q||(g[0]+' '+g[1]+' '+g[2]).toLowerCase().includes(q));$('[data-l]',el).innerHTML=L.length?L.map(g=>`<div class="box"><h3><span>${g[0]}</span><span class="en">${g[1]}</span></h3><p>${g[2]}</p>${g[3]?`<a href="#s${g[3]}" style="font-size:13px;color:${stColor(g[3])}">المحطة ${AR(g[3])}</a>`:''}</div>`).join(''):'<p class="muted">لا نتائج. جرّب كلمة أقصر أو المصطلح الإنجليزي.</p>'};
+ $('[data-q]',el).oninput=e=>R(e.target.value);R('');
+};
+
+/* ---------- init ---------- */
+renderTabs();route();
+
+</script>
+</body>
+</html>
